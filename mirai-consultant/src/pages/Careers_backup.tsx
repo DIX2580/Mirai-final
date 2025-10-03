@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, MapPin, Clock, Mail, MessageCircle, Users, Award, TrendingUp, Heart, Zap, Target, Copy, CheckCircle2, Building2, GraduationCap, Wrench, ChevronRight, Star, Rocket, Globe, Coffee, BookOpen, Lightbulb, ChevronDown, ExternalLink, Send } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Briefcase, MapPin, Clock, Mail, MessageCircle, Users, Award, TrendingUp, Heart, Zap, Target, Copy, CheckCircle2, Building2, GraduationCap, Wrench, ChevronRight, Star, Rocket, Globe, Coffee, BookOpen, Lightbulb } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { useState } from 'react';
 
@@ -215,7 +215,6 @@ const roles: Role[] = [
 export default function Careers() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
-  const [expandedRole, setExpandedRole] = useState<string | null>(null);
 
   const filteredRoles = selectedCategory === 'all' 
     ? roles 
@@ -227,9 +226,7 @@ export default function Careers() {
     setTimeout(() => setCopiedEmail(null), 2000);
   };
 
-  const toggleRole = (roleId: string) => {
-    setExpandedRole(expandedRole === roleId ? null : roleId);
-  };
+  // Note: Collapsible behavior is not enabled in this backup file to keep it lightweight.
 
   return (
     <div className="min-h-screen pt-20 relative overflow-hidden">
