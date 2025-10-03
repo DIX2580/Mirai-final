@@ -8,13 +8,17 @@ Vite + React + TypeScript site for Mirai Consultant.
 - Build: `npm run build`
 - Preview build: `npm run preview`
 
-## Deployment (GitHub Pages)
+## Deployment
 
-This repo is configured to deploy to GitHub Pages at `https://DIX2580.github.io/mirai-consultant/`.
+### Netlify (recommended)
 
-- Base path is set to `/mirai-consultant/` in `vite.config.ts`.
-- The GitHub Actions workflow `.github/workflows/deploy.yml` builds and deploys `dist/` on pushes to `main`.
-- A SPA-friendly `public/404.html` is included to handle deep links.
+- Build command: `npm run build`
+- Publish directory: `dist`
+- SPA routing: `_redirects` file is included (`/*  /index.html  200`)
+
+### GitHub Pages (optional)
+
+If you want to deploy to GitHub Pages under a subpath, set `base` in `vite.config.ts` and add a Pages workflow.
 # Mirai Consultant – React + Vite + Tailwind
 
 Ultra-premium dark theme single-page application with animated neon accents, particles background, and a striking hero. Built with React + TypeScript, Vite, Tailwind CSS v4, Framer Motion, tsParticles, and React Router.
