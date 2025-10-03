@@ -1,0 +1,17 @@
+<svg width="160" height="44" viewBox="0 0 160 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="42" height="42" rx="10" fill="url(#g)" stroke="rgba(255,255,255,0.25)" stroke-width="2" />
+  <path d="M14 30V14h4.4l6.1 9.8L30.6 14H35v16h-4.3v-8.9l-5 7.7h-.8l-4.9-7.6V30H14Z" fill="#fff"/>
+  <text x="56" y="29" font-family="'Segoe UI', system-ui, sans-serif" font-size="20" font-weight="600" fill="url(#tg)">MIRAI</text>
+  <text x="56" y="40" font-family="'Segoe UI', system-ui, sans-serif" font-size="10" letter-spacing="1" fill="#9CA3AF">CONSULTANCY</text>
+  <defs>
+    <linearGradient id="g" x1="1" y1="1" x2="43" y2="43" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1" />
+      <stop offset="0.5" stop-color="#8B5CF6" />
+      <stop offset="1" stop-color="#0EA5E9" />
+    </linearGradient>
+    <linearGradient id="tg" x1="56" y1="12" x2="130" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FAFC" />
+      <stop offset="1" stop-color="#CBD5E1" />
+    </linearGradient>
+  </defs>
+</svg>

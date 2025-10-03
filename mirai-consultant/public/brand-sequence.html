@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brand Sequence</title>
+    <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.1/dist/dotlottie-wc.js" type="module"></script>
+    <style>
+      html, body { height: 100%; margin: 0; background: #000; }
+  .stage { position: fixed; inset: 0; display: grid; place-items: center; background: transparent; }
+  /* Default: full viewport player */
+  dotlottie-wc { width: 100vw; height: 100vh; max-width: 100%; max-height: 100%; opacity: 0; transition: opacity 600ms ease; }
+      .show { opacity: 1; }
+      /* Optional: slight overlay vignette for premium look */
+      .vignette { position: fixed; inset: 0; pointer-events: none; background: radial-gradient(1200px 800px at 85% 65%, rgba(56,189,248,0.08), transparent 60%), radial-gradient(1000px 700px at 35% 75%, rgba(236,72,153,0.08), transparent 60%); }
+    </style>
+  </head>
+  <body>
+    <div class="stage">
+      <dotlottie-wc id="anim" autoplay style="background: transparent"></dotlottie-wc>
+    </div>
+    <div class="vignette"></div>
+    <script>
+      const sources = [
+        'https://lottie.host/952df7a5-00db-4a52-868a-e00d00f07af9/eQhHsz94Dw.lottie',
+        'https://lottie.host/62284f35-acd0-4c2e-b95a-ae9dae865920/oVZJ2acIec.lottie',
+        'https://lottie.host/58643083-afaf-465b-8e56-91ad66a9c1c2/1CSbfb2aHx.lottie',
+        'https://lottie.host/0f3fe7cf-c6ee-48a9-9252-d81c725141b0/h96hACFRCh.lottie'
+      ];
+      const anim = document.getElementById('anim');
+      let idx = 0;
+      const SWITCH_MS = 6000; // fixed interval
+
+      function setSrc(i) {
+        anim.classList.remove('show');
+        setTimeout(() => {
+          anim.setAttribute('src', sources[i % sources.length]);
+          try { anim.loop = false; anim.autoplay = true; anim.play?.(); } catch {}
+          setTimeout(() => anim.classList.add('show'), 50);
+        }, 300);
+      }
+
+      // Initialize
+      setSrc(idx);
+
+      // Respect reduced motion: freeze on first frame (no cycling)
+      const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!mq.matches) {
+        setInterval(() => { idx = (idx + 1) % sources.length; setSrc(idx); }, SWITCH_MS);
+      } else {
+        try { anim.pause?.(); } catch {}
+      }
+    </script>
+  </body>
+</html>
