@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { CheckCircle, Target, Clock, Shield, Award, Zap } from 'lucide-react';
-import Button from './ui/Button';
 
 const props = [
   { 
@@ -136,7 +135,9 @@ export default function ValueProps() {
               <div className="text-white font-semibold">Join 250+ satisfied clients</div>
               <div className="text-slate-400 text-sm">Ready to start your next project?</div>
             </div>
-            <Button variant="primary">Get Started</Button>
+            <button className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 to-violet-500 rounded-xl hover:shadow-[0_0_30px_theme(colors.fuchsia.500/40%)] transition-shadow">
+              Get Started
+            </button>
           </div>
         </motion.div>
       </div>

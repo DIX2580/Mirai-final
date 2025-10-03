@@ -2,7 +2,6 @@
 // DotLottie wrapper not needed now that we embed a single iframe sequence
 import { Link } from 'react-router-dom';
 import Button from './ui/Button';
-import { useMotionLevel } from '../context/MotionContext';
 
 const services = [
   { label: 'Railways', slug: 'railways' },
@@ -13,7 +12,6 @@ const services = [
 ];
 
 export default function Hero() {
-  const motionLevel = useMotionLevel();
   const subtitle =
     "India’s Engineering Backbone — from high‑precision surveys to iconic bridges, railways, buildings and highways. We take projects from design to flawless execution.";
   // No interactive media; keep things simple and smooth
@@ -86,29 +84,17 @@ export default function Hero() {
           </div>
 
           {/* Right: single iframe that sequences 3 Lotties full-screen inside */}
-          {motionLevel > 0 && (
-            <div className="relative hidden md:block">
-              <div className="relative h-64 lg:h-80 overflow-hidden rounded-xl border border-white/10 bg-black/40">
-                {motionLevel === 3 ? (
-                  <iframe title="Branding Sequence" src="/brand-sequence.html" loading="lazy" className="block w-full h-full" style={{ border: 0 }} />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-slate-400 text-sm tracking-wide">Brand Identity</div>
-                )}
-              </div>
+          <div className="relative hidden md:block">
+            <div className="relative h-64 lg:h-80 overflow-hidden rounded-xl border border-white/10 bg-black/40">
+              <iframe title="Branding Sequence" src="/brand-sequence.html" loading="lazy" className="block w-full h-full" style={{ border: 0 }} />
             </div>
-          )}
+          </div>
           {/* Mobile: same sequence in a compact tile, placed before text (fixed 300px height) */}
-          {motionLevel > 1 && (
-            <div className="md:hidden -mt-4 mb-6 order-first">
-              <div className="relative h-[300px] overflow-hidden rounded-lg border border-white/10 bg-black/40">
-                {motionLevel === 3 ? (
-                  <iframe title="Branding Sequence Mobile" src="/brand-sequence.html" loading="lazy" className="block w-full h-full" style={{ border: 0 }} />
-                ) : (
-                  <div className="flex items-center justify-center h-full text-slate-400 text-sm">Brand Identity</div>
-                )}
-              </div>
+          <div className="md:hidden -mt-4 mb-6 order-first">
+            <div className="relative h-[300px] overflow-hidden rounded-lg border border-white/10 bg-black/40">
+              <iframe title="Branding Sequence Mobile" src="/brand-sequence.html" loading="lazy" className="block w-full h-full" style={{ border: 0 }} />
             </div>
-          )}
+          </div>
           </div>
         </div>
       </div>

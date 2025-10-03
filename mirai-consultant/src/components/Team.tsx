@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Award, Briefcase, GraduationCap, Linkedin } from 'lucide-react';
-import Button from './ui/Button';
 
 const people = [
   { 
@@ -134,7 +133,10 @@ export default function Team() {
 
                 {/* Social Link */}
                 <div className="pt-4">
-                  <Button variant="secondary" className="inline-flex items-center gap-2 px-4 py-2 text-xs" leftIcon={<Linkedin className="w-3 h-3" />}>Connect</Button>
+                  <button className="inline-flex items-center gap-2 px-4 py-2 text-xs text-slate-300 border border-white/20 rounded-lg hover:bg-white/10 transition-colors">
+                    <Linkedin className="w-3 h-3" />
+                    Connect
+                  </button>
                 </div>
               </div>
 
@@ -156,7 +158,9 @@ export default function Team() {
               <div className="text-white font-semibold text-lg">Join Our Expert Team</div>
               <div className="text-slate-400">We're always looking for talented engineers</div>
             </div>
-            <Button variant="primary">View Careers</Button>
+            <button className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl hover:shadow-[0_0_30px_theme(colors.emerald.500/40%)] transition-shadow">
+              View Careers
+            </button>
           </div>
         </motion.div>
       </div>

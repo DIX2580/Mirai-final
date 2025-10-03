@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion';
-import { useMotionLevel } from '../context/MotionContext';
 import { ExternalLink, Calendar, MapPin, Users } from 'lucide-react';
-import Button from './ui/Button';
 
 const items = [
   { 
@@ -61,7 +59,6 @@ const items = [
 ];
 
 export default function Projects() {
-  const motionLevel = useMotionLevel();
   return (
     <section id="projects" className="relative py-20 lg:py-32 border-t border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -86,19 +83,14 @@ export default function Projects() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {items.map((it, i) => {
-            const hover = motionLevel >= 2 ? { y: -5 } : undefined;
-            const initial = motionLevel >= 1 ? { opacity: 0, y: 20 } : { opacity: 1, y: 0 };
-            const animate = motionLevel >= 1 ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 };
-            const transition = motionLevel >= 1 ? { duration: 0.6, delay: i * 0.05 } : { duration: 0 };
-            return (
-              <motion.article
-                key={it.title}
-                initial={initial}
-                whileInView={animate}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={transition}
-                whileHover={hover}
+          {items.map((it, i) => (
+            <motion.article
+              key={it.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              whileHover={{ y: -5 }}
               className="group relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl overflow-hidden hover:bg-white/[0.08] transition-all duration-300"
             >
               {/* Image */}
@@ -151,8 +143,7 @@ export default function Projects() {
               {/* Hover effect overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-fuchsia-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </motion.article>
-            );
-          })}
+          ))}
         </div>
 
         <motion.div 
@@ -161,7 +152,10 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <Button variant="primary">View All Projects <ExternalLink className="w-4 h-4" /></Button>
+          <button className="inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500 rounded-xl shadow-[0_0_30px_theme(colors.fuchsia.500/30%)] hover:shadow-[0_0_40px_theme(colors.fuchsia.500/50%)] transition-shadow">
+            View All Projects
+            <ExternalLink className="w-4 h-4" />
+          </button>
         </motion.div>
       </div>
     </section>

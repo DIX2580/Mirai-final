@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { ChevronDown, HelpCircle, MessageCircle, Phone } from 'lucide-react';
-import Button from './ui/Button';
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -147,8 +146,14 @@ export default function FAQ() {
               </div>
             </div>
             <div className="flex gap-3">
-              <Button variant="primary" leftIcon={<MessageCircle className="w-4 h-4" />}>Chat with us</Button>
-              <Button variant="secondary" leftIcon={<Phone className="w-4 h-4" />}>Call us</Button>
+              <button className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 to-violet-500 rounded-xl hover:shadow-[0_0_30px_theme(colors.fuchsia.500/40%)] transition-shadow flex items-center gap-2">
+                <MessageCircle className="w-4 h-4" />
+                Chat with us
+              </button>
+              <button className="px-6 py-3 text-sm font-semibold text-slate-300 border border-white/20 rounded-xl hover:bg-white/10 transition-colors flex items-center gap-2">
+                <Phone className="w-4 h-4" />
+                Call us
+              </button>
             </div>
           </div>
         </motion.div>

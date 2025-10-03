@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Quote, Star } from 'lucide-react';
-import Button from './ui/Button';
 
 const quotes = [
   { 
@@ -152,8 +151,12 @@ export default function TestimonialsNew() {
               Ready to become our next success story? Let's discuss how we can bring your infrastructure vision to life.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="primary">Start Your Project</Button>
-              <Button variant="secondary">View Case Studies</Button>
+              <button className="px-8 py-4 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500 rounded-xl shadow-[0_0_30px_theme(colors.fuchsia.500/30%)] hover:shadow-[0_0_40px_theme(colors.fuchsia.500/50%)] transition-shadow">
+                Start Your Project
+              </button>
+              <button className="px-8 py-4 text-sm font-semibold text-slate-300 border border-white/20 rounded-xl hover:bg-white/10 transition-colors">
+                View Case Studies
+              </button>
             </div>
           </motion.div>
         </motion.div>
