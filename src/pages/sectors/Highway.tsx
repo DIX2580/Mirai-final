@@ -69,10 +69,10 @@ export default function Highway() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <Button variant="primary" href="/contact">
+              <Button variant="primary" to="/contact">
                 Start a Project
               </Button>
-              <Button variant="secondary" href="/about">
+              <Button variant="secondary" to="/about">
                 Our Expertise
               </Button>
             </motion.div>
@@ -149,7 +149,7 @@ export default function Highway() {
                 <p className="text-slate-300 leading-relaxed mb-6">
                   Our highway professionals have extensive expertise in capacity & network analysis, providing optimal design solutions for all road-related infrastructure. Our team excels in challenging projects, including road improvement in Himalayan Terrain.
                 </p>
-                <Button variant="secondary" href="/careers">
+                <Button variant="secondary" to="/careers">
                   Join Our Team
                 </Button>
               </div>
@@ -217,10 +217,10 @@ export default function Highway() {
               Partner with us to deliver world-class highway infrastructure that drives economic growth and connects communities.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="primary" href="/contact">
+              <Button variant="primary" to="/contact">
                 Discuss Your Project
               </Button>
-              <Button variant="secondary" href="/gallery">
+              <Button variant="secondary" to="/gallery">
                 View Our Projects
               </Button>
             </div>

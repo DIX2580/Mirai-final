@@ -71,10 +71,10 @@ export default function Bridges() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <Button variant="primary" href="/contact">
+              <Button variant="primary" to="/contact">
                 Start a Project
               </Button>
-              <Button variant="secondary" href="/about">
+              <Button variant="secondary" to="/about">
                 Our Expertise
               </Button>
             </motion.div>
@@ -151,7 +151,7 @@ export default function Bridges() {
                 <p className="text-slate-300 leading-relaxed mb-6">
                   Our team of bridge engineers brings deep expertise in structural analysis, foundation design, and proof consultancy. We use advanced design software and methodologies to deliver safe, efficient, and aesthetically pleasing bridge solutions.
                 </p>
-                <Button variant="secondary" href="/careers">
+                <Button variant="secondary" to="/careers">
                   Join Our Team
                 </Button>
               </div>
@@ -219,10 +219,10 @@ export default function Bridges() {
               Partner with us to design and deliver bridges that stand the test of time, combining engineering excellence with aesthetic brilliance.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="primary" href="/contact">
+              <Button variant="primary" to="/contact">
                 Discuss Your Project
               </Button>
-              <Button variant="secondary" href="/gallery">
+              <Button variant="secondary" to="/gallery">
                 View Our Projects
               </Button>
             </div>

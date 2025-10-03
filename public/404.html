@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content="0; url=/mirai-consultant/" />
+    <link rel="canonical" href="/mirai-consultant/" />
+  </head>
+  <body>
+    <script>
+      // Single Page App redirect for GitHub Pages
+      // If a 404 occurs on a deep link, redirect to base path
+      var base = '/mirai-consultant/';
+      var redirect = base;
+      // Preserve path as a query so the app could parse if needed
+      if (location.pathname && location.pathname !== base) {
+        redirect = base + '?p=' + encodeURIComponent(location.pathname + location.search + location.hash);
+      }
+      location.replace(redirect);
+    </script>
+  </body>
+</html>

@@ -73,10 +73,10 @@ export default function Railways() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <Button variant="primary" href="/contact">
+              <Button variant="primary" to="/contact">
                 Start a Project
               </Button>
-              <Button variant="secondary" href="/about">
+              <Button variant="secondary" to="/about">
                 Our Expertise
               </Button>
             </motion.div>
@@ -153,7 +153,7 @@ export default function Railways() {
                 <p className="text-slate-300 leading-relaxed mb-6">
                   Our railway engineering team brings extensive expertise in network analysis, track design, and construction supervision. We have successfully completed over 15 major railway projects across India, providing comprehensive solutions from feasibility to operation.
                 </p>
-                <Button variant="secondary" href="/careers">
+                <Button variant="secondary" to="/careers">
                   Join Our Team
                 </Button>
               </div>
@@ -221,10 +221,10 @@ export default function Railways() {
               Partner with us to deliver sustainable, efficient, and innovative railway solutions that drive economic growth and connect communities across India.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="primary" href="/contact">
+              <Button variant="primary" to="/contact">
                 Discuss Your Project
               </Button>
-              <Button variant="secondary" href="/gallery">
+              <Button variant="secondary" to="/gallery">
                 View Our Projects
               </Button>
             </div>
