@@ -5,7 +5,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2">
             <div className="h-3 w-3 rounded-sm bg-gradient-to-br from-fuchsia-500 via-violet-500 to-sky-500" />
-            <span className="brand-title text-white/90 font-semibold tracking-widest">MIRAI CONSULTANT</span>
+            <span className="brand-title text-white/90 font-semibold tracking-widest">MIRAI CONSULTANCY</span>
           </div>
           <p className="mt-3 text-sm text-slate-400 max-w-md">
             India's leading engineering consultancy delivering future‑ready infrastructure across Railways, Bridges, Buildings, Survey & Highway sectors.
@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} Mirai Consultant. All rights reserved.
+        © {new Date().getFullYear()} MIRAI CONSULTANCY. All rights reserved.
       </div>
     </footer>
   );

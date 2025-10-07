@@ -18,7 +18,7 @@ export default function About() {
             <span className="text-sm font-medium text-slate-400 tracking-wider uppercase">Who We Are</span>
             <div className="h-2 w-2 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500" />
           </div>
-          <h2 className="brand-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white">About Mirai Consultant</h2>
+          <h2 className="brand-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white">About MIRAI CONSULTANCY</h2>
           <p className="mt-4 text-slate-300 max-w-3xl mx-auto">
             India’s engineering backbone for Railways, Bridges, Buildings, Survey and Highways. From feasibility and design to proof checking and supervision — we deliver with precision and reliability.
           </p>

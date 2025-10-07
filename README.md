@@ -1,6 +1,6 @@
-# Mirai Consultant
+# MIRAI CONSULTANCY
 
-Vite + React + TypeScript site for Mirai Consultant.
+Vite + React + TypeScript site for MIRAI CONSULTANCY.
 
 ## Development
 
@@ -19,7 +19,7 @@ Vite + React + TypeScript site for Mirai Consultant.
 ### GitHub Pages (optional)
 
 If you want to deploy to GitHub Pages under a subpath, set `base` in `vite.config.ts` and add a Pages workflow.
-# Mirai Consultant – React + Vite + Tailwind
+# MIRAI CONSULTANCY – React + Vite + Tailwind
 
 Ultra-premium dark theme single-page application with animated neon accents, particles background, and a striking hero. Built with React + TypeScript, Vite, Tailwind CSS v4, Framer Motion, tsParticles, and React Router.
 
@@ -99,4 +99,4 @@ npm run preview
 
 ## License
 
-Proprietary – for Mirai Consultant.
+Proprietary – for MIRAI CONSULTANCY.
