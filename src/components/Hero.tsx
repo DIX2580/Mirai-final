@@ -1,35 +1,29 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import Button from './ui/Button';
 
 const services = [
   {
     label: 'Railways',
-    slug: 'railways',
     image: 'https://images.unsplash.com/photo-1501661808542-6b0b0b87b88e?auto=format&fit=crop&w=1800&q=80',
     blurb: 'Dedicated freight corridors, metro systems and track modernisation.',
   },
   {
     label: 'Bridges',
-    slug: 'bridges',
     image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=80',
     blurb: 'Iconic cable-stayed spans, ROBs and interchange structures.',
   },
   {
     label: 'Buildings',
-    slug: 'buildings',
     image: 'https://images.unsplash.com/photo-1487956382158-bb926046304a?auto=format&fit=crop&w=1800&q=80',
     blurb: 'Future-ready commercial, institutional and industrial assets.',
   },
   {
     label: 'Survey',
-    slug: 'survey',
     image: 'https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=1800&q=80',
     blurb: 'High-precision topographical, LiDAR and drone based surveys.',
   },
   {
     label: 'Highway',
-    slug: 'highway',
     image: 'https://images.unsplash.com/photo-1533106418989-88406c7cc8c0?auto=format&fit=crop&w=1800&q=80',
     blurb: 'Expressways, urban arterials and hill road engineering expertise.',
   },
@@ -49,17 +43,18 @@ const videos = [
 ];
 
 export default function Hero() {
-  const [stage, setStage] = useState<'images' | 'videos'>('images');
+  const [stage, setStage] = useState<'gallery' | 'video'>('gallery');
   const [activeVideo, setActiveVideo] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setStage('videos'), 5000);
+    const timer = window.setTimeout(() => setStage('video'), 5000);
     return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (stage !== 'videos') {
+    if (stage !== 'video') {
       videoRefs.current.forEach((vid) => vid?.pause());
       setActiveVideo(0);
       return;
@@ -77,6 +72,13 @@ export default function Hero() {
     }
   }, [stage, activeVideo]);
 
+  useEffect(() => {
+    if (selectedIndex >= services.length) {
+      setSelectedIndex(0);
+    }
+  }, [selectedIndex]);
+
+  const featured = useMemo(() => services[selectedIndex] ?? services[0], [selectedIndex]);
   const topRow = useMemo(() => services.slice(0, 3), []);
   const bottomRow = useMemo(() => services.slice(3), []);
 
@@ -107,81 +109,116 @@ export default function Hero() {
               </p>
             </header>
 
-            <div className="relative min-h-[320px] lg:min-h-[360px]">
-              <div className={`transition-opacity duration-700 ${stage === 'images' ? 'opacity-100' : 'opacity-0 pointer-events-none absolute inset-0'}`}>
-                <div className="space-y-4">
-                  <div className="grid gap-4 sm:grid-cols-3">
-                    {topRow.map((service) => (
-                      <HeroTile key={service.label} service={service} />
-                    ))}
+            <div className="relative min-h-[360px] lg:min-h-[420px]">
+              <div
+                className={`transition-all duration-700 ${stage === 'gallery' ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 -translate-y-6 absolute inset-0'}`}
+              >
+                <div className="space-y-6">
+                  <div className="group relative overflow-hidden rounded-3xl border border-white/10 bg-black/50 shadow-[0_15px_40px_rgba(0,0,0,0.45)]">
+                    <img
+                      src={featured.image}
+                      alt={featured.label}
+                      className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out scale-105 group-hover:scale-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs uppercase tracking-[0.3em] text-white/80 backdrop-blur">
+                        01
+                        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500" />
+                        {featured.label}
+                      </div>
+                      <p className="mt-3 max-w-2xl text-sm sm:text-base text-slate-200/90">
+                        {featured.blurb}
+                      </p>
+                    </div>
                   </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {bottomRow.map((service) => (
-                      <HeroTile key={service.label} service={service} />
-                    ))}
+
+                  <div className="space-y-4">
+                    <div className="grid gap-4 md:grid-cols-3">
+                      {topRow.map((service, index) => (
+                        <HeroTile
+                          key={service.label}
+                          service={service}
+                          index={index}
+                          isSelected={services.indexOf(service) === selectedIndex}
+                          onSelect={() => setSelectedIndex(services.indexOf(service))}
+                        />
+                      ))}
+                    </div>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {bottomRow.map((service, index) => (
+                        <HeroTile
+                          key={service.label}
+                          service={service}
+                          index={index + topRow.length}
+                          isSelected={services.indexOf(service) === selectedIndex}
+                          onSelect={() => setSelectedIndex(services.indexOf(service))}
+                        />
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className={`transition-opacity duration-700 ${stage === 'videos' ? 'opacity-100' : 'opacity-0 pointer-events-none absolute inset-0'}`}>
+              <div
+                className={`transition-all duration-700 ${stage === 'video' ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-6 absolute inset-0'}`}
+              >
                 <div className="flex flex-col gap-6">
-                  <div className="flex flex-wrap justify-center gap-3 lg:justify-start">
+                  <div className="flex flex-wrap items-center justify-center gap-3 text-xs sm:text-sm uppercase tracking-[0.3em] text-slate-200/80">
                     {services.map((service) => (
-                      <Link
+                      <span
                         key={service.label}
-                        to={`/services/${service.slug}`}
-                        className="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition-colors hover:bg-white/10"
+                        className="rounded-full border border-white/10 bg-white/5 px-4 py-2 backdrop-blur transition hover:border-white/20"
                       >
-                        <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500 group-hover:scale-110 transition-transform" />
                         {service.label}
-                      </Link>
+                      </span>
                     ))}
                   </div>
 
-                  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/60 p-3 sm:p-4">
+                  <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-black/60 shadow-[0_20px_60px_rgba(8,47,73,0.45)]">
                     {videos.map((video, index) => (
                       <div
                         key={video.src}
-                        className={`${index === activeVideo ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-6'} absolute inset-3 sm:inset-4 transition-all duration-500`}
+                        className={`${index === activeVideo ? 'opacity-100 translate-y-0' : 'pointer-events-none opacity-0 translate-y-10'} absolute inset-0 transition-all duration-700`}
                       >
-                        <div className="flex flex-col gap-3">
-                          <div className="flex items-center justify-between text-sm text-slate-300">
-                            <span className="font-semibold uppercase tracking-wide text-slate-200">{video.title}</span>
+                        <div className="flex h-full flex-col">
+                          <div className="flex items-center justify-between px-6 pt-6 text-xs sm:text-sm uppercase tracking-[0.2em] text-slate-200/70">
+                            <span>{video.title}</span>
                             <span>
                               {index + 1} / {videos.length}
                             </span>
                           </div>
-                          <video
-                            ref={(el) => {
-                              videoRefs.current[index] = el;
-                            }}
-                            className="w-full rounded-xl border border-white/10 bg-black object-cover"
-                            poster={video.poster}
-                            controls
-                            muted
-                            playsInline
-                            preload="metadata"
-                            onEnded={() => {
-                              if (index < videos.length - 1) {
-                                setActiveVideo((prev) => Math.min(prev + 1, videos.length - 1));
-                              }
-                            }}
-                          >
-                            <source src={video.src} type="video/mp4" />
-                          </video>
+                          <div className="relative mt-4 aspect-[16/9] w-full">
+                            <video
+                              ref={(el) => {
+                                videoRefs.current[index] = el;
+                              }}
+                              className="absolute inset-0 h-full w-full rounded-3xl border border-white/10 object-cover"
+                              poster={video.poster}
+                              muted
+                              playsInline
+                              preload="auto"
+                              autoPlay={stage === 'video' && index === activeVideo}
+                              controls={false}
+                              onEnded={() => {
+                                setActiveVideo((prev) => {
+                                  const next = prev + 1;
+                                  if (next >= videos.length) {
+                                    return 0;
+                                  }
+                                  return next;
+                                });
+                              }}
+                            >
+                              <source src={video.src} type="video/mp4" />
+                            </video>
+                          </div>
+                          <div className="px-6 pb-6 pt-4 text-xs text-slate-300/80">
+                            Muted autoplay sequence showcasing our execution capabilities.
+                          </div>
                         </div>
                       </div>
                     ))}
-
-                    {/* ensure container height */}
-                    <div className="invisible">
-                      <div className="flex flex-col gap-3">
-                        <div className="flex items-center justify-between text-sm">
-                          <span>placeholder</span>
-                        </div>
-                        <div className="aspect-video w-full rounded-xl border" />
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -214,39 +251,39 @@ export default function Hero() {
 type HeroTileProps = {
   service: {
     label: string;
-    slug: string;
     image: string;
     blurb: string;
   };
+  index: number;
+  isSelected: boolean;
+  onSelect: () => void;
 };
 
-function HeroTile({ service }: HeroTileProps) {
+function HeroTile({ service, index, isSelected, onSelect }: HeroTileProps) {
   return (
-    <Link
-      to={`/services/${service.slug}`}
-      className="group relative block overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-transform duration-500 hover:-translate-y-1 hover:border-white/20"
+    <button
+      type="button"
+      onClick={onSelect}
+      className={`group relative flex flex-col gap-2 rounded-2xl border border-white/10 bg-white/5 p-2 transition-all duration-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400/70 ${
+        isSelected ? 'border-white/40 bg-white/10 shadow-[0_15px_30px_rgba(0,0,0,0.45)]' : 'hover:-translate-y-1 hover:border-white/20'
+      }`}
     >
-      <div
-        aria-hidden
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${service.image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <div className="relative flex h-full flex-col justify-end bg-gradient-to-t from-black/80 via-black/10 to-transparent">
-        <div className="p-4">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-slate-200">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500" />
-            {service.label}
-          </div>
-          <p className="mt-2 text-sm text-slate-300">
-            {service.blurb}
-          </p>
+      <div className="relative overflow-hidden rounded-xl">
+        <div className="aspect-[4/3] w-full overflow-hidden rounded-xl">
+          <img
+            src={service.image}
+            alt={service.label}
+            className={`h-full w-full object-cover transition-transform duration-[1200ms] ease-out ${isSelected ? 'scale-110' : 'group-hover:scale-105'}`}
+          />
         </div>
+        <span className="absolute left-3 top-3 inline-flex h-7 items-center justify-center rounded-full bg-black/60 px-3 text-xs font-semibold text-white/80">
+          {(index + 1).toString().padStart(2, '0')}
+        </span>
       </div>
-      <div className="absolute inset-0 border border-white/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-    </Link>
+      <div className="px-2 pb-2 text-left">
+        <p className="text-sm font-semibold text-white">{service.label}</p>
+        <p className="mt-1 text-xs text-slate-300/80">{service.blurb}</p>
+      </div>
+    </button>
   );
 }
