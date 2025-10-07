@@ -53,7 +53,7 @@ export default function TestimonialsNew() {
             <div className="h-2 w-2 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500" />
           </div>
           <h2 className="brand-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-            Testimonials & Clients
+            Our Clients
           </h2>
           <p className="text-slate-300 text-lg max-w-3xl mx-auto leading-relaxed">
             Don't just take our word for it. Hear from industry leaders and infrastructure pioneers 

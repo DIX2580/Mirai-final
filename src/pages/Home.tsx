@@ -4,8 +4,6 @@ import Services from '../components/Services';
 import Projects from '../components/Projects';
 import ValueProps from '../components/ValueProps';
 import TestimonialsNew from '../components/TestimonialsNew';
-import Team from '../components/Team';
-import FAQ from '../components/FAQ';
 
 export default function Home() {
   return (
@@ -16,8 +14,6 @@ export default function Home() {
       <Projects />
       <ValueProps />
       <TestimonialsNew />
-      <Team />
-      <FAQ />
     </>
   );
 }
