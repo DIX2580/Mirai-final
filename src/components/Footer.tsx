@@ -1,4 +1,18 @@
-export default function Footer() {
+type FooterProps = {
+  minimal?: boolean;
+};
+
+export default function Footer({ minimal }: FooterProps) {
+  if (minimal) {
+    return (
+      <footer className="relative border-t border-white/10 bg-black/30">
+        <div className="py-4 text-center text-xs text-slate-500">
+          © 2025 MIRAI CONSULTANCY. All rights reserved.
+        </div>
+      </footer>
+    );
+  }
+
   return (
     <footer className="relative border-t border-white/10 bg-black/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 grid gap-8 sm:grid-cols-2 items-start">
@@ -31,7 +45,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-white/10 py-4 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} MIRAI CONSULTANCY. All rights reserved.
+        © 2025 MIRAI CONSULTANCY. All rights reserved.
       </div>
     </footer>
   );

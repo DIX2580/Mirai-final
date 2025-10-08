@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, MapPin, Clock, Mail, MessageCircle, Users, Award, TrendingUp, Heart, Zap, Target, Copy, CheckCircle2, Building2, GraduationCap, Wrench, ChevronRight, ChevronDown, Send } from 'lucide-react';
+import { Briefcase, MapPin, Clock, Mail, MessageCircle, Users, Award, TrendingUp, Heart, Zap, Target, Copy, CheckCircle2, Building2, Wrench, ChevronRight, ChevronDown, Send } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { useState } from 'react';
 
@@ -7,7 +7,7 @@ type Role = {
   title: string;
   location: string;
   type: string;
-  category: 'Engineering' | 'Management' | 'Graduate';
+  category: 'Engineering' | 'Management';
   summary: string;
   responsibilities: string[];
   requirements: string[];
@@ -56,7 +56,7 @@ const categories = [
   { id: 'all', name: 'All Positions', icon: <Briefcase className="h-4 w-4" /> },
   { id: 'Engineering', name: 'Engineering', icon: <Wrench className="h-4 w-4" /> },
   { id: 'Management', name: 'Management', icon: <Building2 className="h-4 w-4" /> },
-  { id: 'Graduate', name: 'Graduate Programs', icon: <GraduationCap className="h-4 w-4" /> },
+  
 ];
 
 const roles: Role[] = [
@@ -152,54 +152,6 @@ const roles: Role[] = [
       '10+ years in infrastructure project management',
       'Proven track record of delivering ₹100+ Cr projects',
       'Excellent leadership, negotiation and presentation skills',
-    ],
-    email: 'careers@mirai.example',
-  },
-  {
-    id: 'grad-trainee',
-    title: 'Graduate Engineer Trainee',
-    location: 'Multiple Locations',
-    type: 'Full‑time',
-    category: 'Graduate',
-    experience: '0-1 years',
-    department: 'All Departments',
-    summary:
-      'Kick‑start your engineering career on iconic rail/bridge programs with mentoring and structured rotations.',
-    responsibilities: [
-      'Assist in modeling, drafting and quantity take‑offs',
-      'Support site supervision and QC documentation',
-      'Learn tools and design workflows across disciplines',
-      'Participate in cross-functional project teams',
-    ],
-    requirements: [
-      'B.E./B.Tech – Civil (0–1 years)',
-      'Strong fundamentals and eagerness to learn',
-      'Good communication and teamwork',
-      'Basic knowledge of AutoCAD and MS Office',
-    ],
-    email: 'careers@mirai.example',
-  },
-  {
-    id: 'intern-civil',
-    title: 'Civil Engineering Intern',
-    location: 'Pan India',
-    type: 'Internship',
-    category: 'Graduate',
-    experience: 'Final year students',
-    department: 'All Departments',
-    summary:
-      '6-month internship program for final year students to gain hands-on experience in real infrastructure projects.',
-    responsibilities: [
-      'Assist engineers in design, analysis and documentation',
-      'Learn industry-standard software and tools',
-      'Participate in site visits and project meetings',
-      'Work on mini-projects under senior guidance',
-    ],
-    requirements: [
-      'Currently pursuing B.E./B.Tech in Civil Engineering (Final Year)',
-      'Strong academic record (CGPA > 7.0)',
-      'Basic knowledge of structural analysis and design',
-      'Enthusiastic, proactive and quick learner',
     ],
     email: 'careers@mirai.example',
   },

@@ -1,10 +1,12 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import BackgroundVideo from '../components/BackgroundVideo';
 import FancyCursor from '../components/FancyCursor';
 
 export default function Layout() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   return (
     <div className="min-h-screen flex flex-col relative bg-[var(--bg)]">
       {/* Global video background (fixed to viewport, starts below navbar) */}
@@ -18,7 +20,7 @@ export default function Layout() {
         <Outlet />
       </main>
       <div className="relative z-10">
-        <Footer />
+        <Footer minimal={!isHome} />
       </div>
       <FancyCursor />
     </div>
