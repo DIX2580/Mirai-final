@@ -45,12 +45,12 @@ const services: Service[] = [
 
 const videos: VideoAsset[] = [
   {
-    src: 'video.mp4',
+    src: 'https://cdn.pixabay.com/video/2023/05/29/165003-831362593_large.mp4',
     poster: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
     title: 'Engineering Showcase',
   },
   {
-    src: 'https://cdn.pixabay.com/video/2023/05/29/165003-831362593_large.mp4',
+    src: 'video.mp4',
     poster: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80',
     title: 'Modern Infrastructure',
   },
