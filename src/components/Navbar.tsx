@@ -41,10 +41,10 @@ export default function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 group-hover:w-full h-px bg-gradient-to-r from-blue-500 via-indigo-500 to-sky-500 transition-all duration-300" />
             </NavLink>
 
-            {/* Sectors dropdown */}
+            {/* Core Sectors dropdown */}
             <div className="relative group">
               <button className="text-sm font-medium text-slate-300 hover:text-white transition-colors flex items-center gap-1">
-                Sectors
+                Core Sectors
                 <svg className="h-4 w-4 opacity-70 transition-transform group-hover:rotate-180" viewBox="0 0 20 20" fill="currentColor">
                   <path d="M5.25 7.5l4.5 4.5 4.5-4.5"/>
                 </svg>
@@ -144,7 +144,7 @@ export default function Navbar() {
                   </div>
                 </NavLink>
                 
-                {/* Sectors in mobile */}
+                {/* Core Sectors in mobile */}
                 <div>
                   <button
                     onClick={() => setSectorsOpen(!sectorsOpen)}
@@ -152,7 +152,7 @@ export default function Navbar() {
                   >
                     <div className="flex items-center gap-3">
                       <div className="h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 to-sky-500" />
-                      Sectors
+                      Core Sectors
                     </div>
                     <motion.svg
                       animate={{ rotate: sectorsOpen ? 180 : 0 }}

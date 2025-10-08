@@ -544,8 +544,12 @@ export default function Careers() {
         </div>
       </div>
 
-      {/* Why Join Us Section */}
+      {/* Why Join Us Section - Enhanced Design */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        {/* Floating decorative elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-10 right-10 w-40 h-40 bg-indigo-500/5 rounded-full blur-3xl" />
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -558,53 +562,83 @@ export default function Careers() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            className="inline-block mb-4"
+            className="inline-block mb-6"
           >
-            <span className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-sky-500/20 border border-white/20 text-sm font-semibold text-blue-300">
-              Life at Mirai
+            <span className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/30 via-indigo-500/30 to-sky-500/30 border-2 border-white/30 text-sm font-bold text-white backdrop-blur-xl shadow-lg shadow-blue-500/20">
+              ✨ Life at Mirai
             </span>
           </motion.div>
-          <h2 className="text-4xl lg:text-6xl font-black text-white mb-6">
-            Why Join <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-sky-400">Mirai?</span>
-          </h2>
-          <p className="text-xl text-slate-300 max-w-4xl mx-auto">
-            Grow fast with mentorship, work on nation‑building projects, and build a career powered by cutting‑edge tools and a supportive culture.
-          </p>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-5xl lg:text-7xl font-black text-white mb-8 leading-tight"
+          >
+            Why Join{' '}
+            <span className="relative inline-block">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-sky-400">
+                Mirai?
+              </span>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="absolute -bottom-2 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-indigo-500 to-sky-500 rounded-full"
+              />
+            </span>
+          </motion.h2>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-xl lg:text-2xl text-slate-200 max-w-4xl mx-auto leading-relaxed"
+          >
+            <span className="font-semibold text-white">Accelerate your career</span> with mentorship from industry leaders,{' '}
+            <span className="font-semibold text-white">shape nation‑building projects</span>, and work with{' '}
+            <span className="font-semibold text-white">cutting‑edge BIM & AI tools</span> in a culture that values innovation and growth.
+          </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {benefits.map((benefit, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.6, delay: index * 0.12 }}
               viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative bg-gradient-to-br from-slate-900/90 to-slate-800/70 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-blue-500/50 transition-all duration-500 cursor-pointer overflow-hidden"
+              whileHover={{ y: -12, scale: 1.03 }}
+              className="group relative bg-gradient-to-br from-slate-900/95 to-slate-800/90 backdrop-blur-2xl border-2 border-white/20 rounded-3xl p-10 hover:border-blue-400/60 transition-all duration-500 cursor-pointer overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-blue-500/30"
             >
-              {/* Animated Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-sky-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+              {/* Enhanced Animated Background Layers */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 via-indigo-500/0 to-sky-500/0 group-hover:from-blue-500/20 group-hover:via-indigo-500/20 group-hover:to-sky-500/20 opacity-0 group-hover:opacity-100 transition-all duration-700 rounded-3xl" />
               <motion.div 
-                className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-sky-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute -inset-2 bg-gradient-to-r from-blue-500/30 via-indigo-500/30 to-sky-500/30 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                 animate={{ 
-                  scale: [1, 1.1, 1],
+                  scale: [1, 1.15, 1],
+                  rotate: [0, 5, -5, 0],
                 }}
-                transition={{ duration: 3, repeat: Infinity }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-transparent rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
               <div className="relative">
                 <motion.div 
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/30 via-indigo-500/30 to-sky-500/30 border border-white/20 text-blue-400 mb-6 shadow-lg group-hover:shadow-blue-500/50"
+                  whileHover={{ rotate: [0, -10, 10, -10, 0], scale: 1.15 }}
+                  transition={{ duration: 0.7 }}
+                  className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500/40 via-indigo-500/40 to-sky-500/40 border-2 border-white/30 text-blue-300 mb-6 shadow-xl group-hover:shadow-2xl group-hover:shadow-blue-500/60 group-hover:border-blue-400/60"
                 >
-                  {benefit.icon}
+                  <div className="scale-125">
+                    {benefit.icon}
+                  </div>
                 </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-sky-400 transition-all">
+                <h3 className="text-2xl lg:text-3xl font-black text-white mb-5 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-300 group-hover:via-indigo-300 group-hover:to-sky-300 transition-all duration-300">
                   {benefit.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+                <p className="text-slate-300 text-base leading-relaxed group-hover:text-slate-100 transition-colors duration-300">
                   {benefit.description}
                 </p>
               </div>
@@ -614,36 +648,110 @@ export default function Careers() {
 
       </div>
 
-      {/* Core Sectors */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28">
+      {/* Core Sectors - Enhanced Design */}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 lg:pb-32">
+        {/* Background effects */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent rounded-3xl blur-3xl" />
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-10"
+          className="text-center mb-12 relative"
         >
-          <h3 className="text-3xl lg:text-4xl font-bold text-white mb-3">Core Sectors</h3>
-          <p className="text-slate-400">We hire across our flagship sectors</p>
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="inline-block mb-4"
+          >
+            <span className="px-5 py-2.5 rounded-full bg-gradient-to-r from-indigo-500/30 via-blue-500/30 to-sky-500/30 border-2 border-white/30 text-sm font-bold text-white backdrop-blur-xl shadow-lg">
+              🏗️ Our Expertise
+            </span>
+          </motion.div>
+          <motion.h3 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-4xl lg:text-6xl font-black text-white mb-4"
+          >
+            Core{' '}
+            <span className="relative inline-block">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400">
+                Sectors
+              </span>
+              <motion.div
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                viewport={{ once: true }}
+                className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 rounded-full"
+              />
+            </span>
+          </motion.h3>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-lg text-slate-300"
+          >
+            We hire top talent across our flagship infrastructure sectors
+          </motion.p>
         </motion.div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative">
           {[
-            { emoji: '🚆', title: 'Railways' },
-            { emoji: '🌉', title: 'Bridges' },
-            { emoji: '🛣️', title: 'Highways' },
-            { emoji: '🏗️', title: 'Building & Infrastructure' },
+            { emoji: '🚆', title: 'Railways', color: 'from-red-500 to-orange-500', hoverColor: 'hover:border-red-400/60', shadowColor: 'hover:shadow-red-500/30' },
+            { emoji: '🌉', title: 'Bridges', color: 'from-blue-500 to-cyan-500', hoverColor: 'hover:border-blue-400/60', shadowColor: 'hover:shadow-blue-500/30' },
+            { emoji: '🛣️', title: 'Highways', color: 'from-green-500 to-emerald-500', hoverColor: 'hover:border-green-400/60', shadowColor: 'hover:shadow-green-500/30' },
+            { emoji: '🏗️', title: 'Building & Infrastructure', color: 'from-purple-500 to-pink-500', hoverColor: 'hover:border-purple-400/60', shadowColor: 'hover:shadow-purple-500/30' },
           ].map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              initial={{ opacity: 0, y: 30, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
-              whileHover={{ y: -4 }}
-              className="bg-slate-900/80 border border-white/10 rounded-2xl p-6 text-center"
+              whileHover={{ y: -8, scale: 1.05 }}
+              className={`group relative bg-gradient-to-br from-slate-900/90 to-slate-800/80 backdrop-blur-xl border-2 border-white/20 ${item.hoverColor} rounded-3xl p-8 text-center transition-all duration-500 cursor-pointer overflow-hidden shadow-xl ${item.shadowColor}`}
             >
-              <div className="text-3xl mb-3">{item.emoji}</div>
-              <div className="text-white font-semibold">{item.title}</div>
+              {/* Gradient background on hover */}
+              <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
+              <motion.div
+                className={`absolute -inset-1 bg-gradient-to-r ${item.color} rounded-3xl blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
+                animate={{
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 3, -3, 0],
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              
+              <div className="relative">
+                <motion.div
+                  whileHover={{ rotate: [0, -15, 15, -15, 0], scale: 1.2 }}
+                  transition={{ duration: 0.6 }}
+                  className="text-6xl mb-4 filter drop-shadow-lg"
+                >
+                  {item.emoji}
+                </motion.div>
+                <motion.h4
+                  className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-200 transition-all duration-300"
+                >
+                  {item.title}
+                </motion.h4>
+                {/* Decorative line */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
+                  viewport={{ once: true }}
+                  className={`mt-4 h-1 rounded-full bg-gradient-to-r ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                />
+              </div>
             </motion.div>
           ))}
         </div>
