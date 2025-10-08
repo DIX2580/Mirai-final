@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, MapPin, Clock, Mail, MessageCircle, Users, Award, TrendingUp, Heart, Zap, Target, Copy, CheckCircle2, Building2, GraduationCap, Wrench, ChevronRight, Star, Rocket, Globe, Coffee, BookOpen, Lightbulb, ChevronDown, Send } from 'lucide-react';
+import { Briefcase, MapPin, Clock, Mail, MessageCircle, Users, Award, TrendingUp, Heart, Zap, Target, Copy, CheckCircle2, Building2, GraduationCap, Wrench, ChevronRight, ChevronDown, Send } from 'lucide-react';
 import Button from '../components/ui/Button';
 import { useState } from 'react';
 
@@ -50,14 +50,7 @@ const benefits = [
   },
 ];
 
-const perks = [
-  { icon: <Coffee className="h-5 w-5" />, title: 'Free Meals & Snacks', description: 'Complimentary lunch and unlimited refreshments' },
-  { icon: <BookOpen className="h-5 w-5" />, title: 'Learning Budget', description: '₹50,000/year for courses, certifications & conferences' },
-  { icon: <Rocket className="h-5 w-5" />, title: 'Fast-Track Growth', description: 'Rapid promotions based on performance, not tenure' },
-  { icon: <Globe className="h-5 w-5" />, title: 'Remote Flexibility', description: 'Hybrid model with work-from-anywhere options' },
-  { icon: <Lightbulb className="h-5 w-5" />, title: 'Innovation Labs', description: 'Dedicated time for R&D and experimental projects' },
-  { icon: <Star className="h-5 w-5" />, title: 'Recognition Programs', description: 'Quarterly awards, spot bonuses & team celebrations' },
-];
+
 
 const categories = [
   { id: 'all', name: 'All Positions', icon: <Briefcase className="h-4 w-4" /> },
@@ -357,114 +350,8 @@ export default function Careers() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
       </motion.div>
 
-      {/* Why Join Us Section */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="inline-block mb-4"
-          >
-            <span className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-sky-500/20 border border-white/20 text-sm font-semibold text-blue-300">
-              Life at Mirai
-            </span>
-          </motion.div>
-          <h2 className="text-4xl lg:text-6xl font-black text-white mb-6">
-            Why Join <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-sky-400">Mirai?</span>
-          </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto">
-            We believe in creating an environment where talent thrives, innovation flourishes, and careers are built on purpose.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative bg-gradient-to-br from-slate-900/90 to-slate-800/70 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-blue-500/50 transition-all duration-500 cursor-pointer overflow-hidden"
-            >
-              {/* Animated Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-sky-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
-              <motion.div 
-                className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-sky-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                animate={{ 
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
-              
-              <div className="relative">
-                <motion.div 
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/30 via-indigo-500/30 to-sky-500/30 border border-white/20 text-blue-400 mb-6 shadow-lg group-hover:shadow-blue-500/50"
-                >
-                  {benefit.icon}
-                </motion.div>
-                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-sky-400 transition-all">
-                  {benefit.title}
-                </h3>
-                <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
-                  {benefit.description}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Perks & Benefits Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-br from-indigo-950/40 via-blue-950/30 to-sky-950/40 border border-white/20 rounded-3xl p-8 lg:p-12"
-        >
-          <div className="text-center mb-10">
-            <h3 className="text-3xl lg:text-4xl font-bold text-white mb-4">Additional Perks & Benefits</h3>
-            <p className="text-slate-400 text-lg">Premium benefits that set us apart</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {perks.map((perk, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-blue-500/30 transition-all duration-300"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-sky-500/20 flex items-center justify-center text-blue-400 border border-white/10">
-                    {perk.icon}
-                  </div>
-                  <div>
-                    <h4 className="text-white font-semibold mb-2">{perk.title}</h4>
-                    <p className="text-slate-400 text-sm leading-relaxed">{perk.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Open Positions - Collapsible Design */}
-      <div id="positions" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-32 border-t border-white/10">
+      {/* Open Positions - Top */}
+      <div id="positions" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 border-t border-white/10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -480,14 +367,14 @@ export default function Careers() {
             className="inline-block mb-4"
           >
             <span className="px-4 py-2 rounded-full bg-gradient-to-r from-sky-500/20 via-indigo-500/20 to-blue-500/20 border border-white/20 text-sm font-semibold text-sky-300">
-              Join Our Team
+              Open Positions
             </span>
           </motion.div>
           <h2 className="text-4xl lg:text-6xl font-black text-white mb-6">
-            Open <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-blue-400">Positions</span>
+            Find Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-blue-400">Next Role</span>
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10">
-            Explore <span className="text-white font-semibold">{roles.length} exciting opportunities</span> and find the role that matches your skills and ambitions.
+            Explore <span className="text-white font-semibold">{roles.length} opportunities</span> across Railways, Bridges and Highways.
           </p>
 
           {/* Category Filter */}
@@ -705,33 +592,109 @@ export default function Careers() {
         </div>
       </div>
 
-      {/* Life at Mirai CTA */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-t border-white/10">
+      {/* Why Join Us Section */}
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="relative bg-gradient-to-br from-blue-950/40 via-indigo-950/40 to-sky-950/40 border border-white/20 rounded-3xl p-12 lg:p-16 overflow-hidden"
+          className="text-center mb-16"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(79,70,229,0.15),transparent_70%)]" />
-          
-          <div className="relative text-center max-w-3xl mx-auto">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Don't See the Perfect Role?
-            </h2>
-            <p className="text-xl text-slate-300 mb-10 leading-relaxed">
-              We're always looking for talented individuals. Send us your resume and tell us how you can contribute to shaping India's infrastructure.
-            </p>
-            <Button
-              href="mailto:careers@mirai.example?subject=General Application"
-              variant="primary"
-              leftIcon={<Briefcase className="h-5 w-5" />}
-            >
-              Send General Application
-            </Button>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="inline-block mb-4"
+          >
+            <span className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-sky-500/20 border border-white/20 text-sm font-semibold text-blue-300">
+              Life at Mirai
+            </span>
+          </motion.div>
+          <h2 className="text-4xl lg:text-6xl font-black text-white mb-6">
+            Why Join <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-sky-400">Mirai?</span>
+          </h2>
+          <p className="text-xl text-slate-300 max-w-4xl mx-auto">
+            Grow fast with mentorship, work on nation‑building projects, and build a career powered by cutting‑edge tools and a supportive culture.
+          </p>
         </motion.div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
+          {benefits.map((benefit, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative bg-gradient-to-br from-slate-900/90 to-slate-800/70 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-blue-500/50 transition-all duration-500 cursor-pointer overflow-hidden"
+            >
+              {/* Animated Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-indigo-500/10 to-sky-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+              <motion.div 
+                className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-indigo-500/20 to-sky-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{ duration: 3, repeat: Infinity }}
+              />
+              
+              <div className="relative">
+                <motion.div 
+                  whileHover={{ rotate: 360, scale: 1.1 }}
+                  transition={{ duration: 0.6 }}
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/30 via-indigo-500/30 to-sky-500/30 border border-white/20 text-blue-400 mb-6 shadow-lg group-hover:shadow-blue-500/50"
+                >
+                  {benefit.icon}
+                </motion.div>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-sky-400 transition-all">
+                  {benefit.title}
+                </h3>
+                <p className="text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+                  {benefit.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+      </div>
+
+      {/* Core Sectors */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 lg:pb-28">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-10"
+        >
+          <h3 className="text-3xl lg:text-4xl font-bold text-white mb-3">Core Sectors</h3>
+          <p className="text-slate-400">We hire across our flagship sectors</p>
+        </motion.div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { emoji: '🚆', title: 'Railways' },
+            { emoji: '🌉', title: 'Bridges' },
+            { emoji: '🛣️', title: 'Highways' },
+            { emoji: '🏗️', title: 'Building & Infrastructure' },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: idx * 0.05 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -4 }}
+              className="bg-slate-900/80 border border-white/10 rounded-2xl p-6 text-center"
+            >
+              <div className="text-3xl mb-3">{item.emoji}</div>
+              <div className="text-white font-semibold">{item.title}</div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );
