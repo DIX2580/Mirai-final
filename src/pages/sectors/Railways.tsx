@@ -171,10 +171,6 @@ export default function Railways() {
                       alt="Railway Engineering"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Modern Railway Infrastructure</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      State-of-the-art design and construction methodologies for railway systems.
-                    </p>
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
@@ -182,10 +178,6 @@ export default function Railways() {
                       alt="Railway Track"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Advanced Track Systems</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      Precision engineering for multi-track railway expansions.
-                    </p>
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
@@ -193,10 +185,6 @@ export default function Railways() {
                       alt="Indian Railway Network"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Indian Railway Network</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      Comprehensive solutions for India's extensive railway infrastructure.
-                    </p>
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
@@ -204,10 +192,6 @@ export default function Railways() {
                       alt="Railway Bridge Construction"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Bridge & Viaduct Engineering</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      Specialized expertise in railway bridge design and construction.
-                    </p>
                   </div>
                 </div>
               </div>
