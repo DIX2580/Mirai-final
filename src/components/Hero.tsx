@@ -153,14 +153,15 @@ export default function Hero() {
                     >
                       <div className="relative flex h-[460px] w-full items-center justify-center overflow-hidden rounded-[22px] bg-black/80 sm:h-[520px] lg:h-[580px]">
                         <div className="pointer-events-none absolute inset-0 border border-white/15 rounded-[22px]" />
-                        <video
-                          src="/Miraivid.mp4"
-                          autoPlay
-                          muted
-                          loop
-                          playsInline
-                          className="h-full w-full rounded-[20px] object-cover shadow-[inset_0_0_60px_rgba(0,0,0,0.45)]"
+                        <iframe
+                          src="https://player.vimeo.com/video/1125794428?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&background=1&loop=1"
+                          width="100%"
+                          height="100%"
+                          frameBorder="0"
+                          allow="autoplay; fullscreen; picture-in-picture"
+                          referrerPolicy="strict-origin-when-cross-origin"
                           title="Miraivid"
+                          className="h-full w-full rounded-[20px] object-cover shadow-[inset_0_0_60px_rgba(0,0,0,0.45)]"
                         />
                       </div>
                     </motion.div>
