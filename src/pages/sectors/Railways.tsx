@@ -1,6 +1,6 @@
-﻿import { motion } from 'framer-motion';
+﻿import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { Train, CheckCircle, Users, Zap, Award, MapPin, Calendar, ArrowRight, Target } from 'lucide-react';
+import { Train, CheckCircle, Users, Zap, Award, MapPin, Calendar, ArrowRight, Target, X } from 'lucide-react';
 import Button from '../../components/ui/Button';
 
 type Section = 'about' | 'services' | 'projects';
@@ -36,6 +36,7 @@ const projects = [
 
 export default function Railways() {
   const [activeSection, setActiveSection] = useState<Section>('about');
+  const [selectedImage, setSelectedImage] = useState<{ src: string; label: string; description?: string } | null>(null);
 
   return (
     <div className="min-h-screen pt-20 bg-slate-950 text-white">
@@ -165,34 +166,62 @@ export default function Railways() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage({
+                      src: 'https://t4.ftcdn.net/jpg/02/69/86/19/360_F_269861905_g8j8FL4715MgfYb77eP5DicVURaKxJBT.jpg',
+                      label: 'Modern Railway Infrastructure',
+                    })}
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60"
+                  >
+                    <img
                       src="https://t4.ftcdn.net/jpg/02/69/86/19/360_F_269861905_g8j8FL4715MgfYb77eP5DicVURaKxJBT.jpg"
                       alt="Railway Engineering"
-                      className="w-full h-48 object-cover rounded-xl mb-4"
+                      className="w-full h-48 object-cover rounded-xl mb-4 transition-transform duration-300 group-hover:scale-[1.02]"
                     />
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage({
+                      src: 'https://images.unsplash.com/photo-1540804236945-b6ae24bfe0a9?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFpbHdheSUyMHRyYWNrfGVufDB8fDB8fHww',
+                      label: 'Advanced Track Systems',
+                    })}
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60"
+                  >
+                    <img
                       src="https://images.unsplash.com/photo-1540804236945-b6ae24bfe0a9?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFpbHdheSUyMHRyYWNrfGVufDB8fDB8fHww"
                       alt="Railway Track"
-                      className="w-full h-48 object-cover rounded-xl mb-4"
+                      className="w-full h-48 object-cover rounded-xl mb-4 transition-transform duration-300 group-hover:scale-[1.02]"
                     />
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage({
+                      src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxAOJejdEjSUqubAiVq5In_u6Qxn9Aj2s-Og&s',
+                      label: 'Indian Railway Network',
+                    })}
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60"
+                  >
+                    <img
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxAOJejdEjSUqubAiVq5In_u6Qxn9Aj2s-Og&s"
                       alt="Indian Railway Network"
-                      className="w-full h-48 object-cover rounded-xl mb-4"
+                      className="w-full h-48 object-cover rounded-xl mb-4 transition-transform duration-300 group-hover:scale-[1.02]"
                     />
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedImage({
+                      src: '/railway.png',
+                      label: 'Railway Bridge Construction',
+                    })}
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60"
+                  >
+                    <img
                       src="/railway.png"
                       alt="Railway Bridge Construction"
-                      className="w-full h-48 object-cover rounded-xl mb-4"
+                      className="w-full h-48 object-cover rounded-xl mb-4 transition-transform duration-300 group-hover:scale-[1.02]"
                     />
-                  </div>
+                  </button>
                 </div>
               </div>
             )}
@@ -332,6 +361,49 @@ export default function Railways() {
           </motion.div>
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <div
+              className="relative max-w-4xl w-full"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <motion.img
+                key={selectedImage.src}
+                src={selectedImage.src}
+                alt={selectedImage.label}
+                className="w-full h-auto max-h-[75vh] object-contain rounded-2xl shadow-[0_20px_60px_rgba(15,23,42,0.6)]"
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+              />
+
+              <div className="mt-4 flex items-start justify-between gap-4 rounded-xl bg-slate-900/70 p-4 border border-white/10">
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{selectedImage.label}</h3>
+                  {selectedImage.description && (
+                    <p className="text-sm text-slate-300 mt-1">{selectedImage.description}</p>
+                  )}
+                </div>
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                  aria-label="Close image preview"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

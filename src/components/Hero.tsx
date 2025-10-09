@@ -238,7 +238,7 @@ type HeroTileProps = {
 function HeroTile({ service, isSelected, onSelect, onImageClick }: HeroTileProps) {
   const handleClick = () => {
     onSelect();
-    // Removed navigation - only image enlargement functionality
+    onImageClick();
   };
 
   return (
