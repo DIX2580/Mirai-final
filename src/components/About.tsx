@@ -1,6 +1,5 @@
 ﻿import { motion } from 'framer-motion';
-import { Award, CheckCircle, Target, Train, Landmark, Building2, Lightbulb, Users, TrendingUp, Clock, Rocket } from 'lucide-react';
-import Button from './ui/Button';
+import { Award, CheckCircle, Target, Train, Landmark, Lightbulb, Users, TrendingUp, Clock, Rocket } from 'lucide-react';
 
 export default function About() {
   return (
@@ -376,8 +375,6 @@ export default function About() {
               })}
             </div>
           </div>
-        </motion.div>
-
         </motion.div>
       </div>
     </section>
