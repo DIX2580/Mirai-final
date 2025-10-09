@@ -20,7 +20,6 @@ import {
   Users,
   Zap,
   ChevronDown,
-  ChevronRight,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 
@@ -309,10 +308,10 @@ const Careers = () => {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-5"
             >
               Shape India's Infrastructure Future with
-              <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-indigo-300">
+              <span className="block mt-1 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-indigo-300">
                 Mirai Consultancy
               </span>
             </motion.h1>
@@ -330,62 +329,8 @@ const Careers = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto mb-10"
-            >
-              {[
-                { value: '5000+', label: 'km of highways' },
-                { value: '30,000m', label: 'bridge spans' },
-                { value: '10,000+', label: 'km of railways' },
-              ].map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  whileHover={{ y: -4, scale: 1.02 }}
-                  className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-3 sm:py-4"
-                >
-                  <div className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-blue-300">
-                    {stat.value}
-                  </div>
-                  <div className="text-[10px] sm:text-xs tracking-wide uppercase text-slate-400 font-semibold">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10"
-            >
-              {[
-                'Remote-first collaboration',
-                'Structured career paths',
-                'Cutting-edge BIM & AI tools',
-                'Comprehensive benefits',
-              ].map((item) => (
-                <span
-                  key={item}
-                  className="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-white/15 bg-white/5 text-white/90 backdrop-blur-lg"
-                >
-                  {item}
-                </span>
-              ))}
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
               className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
             >
-              <Button
-                variant="primary"
-                href="#positions"
-                leftIcon={<ChevronRight className="h-4 w-4" />}
-              >
-                View Open Positions
-              </Button>
               <Button
                 variant="secondary"
                 href="mailto:careers@mirai.example"
@@ -441,25 +386,25 @@ const Careers = () => {
               Open Positions
             </span>
           </motion.div>
-          <h2 className="text-4xl lg:text-6xl font-black text-white mb-6">
+          <h2 className="text-3xl lg:text-4xl font-black text-white mb-4">
             Find Your{' '}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-blue-400">
               Next Role
             </span>
           </h2>
-          <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10">
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto mb-8">
             Explore <span className="text-white font-semibold">{roles.length} opportunities</span> across railways, bridges, highways, and building services.
           </p>
 
           {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3 mb-4">
+          <div className="flex flex-wrap justify-center gap-2 mb-3">
             {categories.map((category) => (
               <motion.button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold transition-all duration-300 shadow-lg ${
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg font-bold transition-all duration-300 shadow-lg ${
                   selectedCategory === category.id
                     ? 'bg-blue-600 text-white border-2 border-blue-500 shadow-blue-500/40'
                     : 'bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border-2 border-slate-600 hover:border-slate-500 shadow-slate-900/50'
@@ -478,7 +423,7 @@ const Careers = () => {
             ))}
           </div>
 
-          <p className="text-sm text-slate-500">
+          <p className="text-xs text-slate-500">
             Showing <span className="text-white font-semibold">{filteredRoles.length}</span>{' '}
             {filteredRoles.length === 1 ? 'position' : 'positions'}
           </p>
@@ -780,9 +725,8 @@ const Careers = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-4xl lg:text-6xl font-black text-white mb-4"
+            className="text-3xl lg:text-4xl font-black text-white mb-4"
           >
-            Core{' '}
             <span className="relative inline-block">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400">
                 Sectors
@@ -845,7 +789,7 @@ const Careers = () => {
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -8, scale: 1.05 }}
-              className={`group relative bg-gradient-to-br from-slate-900/90 to-slate-800/80 backdrop-blur-xl border-2 border-white/20 ${item.hoverColor} rounded-3xl p-8 text-center transition-all duration-500 cursor-pointer overflow-hidden shadow-xl ${item.shadowColor}`}
+              className={`group relative bg-gradient-to-br from-slate-900/90 to-slate-800/80 backdrop-blur-xl border-2 border-white/20 ${item.hoverColor} rounded-3xl p-6 text-center transition-all duration-500 cursor-pointer overflow-hidden shadow-xl ${item.shadowColor}`}
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
               <motion.div
@@ -863,10 +807,10 @@ const Careers = () => {
                   whileInView={{ scale: 1, rotate: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 + idx * 0.1, type: 'spring' }}
                   viewport={{ once: true }}
-                  className="mx-auto mb-4 w-16 h-16 flex items-center justify-center"
+                  className="mx-auto mb-4 w-12 h-12 flex items-center justify-center"
                 >
                   <item.icon
-                    className="w-12 h-12 text-white group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300"
+                    className="w-8 h-8 text-white group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300"
                     style={{ filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))' }}
                   />
                 </motion.div>

@@ -132,20 +132,43 @@ export default function Railways() {
                     <h2 className="text-2xl lg:text-3xl font-bold text-white">About Railways Engineering</h2>
                   </div>
                   
-                  <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
-                    <p>
-                      Railway infrastructure forms the backbone of India's transportation network. Our expertise spans preliminary design, detailed engineering, and construction supervision for new railway lines, double/multi-track expansions, and ROB/RUB constructions.
-                    </p>
-                    <p>
-                      With over 30 years of combined experience, our team leverages modern surveying technologies including drone-based DGP surveys to deliver projects that meet international standards and local requirements.
-                    </p>
+                  <div className="space-y-6 text-slate-300 text-lg leading-relaxed">
+                    <div>
+                      <h3 className="text-xl font-semibold text-sky-400 mb-3">Government Initiative</h3>
+                      <p className="mb-4">
+                        The Government of India has laid emphasis for capacity improvement of Railway sector with added rail length, dedicated freight corridor, adding additional tracks, gauge conversion etc for a sustainable, economical, efficient, safe, reliable, environment friendly railway transport infrastructure.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-sky-400 mb-3">Our Contribution</h3>
+                      <p className="mb-4">
+                        Our contribution to the Railway sector development in India is significant in both Green field and brown field Railway projects. We have logged over 10000km of Railway track length in the field of design, construction, track rehabilitation, yard capacity improvement, dedicated industrial corridors, railway infrastructure for industries, operation and maintenance of railway infrastructure etc.
+                      </p>
+                      <p className="mb-4">
+                        We have also designed & supervised implementation of ballast less tracks and road cum track structures, track laying in tunnels in curves etc. We continually explore the practical application of advanced technologies to provide innovative, cost-effective and appropriate project solutions.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-sky-400 mb-3">Capabilities</h3>
+                      <p className="mb-4">
+                        We have the credit of completing more than 15 projects across India. We undertake, railway network analysis, track capacity analysis, feasibility studies, detail engineering design as well as construction supervision of Railway projects.
+                      </p>
+                      <p className="mb-4">
+                        Our firm provides 'one stop solution' for planning, design and construction of Railway infrastructures with added inhouse competency for carrying out Topographical Survey, Hydrological survey and Geo-technical investigation; being pre-requisite for detail engineering.
+                      </p>
+                      <p>
+                        We also provide Railway infrastructure solutions to Industries.
+                      </p>
+                    </div>
                   </div>
 
                   <div className="mt-12 grid gap-6 sm:grid-cols-3">
                     {[
-                      { value: '11+', label: 'ROBs Delivered', icon: Train },
-                      { value: '30+ yrs', label: 'Team Experience', icon: Users },
-                      { value: '100%', label: 'Compliance Score', icon: CheckCircle },
+                      { value: '15+', label: 'Projects Completed', icon: Train },
+                      { value: '10,000+ km', label: 'Railway Track Length', icon: MapPin },
+                      { value: '30+ yrs', label: 'Industry Experience', icon: Users },
                     ].map((stat) => (
                       <div
                         key={stat.label}

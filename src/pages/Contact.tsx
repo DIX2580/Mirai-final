@@ -160,31 +160,6 @@ export default function Contact() {
                 />
               </div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-8">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-sky-400" />
-                </div>
-                <h2 className="text-2xl lg:text-3xl font-bold text-white">Visit Our Office</h2>
-              </div>
-
-              <p className="text-slate-300 text-lg leading-relaxed mb-6">
-                Located in the heart of Bhubaneswar, Odisha
-              </p>
-
-              <div className="relative rounded-xl overflow-hidden border border-white/10 h-64">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3742.8976887654697!2d85.81395!3d20.326025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjDCsDE5JzMzLjciTiA4NcKwNDknMDIuMiJF!5e0!3m2!1sen!2sin!4v1234567890"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="grayscale hover:grayscale-0 transition-all duration-300"
-                />
-              </div>
-            </div>
           </motion.div>
         </div>
       </div>

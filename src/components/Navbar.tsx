@@ -82,7 +82,7 @@ export default function Navbar() {
               onMouseLeave={() => setSectorsOpen(false)}
             >
               <button className={`${linkBaseClasses} flex items-center gap-1 text-slate-300 hover:text-white`}>
-                <span>Core Sectors</span>
+                <span>Sectors</span>
                 <motion.svg
                   animate={{ rotate: sectorsOpen ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
@@ -196,7 +196,7 @@ export default function Navbar() {
                     className="w-full flex items-center justify-between px-4 py-3 rounded-xl text-slate-200 hover:bg-white/10 hover:text-white transition-colors font-medium"
                   >
                     <div className="flex items-center gap-3">
-                      Core Sectors
+                      Sectors
                     </div>
                     <motion.svg
                       animate={{ rotate: sectorsOpen ? 180 : 0 }}

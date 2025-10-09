@@ -1,8 +1,6 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-
-type HeroStage = 'gallery' | 'video';
 
 type Service = {
   label: string;
@@ -34,24 +32,49 @@ const services: Service[] = [
 ];
 
 export default function Hero() {
-  const [stage, setStage] = useState<HeroStage>('gallery');
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState<Service | null>(null);
+  const [headingText, setHeadingText] = useState('');
+  const [paragraphText, setParagraphText] = useState('');
 
-  // Auto-transition to video after 5 seconds
+  const fullHeading = 'We are an emerging engineering consultancy company in Eastern India';
+  const fullParagraph = 'Specialising in railway and highway projects, delivering robust, sustainable and innovative infrastructure project solutions that connect communities and drive economic growth.';
+
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setStage('video');
-    }, 5000);
-    
-    return () => clearTimeout(timer);
-  }, []);
+    let headingTimeout: number;
+    let paragraphTimeout: number;
 
-  const handleSelect = (serviceIndex: number) => {
-    setSelectedIndex(serviceIndex);
-    setStage('gallery');
-    setTimeout(() => setStage('video'), 3000);
-  };
+    // Type heading
+    let headingIndex = 0;
+    const typeHeading = () => {
+      if (headingIndex < fullHeading.length) {
+        setHeadingText(fullHeading.slice(0, headingIndex + 1));
+        headingIndex++;
+        headingTimeout = setTimeout(typeHeading, 50);
+      } else {
+        // Start typing paragraph after heading is done
+        setTimeout(() => {
+          let paragraphIndex = 0;
+          const typeParagraph = () => {
+            if (paragraphIndex < fullParagraph.length) {
+              setParagraphText(fullParagraph.slice(0, paragraphIndex + 1));
+              paragraphIndex++;
+              paragraphTimeout = setTimeout(typeParagraph, 30);
+            }
+          };
+          typeParagraph();
+        }, 500);
+      }
+    };
+
+    // Start typing after a delay
+    const startTyping = setTimeout(typeHeading, 1000);
+
+    return () => {
+      clearTimeout(startTyping);
+      clearTimeout(headingTimeout);
+      clearTimeout(paragraphTimeout);
+    };
+  }, []);
 
   const handleImageClick = (service: Service) => {
     setSelectedImage(service);
@@ -60,10 +83,6 @@ export default function Hero() {
   const closeModal = () => {
     setSelectedImage(null);
   };
-
-  // 2 images in top row, 2 in bottom row
-  const topRow = useMemo(() => services.slice(0, 2), []);
-  const bottomRow = useMemo(() => services.slice(2, 4), []);
 
   return (
     <section id="home" className="relative overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-24 lg:pb-20 min-h-screen flex items-center">
@@ -85,99 +104,94 @@ export default function Hero() {
           <div className="relative z-10">
             <div className="relative min-h-[520px] lg:min-h-[560px]">
               <AnimatePresence mode="wait">
-                {stage === 'gallery' ? (
+                <motion.div
+                  key="gallery"
+                  initial={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -50 }}
+                  transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+                  className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-center"
+                >
+                  {/* Left side - Text Content */}
                   <motion.div
-                    key="gallery"
-                    initial={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -50 }}
-                    transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                    className="flex flex-col items-center gap-6 lg:gap-8"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="flex-1 w-full lg:w-auto text-center lg:text-left"
                   >
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.6, delay: 0.1 }}
-                      className="grid w-full grid-cols-1 gap-4 lg:gap-5 sm:grid-cols-2"
-                    >
-                      {topRow.map((service, idx) => {
-                        const serviceIndex = services.indexOf(service);
+                    <div className="space-y-6">
+                      <motion.h2
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="text-2xl lg:text-4xl font-bold text-white leading-tight"
+                      >
+                        {headingText}
+                        <span className="animate-pulse text-sky-400">|</span>
+                      </motion.h2>
+
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="text-lg lg:text-xl text-slate-300 leading-relaxed"
+                      >
+                        {paragraphText}
+                        {headingText.length === fullHeading.length && paragraphText.length < fullParagraph.length && (
+                          <span className="animate-pulse text-sky-400">|</span>
+                        )}
+                      </motion.p>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4"
+                      >
+                        <button
+                          onClick={() => window.scrollTo({ top: document.getElementById('services')?.offsetTop || 0, behavior: 'smooth' })}
+                          className="px-8 py-3 bg-sky-500 hover:bg-sky-600 text-white font-semibold rounded-xl transition-colors duration-300 shadow-lg hover:shadow-xl"
+                        >
+                          Our Services
+                        </button>
+                        <button
+                          onClick={() => window.scrollTo({ top: document.getElementById('contact')?.offsetTop || 0, behavior: 'smooth' })}
+                          className="px-8 py-3 border-2 border-white/30 hover:border-white/50 text-white font-semibold rounded-xl transition-colors duration-300 backdrop-blur-sm"
+                        >
+                          Get In Touch
+                        </button>
+                      </motion.div>
+                    </div>
+                  </motion.div>
+
+                  {/* Right side - Images */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="flex-1 w-full lg:w-auto"
+                  >
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-5">
+                      {services.map((service, idx) => {
                         return (
                           <motion.div
                             key={service.label}
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.2 + idx * 0.1 }}
+                            transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
                             className="w-full"
                           >
                             <HeroTile
                               service={service}
-                              isSelected={serviceIndex === selectedIndex}
-                              onSelect={() => handleSelect(serviceIndex)}
+                              isSelected={false}
                               onImageClick={() => handleImageClick(service)}
                               variant="top"
                             />
                           </motion.div>
                         );
                       })}
-                    </motion.div>
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.6, delay: 0.5 }}
-                      className="grid w-full grid-cols-1 gap-4 lg:gap-5 sm:grid-cols-2"
-                    >
-                      {bottomRow.map((service, idx) => {
-                        const serviceIndex = services.indexOf(service);
-                        return (
-                          <motion.div
-                            key={service.label}
-                            initial={{ opacity: 0, y: 30 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.6 + idx * 0.1 }}
-                            className="w-full"
-                          >
-                            <HeroTile
-                              service={service}
-                              isSelected={serviceIndex === selectedIndex}
-                              onSelect={() => handleSelect(serviceIndex)}
-                              onImageClick={() => handleImageClick(service)}
-                              variant="bottom"
-                            />
-                          </motion.div>
-                        );
-                      })}
-                    </motion.div>
+                    </div>
                   </motion.div>
-                ) : (
-                  <motion.div
-                    key="video"
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                    className="flex flex-col gap-6"
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.6, delay: 0.5 }}
-                      className="relative overflow-hidden rounded-[28px] border-[3px] border-white/25 bg-gradient-to-b from-slate-900/80 via-slate-950/90 to-slate-900/80 p-3 shadow-[0_24px_70px_rgba(8,47,73,0.55)]"
-                    >
-                      <div className="relative flex h-[460px] w-full items-center justify-center overflow-hidden rounded-[22px] bg-black/80 sm:h-[520px] lg:h-[580px]">
-                        <div className="pointer-events-none absolute inset-0 border border-white/15 rounded-[22px]" />
-                        <iframe
-                          src="https://player.vimeo.com/video/1125794428?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&background=1&loop=1"
-                          width="100%"
-                          height="100%"
-                          frameBorder="0"
-                          allow="autoplay; fullscreen; picture-in-picture"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          title="Miraivid"
-                          className="h-full w-full rounded-[20px] object-cover shadow-[inset_0_0_60px_rgba(0,0,0,0.45)]"
-                        />
-                      </div>
-                    </motion.div>
-                  </motion.div>
-                )}
+                </motion.div>
               </AnimatePresence>
             </div>
           </div>
@@ -230,14 +244,14 @@ export default function Hero() {
 type HeroTileProps = {
   service: Service;
   isSelected: boolean;
-  onSelect: () => void;
+  onSelect?: () => void;
   onImageClick: () => void;
   variant: 'top' | 'bottom';
 };
 
 function HeroTile({ service, isSelected, onSelect, onImageClick }: HeroTileProps) {
   const handleClick = () => {
-    onSelect();
+    onSelect?.();
     onImageClick();
   };
 
@@ -250,7 +264,7 @@ function HeroTile({ service, isSelected, onSelect, onImageClick }: HeroTileProps
           ? 'border-fuchsia-500/60 bg-white/10 shadow-[0_22px_55px_rgba(217,70,239,0.25)]'
           : 'border-white/15 bg-white/[0.05] hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_18px_48px_rgba(0,0,0,0.35)]'
       }`}
-      style={{ aspectRatio: '16/9' }}
+      style={{ aspectRatio: '16/14' }}
     >
       <div className="relative w-full h-full">
         <motion.img
