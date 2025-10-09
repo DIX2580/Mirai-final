@@ -164,7 +164,7 @@ export default function Railways() {
                   </div>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
                       src="https://t4.ftcdn.net/jpg/02/69/86/19/360_F_269861905_g8j8FL4715MgfYb77eP5DicVURaKxJBT.jpg"
@@ -178,13 +178,35 @@ export default function Railways() {
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
-                      src="https://img.freepik.com/free-photo/high-speed-train-station-sunset-with-modern-railroad-track-motion-blur-effect-industrial-scene-with-moving-blurred-train-railway-platform-railroad-concept-railway-tourism_1321-2906.jpg"
+                      src="https://images.unsplash.com/photo-1540804236945-b6ae24bfe0a9?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmFpbHdheSUyMHRyYWNrfGVufDB8fDB8fHww"
                       alt="Railway Track"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
                     <h3 className="text-xl font-semibold text-white mb-2">Advanced Track Systems</h3>
                     <p className="text-slate-400 leading-relaxed">
                       Precision engineering for multi-track railway expansions.
+                    </p>
+                  </div>
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+                    <img 
+                      src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW5kaWFuJTIwcmFpbHdheXxlbnwwfHwwfHx8MA"
+                      alt="Indian Railway Station"
+                      className="w-full h-48 object-cover rounded-xl mb-4"
+                    />
+                    <h3 className="text-xl font-semibold text-white mb-2">Indian Railway Network</h3>
+                    <p className="text-slate-400 leading-relaxed">
+                      Comprehensive solutions for India's extensive railway infrastructure.
+                    </p>
+                  </div>
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+                    <img 
+                      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZGlhbiUyMHJhaWx3YXl8ZW58MHx8MHx8fDA"
+                      alt="Railway Bridge Construction"
+                      className="w-full h-48 object-cover rounded-xl mb-4"
+                    />
+                    <h3 className="text-xl font-semibold text-white mb-2">Bridge & Viaduct Engineering</h3>
+                    <p className="text-slate-400 leading-relaxed">
+                      Specialized expertise in railway bridge design and construction.
                     </p>
                   </div>
                 </div>
