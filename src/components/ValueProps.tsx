@@ -64,14 +64,14 @@ export default function ValueProps() {
           <h2 className="brand-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Why Choose Mirai
           </h2>
-          <p className="text-slate-300 text-lg max-w-3xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-base max-w-3xl mx-auto leading-relaxed">
             We combine decades of engineering expertise with innovative approaches and cutting-edge technology 
             to deliver infrastructure solutions that exceed expectations and stand the test of time.
           </p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {props.map((p, i) => {
+          {props.map((p) => {
             const IconComponent = p.icon;
             return (
               <motion.article
@@ -79,7 +79,7 @@ export default function ValueProps() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: 0.6 }}
                 whileHover={{ y: -5 }}
                 className="group relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-6 lg:p-8 hover:bg-white/[0.08] transition-all duration-300 overflow-hidden text-center"
               >
@@ -92,23 +92,41 @@ export default function ValueProps() {
                 </div>
 
                 {/* Stat */}
-                <div className="relative mb-4">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="relative mb-4"
+                >
                   <div className="text-3xl lg:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-300 mb-1">
                     {p.stat}
                   </div>
                   <div className="text-xs text-slate-500 font-medium uppercase tracking-wider">
                     {p.statLabel}
                   </div>
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <div className="relative">
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
+                  <motion.h3 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all"
+                  >
                     {p.title}
-                  </h3>
-                  <p className="text-slate-400 leading-relaxed text-sm">
+                  </motion.h3>
+                  <motion.p 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-slate-400 leading-relaxed text-sm"
+                  >
                     {p.desc}
-                  </p>
+                  </motion.p>
                 </div>
 
                 {/* Hover border effect */}
@@ -132,12 +150,34 @@ export default function ValueProps() {
               ))}
             </div>
             <div className="text-left">
-              <div className="text-white font-semibold">Join 250+ satisfied clients</div>
-              <div className="text-slate-400 text-sm">Ready to start your next project?</div>
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-white font-semibold"
+              >
+                Join 250+ satisfied clients
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-slate-400 text-sm"
+              >
+                Ready to start your next project?
+              </motion.div>
             </div>
-            <button className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 to-violet-500 rounded-xl hover:shadow-[0_0_30px_theme(colors.fuchsia.500/40%)] transition-shadow">
+            <motion.button 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 to-violet-500 rounded-xl hover:shadow-[0_0_30px_theme(colors.fuchsia.500/40%)] transition-shadow"
+            >
               Get Started
-            </button>
+            </motion.button>
           </div>
         </motion.div>
       </div>

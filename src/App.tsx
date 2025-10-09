@@ -5,9 +5,14 @@ import Home from './pages/Home';
 import SimplePage from './pages/SimplePage';
 import About from './components/About';
 import Careers from './pages/Careers';
+import Contact from './pages/Contact';
+import Gallery from './pages/Gallery';
 import Highway from './pages/sectors/Highway';
 import Bridges from './pages/sectors/Bridges';
 import Railways from './pages/sectors/Railways';
+import ArchitectureBuildings from './pages/sectors/ArchitectureBuildings';
+import Geospatial from './pages/sectors/Geospatial';
+import GeotechnicalInvestigation from './pages/sectors/GeotechnicalInvestigation';
 
 export default function App() {
   return (
@@ -15,13 +20,16 @@ export default function App() {
       <Route element={<Layout />}>        
         <Route path="/" element={<Home />} />
   <Route path="/about" element={<About />} />
-        <Route path="/gallery" element={<SimplePage title="Gallery">Visuals and project images.</SimplePage>} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/projects" element={<SimplePage title="Projects">Selected iconic projects.</SimplePage>} />
   <Route path="/careers" element={<Careers />} />
-        <Route path="/contact" element={<SimplePage title="Contact">Contact details and consultation form.</SimplePage>} />
-  <Route path="/services/highway" element={<Highway />} />
-  <Route path="/services/bridges" element={<Bridges />} />
-  <Route path="/services/railways" element={<Railways />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/sectors/highway" element={<Highway />} />
+        <Route path="/sectors/bridges" element={<Bridges />} />
+        <Route path="/sectors/railways" element={<Railways />} />
+        <Route path="/sectors/architecture-buildings" element={<ArchitectureBuildings />} />
+        <Route path="/sectors/geospatial" element={<Geospatial />} />
+        <Route path="/sectors/geotechnical-investigation" element={<GeotechnicalInvestigation />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>

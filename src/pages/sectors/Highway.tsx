@@ -1,231 +1,329 @@
-import { motion } from 'framer-motion';
-import { Route, MapPin, TrendingUp, CheckCircle, Target, Users } from 'lucide-react';
+﻿import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { Landmark, CheckCircle, Users, Zap, Award, MapPin, Calendar, ArrowRight, Target } from 'lucide-react';
 import Button from '../../components/ui/Button';
 
-const stats = [
-  { value: '5000+', label: 'Kilometers Delivered', icon: <Route className="h-5 w-5" /> },
-  { value: '50+', label: 'Road Projects', icon: <Target className="h-5 w-5" /> },
-  { value: '15+', label: 'States Covered', icon: <MapPin className="h-5 w-5" /> },
-  { value: '20+', label: 'Years Experience', icon: <TrendingUp className="h-5 w-5" /> },
-];
+type Section = 'about' | 'services' | 'projects';
 
 const capabilities = [
-  'Planning & design of all types of highways and expressways',
-  'Rehabilitation and strengthening of existing road networks',
-  'Urban roads with dedicated cycle tracks and pedestrian infrastructure',
-  'Traffic Engineering studies and junction design',
-  'Capacity & network analysis with optimal design solutions',
-  'Subways, Foot Over Bridges (FOBs), parking bays and landscaping',
-  'Expertise in road improvement projects in Himalayan Terrain',
-  'Transport planning and comprehensive traffic surveys',
+  'Traffic & Feasibility Studies',
+  'Detailed Project Reports (DPR)',
+  'Interchange & Junction Design',
+  'Pavement & Material Engineering',
+  'Highway Structures',
+  'Construction Supervision',
+];
+
+const projects = [
+  {
+    title: 'Eastern Freight Mobility Corridor',
+    location: 'Odisha & Jharkhand',
+    scope: '106 km access-controlled corridor',
+    year: '2024',
+    description: 'End-to-end DPR and interchange planning for high-speed freight corridor.',
+    image: 'https://images.pexels.com/photos/240222/pexels-photo-240222.jpeg',
+  },
+  {
+    title: 'Urban Ring Road Programme',
+    location: 'Tier-2 Smart City',
+    scope: 'Six-lane ring road',
+    year: '2023',
+    description: 'Traffic impact assessment and detailed geometric design for urban mobility.',
+    image: 'https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg',
+  },
 ];
 
 export default function Highway() {
+  const [activeSection, setActiveSection] = useState<Section>('about');
+
   return (
-    <div className="min-h-screen pt-20">
-      {/* Hero Banner */}
+    <div className="min-h-screen pt-20 bg-slate-950 text-white">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="relative bg-gradient-to-br from-sky-950/60 via-violet-950/40 to-fuchsia-950/60 border-b border-white/10 overflow-hidden"
+        className="relative overflow-hidden border-b border-white/10 bg-slate-950"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(14,165,233,0.15),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(168,85,247,0.15),transparent_50%)]" />
-        
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-4xl">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-sky-500/20 via-violet-500/20 to-fuchsia-500/20 border border-white/20 backdrop-blur mb-8"
-            >
-              <Route className="h-4 w-4 text-sky-400" />
-              <span className="text-sm font-medium text-slate-200">Core Service</span>
-            </motion.div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-5xl lg:text-7xl font-bold text-white mb-6"
-            >
-              Highway <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-violet-400 to-fuchsia-400">Engineering</span>
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-xl text-slate-300 mb-10 leading-relaxed"
-            >
-              Building India's road infrastructure with precision engineering, innovative design, and sustainable practices across 5000+ kilometers of highways and expressways.
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap gap-4"
-            >
-              <Button variant="primary" to="/contact">
-                Start a Project
-              </Button>
-              <Button variant="secondary" to="/about">
-                Our Expertise
-              </Button>
-            </motion.div>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-16 h-16 rounded-2xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
+              <Landmark className="w-8 h-8 text-sky-400" />
+            </div>
+            <div>
+              <h1 className="text-4xl lg:text-6xl font-bold text-white">
+                Highway <span className="text-sky-400">Engineering</span>
+              </h1>
+              <p className="text-lg text-slate-400 mt-2">Resilient Infrastructure Solutions</p>
+            </div>
           </div>
+          <p className="text-xl text-slate-300 max-w-3xl leading-relaxed">
+            Designing sustainable highway corridors that enhance mobility and economic development.
+          </p>
         </div>
       </motion.div>
 
-      {/* Stats Section */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/60 backdrop-blur border border-white/10 rounded-2xl p-6 lg:p-8 hover:border-sky-500/50 transition-all duration-300 group"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-violet-500/5 to-fuchsia-500/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
-              
-              <div className="relative">
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500/20 via-violet-500/20 to-fuchsia-500/20 border border-white/10 text-sky-400 mb-4 group-hover:scale-110 transition-transform">
-                  {stat.icon}
-                </div>
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-slate-400 text-sm">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Overview Section */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-t border-white/10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          <motion.div
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="flex flex-col lg:flex-row gap-8 text-white">
+          <motion.aside
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, x: 0 }}
+            className="lg:w-64 flex-shrink-0"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Driving India's <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-fuchsia-400">Road Revolution</span>
-            </h2>
-            <div className="space-y-6 text-slate-300 text-lg leading-relaxed">
-              <p>
-                Improvement of road infrastructure in a nation is a precursor of growth. India has witnessed unprecedented development in the road sector over the last three decades through programs like NHDP, PMGSY, Bharatmala Pariyojana, and Urban Renewal Mission.
-              </p>
-              <p>
-                We take pride in contributing to nation-building, having delivered over <strong className="text-white">5000 kilometers</strong> of roads across various states in India. Our projects have significantly contributed to regional economic development and national growth.
-              </p>
-              <p>
-                We continuously integrate new technology and promote innovation & creativity to maintain balance between engineering excellence and aesthetic appeal.
-              </p>
+            <div className="sticky top-24 space-y-3">
+              <button
+                onClick={() => setActiveSection('about')}
+                className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
+                  activeSection === 'about'
+                    ? 'bg-sky-500/10 border border-sky-400/30 text-white'
+                    : 'border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Users className="w-5 h-5" />
+                  <span>About</span>
+                </div>
+              </button>
+              
+              <button
+                onClick={() => setActiveSection('services')}
+                className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
+                  activeSection === 'services'
+                    ? 'bg-sky-500/10 border border-sky-400/30 text-white'
+                    : 'border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Zap className="w-5 h-5" />
+                  <span>Services</span>
+                </div>
+              </button>
+              
+              <button
+                onClick={() => setActiveSection('projects')}
+                className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
+                  activeSection === 'projects'
+                    ? 'bg-sky-500/10 border border-sky-400/30 text-white'
+                    : 'border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Award className="w-5 h-5" />
+                  <span>Key Projects</span>
+                </div>
+              </button>
             </div>
-          </motion.div>
+          </motion.aside>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="relative"
+            key={activeSection}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex-1"
           >
-            <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/60 backdrop-blur border border-white/10 rounded-2xl p-8 lg:p-10">
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-violet-500/5 to-fuchsia-500/5 rounded-2xl" />
-              
-              <div className="relative">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-sky-500/20 via-violet-500/20 to-fuchsia-500/20 border border-white/10 text-sky-400 mb-6">
-                  <Users className="h-7 w-7" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Expert Team</h3>
-                <p className="text-slate-300 leading-relaxed mb-6">
-                  Our highway professionals have extensive expertise in capacity & network analysis, providing optimal design solutions for all road-related infrastructure. Our team excels in challenging projects, including road improvement in Himalayan Terrain.
-                </p>
-                <Button variant="secondary" to="/careers">
-                  Join Our Team
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
+            {activeSection === 'about' && (
+              <div className="space-y-8">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
+                      <Landmark className="w-6 h-6 text-sky-400" />
+                    </div>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-white">About Highway Engineering</h2>
+                  </div>
+                  
+                  <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
+                    <p>
+                      Highway infrastructure drives economic growth and connectivity. Our multidisciplinary approach covers traffic studies, geometric design, and construction supervision.
+                    </p>
+                    <p>
+                      We specialize in national and state highways, expressways, and urban corridors, ensuring compliance with IRC and MoRTH standards.
+                    </p>
+                  </div>
 
-      {/* Capabilities Section */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-t border-white/10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">Our Capabilities</h2>
-          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
-            Comprehensive highway engineering services covering planning, design, rehabilitation, and traffic management across diverse terrains and urban landscapes.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {capabilities.map((capability, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              viewport={{ once: true }}
-              className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/60 backdrop-blur border border-white/10 rounded-xl p-6 hover:border-sky-500/50 transition-all duration-300"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-sky-500/5 via-violet-500/5 to-fuchsia-500/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl" />
-              
-              <div className="relative flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-gradient-to-br from-sky-500/20 via-violet-500/20 to-fuchsia-500/20 border border-white/10 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="h-5 w-5 text-sky-400" />
+                  <div className="mt-12 grid gap-6 sm:grid-cols-3">
+                    {[
+                      { value: '120+ km', label: 'Expressway Optimized', icon: Landmark },
+                      { value: '30+ yrs', label: 'Team Experience', icon: Users },
+                      { value: '100%', label: 'Compliance Score', icon: CheckCircle },
+                    ].map((stat) => (
+                      <div
+                        key={stat.label}
+                        className="group relative overflow-hidden rounded-2xl border border-white/20 bg-slate-900/50 p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sky-500/10 mb-4">
+                          <stat.icon className="h-6 w-6 text-sky-400" />
+                        </div>
+                        <div className="text-3xl font-bold text-white mb-2">
+                          {stat.value}
+                        </div>
+                        <p className="text-sm font-medium text-slate-300 uppercase tracking-wide">
+                          {stat.label}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <p className="text-slate-300 leading-relaxed pt-1">{capability}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
 
-      {/* CTA Section */}
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-28 border-t border-white/10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative bg-gradient-to-br from-sky-950/40 via-violet-950/40 to-fuchsia-950/40 border border-white/20 rounded-3xl p-12 lg:p-16 overflow-hidden text-center"
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.15),transparent_70%)]" />
-          
-          <div className="relative max-w-3xl mx-auto">
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              Ready to Build Better Roads?
-            </h2>
-            <p className="text-xl text-slate-300 mb-10 leading-relaxed">
-              Partner with us to deliver world-class highway infrastructure that drives economic growth and connects communities.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="primary" to="/contact">
-                Discuss Your Project
-              </Button>
-              <Button variant="secondary" to="/gallery">
-                View Our Projects
-              </Button>
-            </div>
-          </div>
-        </motion.div>
+                <div className="grid lg:grid-cols-2 gap-6">
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+                    <img 
+                      src="https://images.pexels.com/photos/240222/pexels-photo-240222.jpeg"
+                      alt="Highway Engineering"
+                      className="w-full h-48 object-cover rounded-xl mb-4"
+                    />
+                    <h3 className="text-xl font-semibold text-white mb-2">Smart Corridor Design</h3>
+                    <p className="text-slate-400 leading-relaxed">
+                      Optimized alignments for safety and efficiency.
+                    </p>
+                  </div>
+                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
+                    <img 
+                      src="https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg"
+                      alt="Highway Track"
+                      className="w-full h-48 object-cover rounded-xl mb-4"
+                    />
+                    <h3 className="text-xl font-semibold text-white mb-2">Sustainable Engineering</h3>
+                    <p className="text-slate-400 leading-relaxed">
+                      Climate-aware design for long-term resilience.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeSection === 'services' && (
+              <div className="space-y-6">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
+                      <Zap className="w-6 h-6 text-sky-400" />
+                    </div>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-white">Our Services</h2>
+                  </div>
+                  
+                  <p className="text-slate-300 text-lg leading-relaxed mb-8">
+                    Comprehensive highway engineering services from planning to construction.
+                  </p>
+
+                  <div className="grid gap-4">
+                    {capabilities.map((service, idx) => (
+                      <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: idx * 0.1 }}
+                        className="flex items-start gap-4 rounded-xl border border-white/10 bg-slate-900/30 p-4 hover:bg-slate-800/30 transition-colors"
+                      >
+                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/10 text-sky-400">
+                          <CheckCircle className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className="text-slate-200 text-base leading-relaxed">{service}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-2xl border border-sky-400/20 bg-sky-500/5 p-8">
+                  <div className="mb-6 flex items-center gap-3">
+                    <Target className="w-6 h-6 text-sky-400" />
+                    <h3 className="text-xl font-semibold text-white">Why Choose MIRAI</h3>
+                  </div>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    {[
+                      'Integrated delivery from concept to completion',
+                      'Digital engineering with BIM and AI',
+                      'Sustainable and resilient designs',
+                      'Risk-focused safety methodologies',
+                    ].map((reason) => (
+                      <div
+                        key={reason}
+                        className="flex items-start gap-3 rounded-lg border border-white/10 bg-slate-900/50 p-3"
+                      >
+                        <CheckCircle className="mt-0.5 h-4 w-4 text-sky-400 flex-shrink-0" />
+                        <span className="text-sm text-slate-300 leading-relaxed">{reason}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeSection === 'projects' && (
+              <div className="space-y-6">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
+                      <Award className="w-6 h-6 text-sky-400" />
+                    </div>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-white">Key Projects</h2>
+                  </div>
+                  
+                  <p className="text-slate-300 text-lg leading-relaxed mb-8">
+                    Showcasing our expertise in highway infrastructure development.
+                  </p>
+                </div>
+
+                {projects.map((project, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.2 }}
+                    className="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 lg:flex"
+                  >
+                    <div className="relative lg:w-2/5">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                    <div className="space-y-4 p-6 lg:w-3/5 lg:p-8">
+                      <div className="flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-sky-400">
+                        <span className="inline-flex items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-500/10 px-3 py-1">
+                          <MapPin className="h-3 w-3" />
+                          {project.location}
+                        </span>
+                        <span className="inline-flex items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-500/10 px-3 py-1">
+                          <Calendar className="h-3 w-3" />
+                          {project.year}
+                        </span>
+                      </div>
+                      <h3 className="text-xl lg:text-2xl font-bold text-white">{project.title}</h3>
+                      <div className="inline-flex rounded-lg border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-slate-200">
+                        {project.scope}
+                      </div>
+                      <p className="text-base leading-relaxed text-slate-300">{project.description}</p>
+                      <Button
+                        variant="secondary"
+                        href="#contact"
+                        rightIcon={<ArrowRight className="w-4 h-4" />}
+                      >
+                        Learn More
+                      </Button>
+                    </div>
+                  </motion.div>
+                ))}
+
+                <div className="rounded-2xl border border-sky-400/20 bg-sky-500/5 p-8 text-center">
+                  <h3 className="text-xl font-semibold text-white mb-3">Have a Highway Project in Mind?</h3>
+                  <p className="text-slate-300 text-base mb-6 max-w-2xl mx-auto">
+                    Partner with us for expert highway engineering solutions.
+                  </p>
+                  <Button
+                    variant="primary"
+                    href="#contact"
+                    className="inline-flex items-center gap-2 px-6 py-3"
+                    rightIcon={<ArrowRight className="w-4 h-4" />}
+                  >
+                    Discuss Your Project
+                  </Button>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </div>
       </div>
     </div>
   );

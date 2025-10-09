@@ -76,20 +76,20 @@ export default function Projects() {
           <h2 className="brand-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Projects & Case Studies
           </h2>
-          <p className="text-slate-300 text-lg max-w-3xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-base max-w-3xl mx-auto leading-relaxed">
             Showcasing iconic infrastructure projects that demonstrate our engineering excellence, 
             innovation, and commitment to transforming India's transportation landscape.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {items.map((it, i) => (
+          {items.map((it) => (
             <motion.article
               key={it.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              transition={{ duration: 0.6 }}
               whileHover={{ y: -5 }}
               className="group relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl overflow-hidden hover:bg-white/[0.08] transition-all duration-300"
             >
@@ -116,15 +116,33 @@ export default function Projects() {
 
               {/* Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
+                <motion.h3 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all"
+                >
                   {it.title}
-                </h3>
-                <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                </motion.h3>
+                <motion.p 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="text-slate-400 text-sm leading-relaxed mb-6"
+                >
                   {it.desc}
-                </p>
+                </motion.p>
 
                 {/* Project details */}
-                <div className="space-y-3">
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="space-y-3"
+                >
                   <div className="flex items-center gap-2 text-xs text-slate-500">
                     <Calendar className="w-3 h-3" />
                     <span>{it.duration}</span>
@@ -137,7 +155,7 @@ export default function Projects() {
                     <Users className="w-3 h-3" />
                     <span>{it.team}</span>
                   </div>
-                </div>
+                </motion.div>
               </div>
 
               {/* Hover effect overlay */}
@@ -152,10 +170,17 @@ export default function Projects() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <button className="inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500 rounded-xl shadow-[0_0_30px_theme(colors.fuchsia.500/30%)] hover:shadow-[0_0_40px_theme(colors.fuchsia.500/50%)] transition-shadow">
+          <motion.button 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            className="inline-flex items-center gap-3 px-8 py-4 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500 rounded-xl shadow-[0_0_30px_theme(colors.fuchsia.500/30%)] hover:shadow-[0_0_40px_theme(colors.fuchsia.500/50%)] transition-shadow"
+          >
             View All Projects
             <ExternalLink className="w-4 h-4" />
-          </button>
+          </motion.button>
         </motion.div>
       </div>
     </section>

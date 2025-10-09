@@ -3,40 +3,47 @@ import { Link } from 'react-router-dom';
 import { Train, Landmark, Building2, MapPin, Route } from 'lucide-react';
 
 const items = [
-  { 
-    title: 'Railways', 
-    slug: 'railways', 
-    desc: 'Network analysis, capacity planning, detailed design & supervision.',
+  {
+    title: 'Railways',
+    slug: 'railways',
+    desc: 'Preliminary engineering and traffic study, final location survey and preparation of detailed project report for new double and triple line projects, preparation of general arrangement drawings and structural design of railway bridges, conducting DGP survey using drone, preparation and detail project report general arrangement drawing structural design for road over bridges, geotechnical investigation, land acquisition.',
     icon: Train,
     gradient: 'from-red-500 to-orange-500'
   },
-  { 
-    title: 'Bridges', 
-    slug: 'bridges', 
-    desc: 'Iconic spans, proof checking, rehabilitation & strengthening.',
+  {
+    title: 'Highways',
+    slug: 'highway',
+    desc: 'Expressway design & corridor planning, traffic surveys and analysis, detailed engineering and design of highways, highway interchange design, bridges culverts and drainage systems, pavement engineering, preparation of detail project report for road connectivity projects.',
+    icon: Route,
+    gradient: 'from-amber-500 to-yellow-500'
+  },
+  {
+    title: 'Bridges',
+    slug: 'bridges',
+    desc: 'Structural excellence & integrity, iconic spans, proof checking, rehabilitation & strengthening.',
     icon: Landmark,
     gradient: 'from-blue-500 to-cyan-500'
   },
-  { 
-    title: 'Buildings', 
-    slug: 'buildings', 
-    desc: 'Structural design, value engineering & project management.',
+  {
+    title: 'Architecture & Buildings',
+    slug: 'buildings',
+    desc: 'Iconic spaces and urban form, structural design, value engineering & project management.',
     icon: Building2,
     gradient: 'from-purple-500 to-pink-500'
   },
-  { 
-    title: 'Survey', 
-    slug: 'survey', 
-    desc: 'Topographical, hydrological & geotechnical investigations.',
+  {
+    title: 'Geospatial',
+    slug: 'survey',
+    desc: 'Survey intelligence & analytics, topographical, hydrological & geotechnical investigations.',
     icon: MapPin,
     gradient: 'from-green-500 to-emerald-500'
   },
-  { 
-    title: 'Highway', 
-    slug: 'highway', 
-    desc: 'Alignment, pavement design & corridor modernization.',
-    icon: Route,
-    gradient: 'from-amber-500 to-yellow-500'
+  {
+    title: 'Geotechnical Investigation',
+    slug: 'geotechnical',
+    desc: 'Ground analysis & foundation studies, comprehensive ground investigation services.',
+    icon: Building2,
+    gradient: 'from-teal-500 to-cyan-500'
   },
 ];
 
@@ -58,14 +65,14 @@ export default function Services() {
           <h2 className="brand-title text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Services & Capabilities
           </h2>
-          <p className="text-slate-300 text-lg max-w-3xl mx-auto leading-relaxed">
+          <p className="text-slate-300 text-base max-w-3xl mx-auto leading-relaxed">
             Comprehensive engineering solutions across infrastructure sectors, 
             delivering excellence from concept to completion with cutting-edge technology and proven expertise.
           </p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {items.map((it, i) => {
+          {items.map((it) => {
             const IconComponent = it.icon;
             return (
               <motion.article
@@ -73,7 +80,7 @@ export default function Services() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: 0.6 }}
                 whileHover={{ y: -5 }}
                 className="group relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-6 lg:p-8 hover:bg-white/[0.08] transition-all duration-300 overflow-hidden"
               >
@@ -87,22 +94,41 @@ export default function Services() {
 
                 {/* Content */}
                 <div className="relative">
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all">
-                    {it.title}
-                  </h3>
-                  <p className="text-slate-400 leading-relaxed mb-6">
-                    {it.desc}
-                  </p>
-                  <Link
-                    to={`/services/${it.slug}`}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-sky-300 hover:text-white transition-colors group/link"
+                  <motion.h3 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-lg font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-300 transition-all"
                   >
-                    Learn more
-                    <svg className="h-4 w-4 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14" />
-                      <path d="M12 5l7 7-7 7" />
-                    </svg>
-                  </Link>
+                    {it.title}
+                  </motion.h3>
+                  <motion.p 
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-slate-400 text-sm leading-relaxed mb-6"
+                  >
+                    {it.desc}
+                  </motion.p>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Link
+                      to={`/services/${it.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-sky-300 hover:text-white transition-colors group/link"
+                    >
+                      Learn more
+                      <svg className="h-4 w-4 transition-transform group-hover/link:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M5 12h14" />
+                        <path d="M12 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </motion.div>
                 </div>
 
                 {/* Hover effect border */}

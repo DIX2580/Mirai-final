@@ -1,27 +1,206 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { Briefcase, MapPin, Clock, Mail, MessageCircle, Users, Award, TrendingUp, Heart, Zap, Target, Copy, CheckCircle2, Building2, Wrench, ChevronRight, ChevronDown, Send } from 'lucide-react';
+import { useMemo, useState, type ReactNode } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  Award,
+  Briefcase,
+  Building2,
+  CheckCircle2,
+  Clock,
+  Construction,
+  Copy,
+  Heart,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Send,
+  Target,
+  TrendingUp,
+  Truck,
+  Train,
+  Users,
+  Zap,
+  ChevronDown,
+  ChevronRight,
+} from 'lucide-react';
 import Button from '../components/ui/Button';
-import { useState } from 'react';
+
+type RoleCategory = 'railways' | 'bridges' | 'highways' | 'buildings';
+type CategoryId = 'all' | RoleCategory;
 
 type Role = {
+  id: string;
   title: string;
+  summary: string;
   location: string;
   type: string;
-  category: 'Engineering' | 'Management';
-  summary: string;
+  category: RoleCategory;
+  experience: string;
+  department: string;
   responsibilities: string[];
   requirements: string[];
   email: string;
-  id: string;
-  experience: string;
-  department: string;
 };
+
+type Category = {
+  id: CategoryId;
+  name: string;
+  icon: ReactNode;
+};
+
+const categories: Category[] = [
+  {
+    id: 'all',
+    name: 'All Opportunities',
+    icon: <Briefcase className="h-5 w-5" />,
+  },
+  {
+    id: 'railways',
+    name: 'Railways',
+    icon: <Train className="h-5 w-5" />,
+  },
+  {
+    id: 'bridges',
+    name: 'Bridges',
+    icon: <Construction className="h-5 w-5" />,
+  },
+  {
+    id: 'highways',
+    name: 'Highways',
+    icon: <Truck className="h-5 w-5" />,
+  },
+  {
+    id: 'buildings',
+    name: 'Buildings & Infra',
+    icon: <Building2 className="h-5 w-5" />,
+  },
+];
+
+const CATEGORY_LABELS: Record<RoleCategory, string> = {
+  railways: 'Railways',
+  bridges: 'Bridges',
+  highways: 'Highways',
+  buildings: 'Buildings & Infrastructure',
+};
+
+const roles: Role[] = [
+  {
+    id: 'RL-101',
+    title: 'Senior Railway Alignment Engineer',
+    summary:
+      'Lead alignment optimization and corridor design for high-speed and freight programmes across Western India.',
+    location: 'Mumbai, India',
+    type: 'Full-time · Hybrid',
+    category: 'railways',
+    experience: '8+ years',
+    department: 'Railway Engineering',
+    responsibilities: [
+      'Develop alignment concepts and detailed design using OpenRail/Bentley workflows.',
+      'Coordinate with geotechnical, structural, and systems teams to resolve design interfaces.',
+      'Own client presentations, design reviews, and approvals with railway authorities.',
+    ],
+    requirements: [
+      'Bachelor’s in Civil Engineering with specialization in transportation or railways.',
+      'Hands-on experience with BIM-based alignment modelling tools.',
+      'Proven ability to lead multi-disciplinary design teams on large rail projects.',
+    ],
+    email: 'railways@mirai.example',
+  },
+  {
+    id: 'RL-118',
+    title: 'Rail Systems BIM Coordinator',
+    summary:
+      'Drive BIM execution, model federation, and clash resolution for metro and commuter rail projects.',
+    location: 'Ahmedabad, India',
+    type: 'Full-time · On-site',
+    category: 'railways',
+    experience: '5+ years',
+    department: 'Digital Engineering',
+    responsibilities: [
+      'Set up BIM execution plans and ensure compliance across design partners.',
+      'Manage model federation, quality checks, and clash coordination workshops.',
+      'Support digital twin initiatives and asset information deliverables.',
+    ],
+    requirements: [
+      '5+ years managing BIM for rail or metro projects.',
+      'Advanced knowledge of Revit, Navisworks, and collaborative CDE platforms.',
+      'Understanding of GSAS/BIM standards and Indian railway specifications.',
+    ],
+    email: 'digital@mirai.example',
+  },
+  {
+    id: 'BR-204',
+    title: 'Bridge Design Lead',
+    summary:
+      'Own the structural design and delivery of long-span bridges including cable-stayed and extradosed systems.',
+    location: 'Delhi NCR, India',
+    type: 'Full-time · Hybrid',
+    category: 'bridges',
+    experience: '10+ years',
+    department: 'Bridge Engineering',
+    responsibilities: [
+      'Lead concept to IFC stage design for complex bridge structures.',
+      'Review and guide structural analysis, detailing, and constructability assessments.',
+      'Interface with clients, authorities, and construction partners throughout delivery.',
+    ],
+    requirements: [
+      'Master’s in Structural Engineering with focus on bridges.',
+      'Expertise in MIDAS, LUSAS, or similar analysis tools.',
+      'Track record delivering major bridge programmes within multidisciplinary teams.',
+    ],
+    email: 'bridges@mirai.example',
+  },
+  {
+    id: 'HW-311',
+    title: 'Highway Geometrics Specialist',
+    summary:
+      'Deliver 3D geometric design and safety enhancements for national and state highway corridors.',
+    location: 'Bengaluru, India',
+    type: 'Full-time · Remote-friendly',
+    category: 'highways',
+    experience: '6+ years',
+    department: 'Highway Engineering',
+    responsibilities: [
+      'Prepare geometrics, corridor modelling, and safety audits meeting IRC and MoRTH standards.',
+      'Collaborate with traffic, drainage, and pavement teams to coordinate design outputs.',
+      'Provide technical leadership during client and independent engineer reviews.',
+    ],
+    requirements: [
+      'Demonstrated experience across DPR and EPC highway projects.',
+      'Strong skills in Civil 3D/OpenRoads and roadway safety assessment tools.',
+      'Excellent communication and stakeholder management capabilities.',
+    ],
+    email: 'highways@mirai.example',
+  },
+  {
+    id: 'BD-118',
+    title: 'MEP Project Manager – Transport Hubs',
+    summary:
+      'Oversee end-to-end MEP strategy for multimodal stations, depots, and operations control centres.',
+    location: 'Nagpur, India',
+    type: 'Full-time · On-site',
+    category: 'buildings',
+    experience: '9+ years',
+    department: 'Building Services',
+    responsibilities: [
+      'Plan and manage MEP design packages, schedules, and coordination workflows.',
+      'Ensure integration with architectural, structural, and systems design teams.',
+      'Monitor site execution, testing, and commissioning support for key assets.',
+    ],
+    requirements: [
+      'Degree in Mechanical or Electrical Engineering with large infrastructure experience.',
+      'Robust knowledge of green building practices and smart infrastructure systems.',
+      'Experience managing consultants and contractors across complex developments.',
+    ],
+    email: 'buildings@mirai.example',
+  },
+];
 
 const benefits = [
   {
     icon: <TrendingUp className="h-6 w-6" />,
     title: 'Career Growth',
-    description: 'Continuous learning opportunities and clear career progression paths with mentorship programs',
+    description:
+      'Continuous learning opportunities and clear career progression paths with mentorship programs',
   },
   {
     icon: <Users className="h-6 w-6" />,
@@ -46,264 +225,204 @@ const benefits = [
   {
     icon: <Target className="h-6 w-6" />,
     title: 'Impactful Projects',
-    description: 'Shape India\'s infrastructure with nation-building projects that create lasting impact',
+    description: "Shape India's infrastructure with nation-building projects that create lasting impact",
   },
 ];
 
-
-
-const categories = [
-  { id: 'all', name: 'All Positions', icon: <Briefcase className="h-4 w-4" /> },
-  { id: 'Engineering', name: 'Engineering', icon: <Wrench className="h-4 w-4" /> },
-  { id: 'Management', name: 'Management', icon: <Building2 className="h-4 w-4" /> },
-  
-];
-
-const roles: Role[] = [
-  {
-    id: 'se-bridges',
-    title: 'Structural Engineer – Bridges',
-    location: 'Mumbai / Hybrid',
-    type: 'Full‑time',
-    category: 'Engineering',
-    experience: '3-7 years',
-    department: 'Bridge Engineering',
-    summary:
-      'Lead detailed design and proof checking of bridge superstructures and substructures across urban and intercity programs.',
-    responsibilities: [
-      'Perform analysis and design of composite girders, PSC, RCC and steel systems',
-      'Prepare and review design reports, drawings, and BOQs',
-      'Coordinate with geotech, hydrology and site teams for constructability',
-      'Support rehabilitation and strengthening designs for existing assets',
-    ],
-    requirements: [
-      'B.E./M.Tech in Civil/Structural Engineering',
-      '3–7 years in bridge design and/or proof consultancy',
-      'Hands‑on with MIDAS/CsiBridge/STAAD, IRC/IS codes',
-      'Strong documentation and coordination skills',
-    ],
-    email: 'careers@mirai.example',
-  },
-  {
-    id: 'highway-engineer',
-    title: 'Highway Design Engineer',
-    location: 'Delhi / Remote',
-    type: 'Full‑time',
-    category: 'Engineering',
-    experience: '2-5 years',
-    department: 'Highway Engineering',
-    summary:
-      'Design and develop highway infrastructure projects including expressways, interchanges, and urban road networks.',
-    responsibilities: [
-      'Geometric design of highways, expressways and urban roads',
-      'Traffic analysis and junction design optimization',
-      'Prepare detailed project reports and technical specifications',
-      'Coordinate with survey, geotechnical and environmental teams',
-    ],
-    requirements: [
-      'B.E./B.Tech in Civil Engineering',
-      '2-5 years experience in highway/road design',
-      'Proficiency in AutoCAD Civil 3D, MX Road, IRC standards',
-      'Knowledge of traffic engineering and pavement design',
-    ],
-    email: 'careers@mirai.example',
-  },
-  {
-    id: 'pm-rail',
-    title: 'Project Manager – Railways',
-    location: 'Bhubaneswar / On‑site',
-    type: 'Full‑time',
-    category: 'Management',
-    experience: '8+ years',
-    department: 'Railway Projects',
-    summary:
-      'Manage end‑to‑end delivery for railway projects including surveys, feasibility, detailed design and supervision.',
-    responsibilities: [
-      'Plan and track multi‑disciplinary deliverables',
-      'Interface with client, contractors and internal teams',
-      'Ensure QA/QC and statutory compliance',
-      'Drive risk registers, MoMs and project dashboards',
-    ],
-    requirements: [
-      'B.E. (Civil) with 8+ years in rail projects',
-      'Strong stakeholder and contract management skills',
-      'Working knowledge of BIM, track and structures is a plus',
-    ],
-    email: 'careers@mirai.example',
-  },
-  {
-    id: 'senior-pm',
-    title: 'Senior Project Manager',
-    location: 'Mumbai / Hybrid',
-    type: 'Full‑time',
-    category: 'Management',
-    experience: '10+ years',
-    department: 'Infrastructure Projects',
-    summary:
-      'Lead large-scale infrastructure projects from conception to completion, managing cross-functional teams and stakeholders.',
-    responsibilities: [
-      'Oversee multiple concurrent highway/bridge/railway projects',
-      'Strategic planning, budgeting and resource allocation',
-      'Client relationship management and business development',
-      'Mentor junior project managers and technical teams',
-    ],
-    requirements: [
-      'B.E./M.Tech in Civil Engineering with PMP/PRINCE2 certification',
-      '10+ years in infrastructure project management',
-      'Proven track record of delivering ₹100+ Cr projects',
-      'Excellent leadership, negotiation and presentation skills',
-    ],
-    email: 'careers@mirai.example',
-  },
-];
-
-export default function Careers() {
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
+const Careers = () => {
+  const [selectedCategory, setSelectedCategory] = useState<CategoryId>('all');
   const [expandedRole, setExpandedRole] = useState<string | null>(null);
+  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
 
-  const filteredRoles = selectedCategory === 'all' 
-    ? roles 
-    : roles.filter(role => role.category === selectedCategory);
-
-  const copyEmail = (email: string, roleId: string) => {
-    navigator.clipboard.writeText(email);
-    setCopiedEmail(roleId);
-    setTimeout(() => setCopiedEmail(null), 2000);
-  };
+  const filteredRoles = useMemo(() => {
+    return roles.filter(
+      (role) => selectedCategory === 'all' || role.category === selectedCategory,
+    );
+  }, [selectedCategory]);
 
   const toggleRole = (roleId: string) => {
-    setExpandedRole(expandedRole === roleId ? null : roleId);
+    setExpandedRole((current) => (current === roleId ? null : roleId));
+  };
+
+  const copyEmail = async (email: string, roleId: string) => {
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(email);
+      }
+      setCopiedEmail(roleId);
+      setTimeout(() => setCopiedEmail(null), 2000);
+    } catch (error) {
+      console.error('Failed to copy email', error);
+      setCopiedEmail(roleId);
+      setTimeout(() => setCopiedEmail(null), 2000);
+    }
+  };
+
+  const getCategoryCount = (categoryId: CategoryId) => {
+    if (categoryId === 'all') {
+      return roles.length;
+    }
+
+    return roles.filter((role) => role.category === categoryId).length;
   };
 
   return (
-    <div className="min-h-screen pt-20 relative overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-3xl animate-pulse delay-500" />
-      </div>
-
-      {/* Hero Banner */}
+    <div className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-white">
+      {/* Hero Banner - Minimal Professional Design */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="relative bg-gradient-to-br from-indigo-950/80 via-blue-950/60 to-sky-950/80 border-b border-white/10 overflow-hidden"
+        className="relative min-h-[70vh] flex items-center justify-center overflow-hidden"
       >
-        {/* Animated Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f12_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f12_1px,transparent_1px)] bg-[size:24px_24px]" />
-        
-        {/* Gradient Overlays */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(79,70,229,0.2),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(14,165,233,0.2),transparent_50%)]" />
-        
-        {/* Floating Elements */}
-        <motion.div
-          animate={{ 
-            y: [0, -20, 0],
-            rotate: [0, 5, 0],
-          }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-20 right-10 w-20 h-20 bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-2xl backdrop-blur border border-white/10"
-        />
-        <motion.div
-          animate={{ 
-            y: [0, 20, 0],
-            rotate: [0, -5, 0],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute bottom-20 left-10 w-32 h-32 bg-gradient-to-br from-sky-500/20 to-blue-500/20 rounded-3xl backdrop-blur border border-white/10"
-        />
-        
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
-          <div className="max-w-5xl mx-auto text-center">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-sky-800/40 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-800/30 via-transparent to-transparent" />
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15] }}
+            transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+            className="absolute top-1/3 right-1/4 w-40 h-40 bg-sky-500/20 rounded-full blur-2xl"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.25, 0.1] }}
+            transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+            className="absolute bottom-1/4 left-1/4 w-52 h-52 bg-indigo-500/15 rounded-full blur-2xl"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:3.5rem_3.5rem] opacity-60" />
+        </div>
+
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+          <div className="max-w-3xl mx-auto text-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/30 via-indigo-500/30 to-sky-500/30 border border-white/30 backdrop-blur-xl mb-8 shadow-lg"
-            >
-              <Briefcase className="h-5 w-5 text-blue-300" />
-              <span className="text-sm font-semibold text-white">We're Actively Hiring - 6 Positions Open</span>
-            </motion.div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="text-5xl md:text-6xl lg:text-8xl font-black text-white mb-8 leading-tight"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-xl text-xs sm:text-sm font-semibold text-white/90 mb-6"
             >
-              Build Your Future <br />
-              <span className="relative inline-block">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-indigo-400 to-sky-400 animate-gradient">
-                  With Mirai
-                </span>
-                <motion.div
-                  animate={{ scaleX: [0, 1] }}
-                  transition={{ duration: 0.8, delay: 0.8 }}
-                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-sky-500 rounded-full"
-                />
+              <Briefcase className="h-4 w-4 text-sky-300" />
+              Hiring for Railways · Bridges · Highways
+              <span className="inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5"
+            >
+              Shape India's Infrastructure Future with
+              <span className="block mt-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-indigo-300">
+                Mirai Consultancy
               </span>
             </motion.h1>
-            
+
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="text-xl lg:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-sm sm:text-base lg:text-lg text-slate-300/90 max-w-2xl mx-auto leading-relaxed mb-8"
             >
-              Join a team of visionaries shaping India's infrastructure future. Work on iconic projects with <span className="text-white font-semibold">5000+ km highways</span>, <span className="text-white font-semibold">30,000m bridges</span>, and <span className="text-white font-semibold">10,000+ km railways</span>.
+              Join a multidisciplinary team delivering complex transport and infrastructure programs nationwide. We combine engineering rigor, digital tools, and collaborative culture to build pathways for your growth.
             </motion.p>
-            
+
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex flex-wrap justify-center gap-4 mb-10"
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="grid grid-cols-3 gap-3 sm:gap-4 max-w-xl mx-auto mb-10"
             >
-              {['🌏 Remote Friendly', '⚡ Fast Growth', '💎 Top Benefits', '🚀 Latest Tech'].map((item, i) => (
+              {[
+                { value: '5000+', label: 'km of highways' },
+                { value: '30,000m', label: 'bridge spans' },
+                { value: '10,000+', label: 'km of railways' },
+              ].map((stat) => (
                 <motion.div
-                  key={i}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="px-6 py-3 rounded-xl bg-slate-800 backdrop-blur-xl border-2 border-slate-600 text-sm font-bold text-white shadow-lg shadow-slate-900/50 hover:shadow-xl hover:bg-slate-700 hover:border-slate-500 transition-all cursor-default"
+                  key={stat.label}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-xl px-3 py-3 sm:py-4"
                 >
-                  {item}
+                  <div className="text-lg sm:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-300 to-blue-300">
+                    {stat.value}
+                  </div>
+                  <div className="text-[10px] sm:text-xs tracking-wide uppercase text-slate-400 font-semibold">
+                    {stat.label}
+                  </div>
                 </motion.div>
               ))}
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10"
             >
-              <Button 
-                variant="primary" 
+              {[
+                'Remote-first collaboration',
+                'Structured career paths',
+                'Cutting-edge BIM & AI tools',
+                'Comprehensive benefits',
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg border border-white/15 bg-white/5 text-white/90 backdrop-blur-lg"
+                >
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
+            >
+              <Button
+                variant="primary"
                 href="#positions"
-                leftIcon={<ChevronRight className="h-5 w-5" />}
+                leftIcon={<ChevronRight className="h-4 w-4" />}
               >
                 View Open Positions
               </Button>
-              <Button 
-                variant="secondary" 
+              <Button
+                variant="secondary"
                 href="mailto:careers@mirai.example"
-                leftIcon={<Mail className="h-5 w-5" />}
+                leftIcon={<Mail className="h-4 w-4" />}
               >
-                General Application
+                Share Your Profile
               </Button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 1 }}
+              className="mt-10 flex justify-center"
+            >
+              <div className="flex flex-col items-center gap-2 text-slate-500 text-[11px] uppercase tracking-[0.18em]">
+                <span>Scroll to explore</span>
+                <div className="w-6 h-9 rounded-full border border-white/20 flex items-start justify-center p-1.5">
+                  <motion.span
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    className="w-1 h-1 rounded-full bg-white"
+                  />
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Bottom Wave */}
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-black to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black via-black/40 to-transparent" />
       </motion.div>
 
-      {/* Open Positions - Top */}
-      <div id="positions" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 border-t border-white/10">
+      {/* Open Positions */}
+      <div
+        id="positions"
+        className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24 border-t border-white/10"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -323,10 +442,13 @@ export default function Careers() {
             </span>
           </motion.div>
           <h2 className="text-4xl lg:text-6xl font-black text-white mb-6">
-            Find Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-blue-400">Next Role</span>
+            Find Your{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 to-blue-400">
+              Next Role
+            </span>
           </h2>
           <p className="text-xl text-slate-400 max-w-3xl mx-auto mb-10">
-            Explore <span className="text-white font-semibold">{roles.length} opportunities</span> across Railways, Bridges and Highways.
+            Explore <span className="text-white font-semibold">{roles.length} opportunities</span> across railways, bridges, highways, and building services.
           </p>
 
           {/* Category Filter */}
@@ -343,11 +465,13 @@ export default function Careers() {
                     : 'bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border-2 border-slate-600 hover:border-slate-500 shadow-slate-900/50'
                 }`}
               >
-                {category.icon}
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10">
+                  {category.icon}
+                </span>
                 {category.name}
                 {category.id !== 'all' && (
                   <span className="px-2 py-0.5 rounded-full bg-white/20 text-xs">
-                    {roles.filter(r => r.category === category.id).length}
+                    {getCategoryCount(category.id)}
                   </span>
                 )}
               </motion.button>
@@ -355,7 +479,8 @@ export default function Careers() {
           </div>
 
           <p className="text-sm text-slate-500">
-            Showing <span className="text-white font-semibold">{filteredRoles.length}</span> {filteredRoles.length === 1 ? 'position' : 'positions'}
+            Showing <span className="text-white font-semibold">{filteredRoles.length}</span>{' '}
+            {filteredRoles.length === 1 ? 'position' : 'positions'}
           </p>
         </motion.div>
 
@@ -379,7 +504,7 @@ export default function Careers() {
                   <div className="flex items-center gap-3 mb-3 flex-wrap">
                     {/* Category Badge */}
                     <span className="px-3 py-1 rounded-lg bg-blue-600/20 border border-blue-500/30 text-blue-300 text-xs font-bold uppercase tracking-wider">
-                      {role.category}
+                      {CATEGORY_LABELS[role.category]}
                     </span>
                     <span className="px-3 py-1 rounded-lg bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold">
                       {role.department}
@@ -435,7 +560,9 @@ export default function Careers() {
                     <div className="p-6 lg:p-8 bg-slate-950/50 space-y-8">
                       {/* Job Summary */}
                       <div>
-                        <h4 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-3">About This Role</h4>
+                        <h4 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-3">
+                          About This Role
+                        </h4>
                         <p className="text-slate-300 text-base leading-relaxed">{role.summary}</p>
                       </div>
 
@@ -450,7 +577,7 @@ export default function Careers() {
                           <ul className="space-y-3">
                             {role.responsibilities.map((item, i) => (
                               <motion.li
-                                key={i}
+                                key={item}
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: i * 0.05 }}
@@ -472,7 +599,7 @@ export default function Careers() {
                           <ul className="space-y-3">
                             {role.requirements.map((item, i) => (
                               <motion.li
-                                key={i}
+                                key={item}
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ delay: i * 0.05 }}
@@ -489,7 +616,11 @@ export default function Careers() {
                       {/* Action Buttons */}
                       <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-4 border-t border-slate-700/50">
                         <Button
-                          href={`mailto:${role.email}?subject=${encodeURIComponent('Application: ' + role.title)}&body=${encodeURIComponent(`Hi Mirai Team,\n\nI am interested in applying for the ${role.title} position.\n\nBest regards`)}`}
+                          href={`mailto:${role.email}?subject=${encodeURIComponent(
+                            'Application: ' + role.title,
+                          )}&body=${encodeURIComponent(
+                            `Hi Mirai Team,\n\nI am interested in applying for the ${role.title} position.\n\nBest regards`,
+                          )}`}
                           variant="primary"
                           leftIcon={<Send className="h-4 w-4" />}
                         >
@@ -516,7 +647,9 @@ export default function Careers() {
                         </motion.button>
 
                         <Button
-                          href={`mailto:${role.email}?subject=${encodeURIComponent('Query: ' + role.title)}`}
+                          href={`mailto:${role.email}?subject=${encodeURIComponent(
+                            'Query: ' + role.title,
+                          )}`}
                           variant="ghost"
                           leftIcon={<MessageCircle className="h-4 w-4" />}
                         >
@@ -544,7 +677,7 @@ export default function Careers() {
         </div>
       </div>
 
-      {/* Why Join Us Section - Compact & Refined */}
+      {/* Why Join Us Section */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -564,7 +697,7 @@ export default function Careers() {
               Life at Mirai
             </span>
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
@@ -576,21 +709,21 @@ export default function Careers() {
               Mirai?
             </span>
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             className="text-base lg:text-lg text-slate-300 max-w-3xl mx-auto"
           >
-            Grow fast with mentorship, shape nation‑building projects, and work with cutting‑edge tools in a supportive culture.
+            Grow fast with mentorship, shape nation-building projects, and work with cutting-edge tools in a supportive culture.
           </motion.p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {benefits.map((benefit, index) => (
             <motion.div
-              key={index}
+              key={benefit.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
@@ -598,11 +731,10 @@ export default function Careers() {
               whileHover={{ y: -6, scale: 1.02 }}
               className="group relative bg-gradient-to-br from-slate-900/90 to-slate-800/80 backdrop-blur-xl border border-white/10 rounded-2xl p-6 hover:border-blue-400/50 transition-all duration-400 cursor-pointer overflow-hidden shadow-lg hover:shadow-xl hover:shadow-blue-500/20"
             >
-              {/* Subtle hover background */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-indigo-500/0 group-hover:from-blue-500/10 group-hover:to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-2xl" />
-              
+
               <div className="relative">
-                <motion.div 
+                <motion.div
                   whileHover={{ rotate: 360, scale: 1.1 }}
                   transition={{ duration: 0.6 }}
                   className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500/30 via-indigo-500/30 to-sky-500/30 border border-white/20 text-blue-400 mb-4 shadow-lg group-hover:shadow-blue-500/40"
@@ -619,14 +751,12 @@ export default function Careers() {
             </motion.div>
           ))}
         </div>
-
       </div>
 
-      {/* Core Sectors - Enhanced Design */}
+      {/* Core Sectors */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-20 lg:pb-32">
-        {/* Background effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent rounded-3xl blur-3xl" />
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -645,7 +775,7 @@ export default function Careers() {
               🏗️ Our Expertise
             </span>
           </motion.div>
-          <motion.h3 
+          <motion.h3
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -666,7 +796,7 @@ export default function Careers() {
               />
             </span>
           </motion.h3>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -679,13 +809,37 @@ export default function Careers() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative">
           {[
-            { title: 'Railways', color: 'from-red-500 to-orange-500', hoverColor: 'hover:border-red-400/60', shadowColor: 'hover:shadow-red-500/30' },
-            { title: 'Bridges', color: 'from-blue-500 to-cyan-500', hoverColor: 'hover:border-blue-400/60', shadowColor: 'hover:shadow-blue-500/30' },
-            { title: 'Highways', color: 'from-green-500 to-emerald-500', hoverColor: 'hover:border-green-400/60', shadowColor: 'hover:shadow-green-500/30' },
-            { title: 'Building & Infrastructure', color: 'from-purple-500 to-pink-500', hoverColor: 'hover:border-purple-400/60', shadowColor: 'hover:shadow-purple-500/30' },
+            {
+              title: 'Railways',
+              icon: Train,
+              color: 'from-red-500 to-orange-500',
+              hoverColor: 'hover:border-red-400/60',
+              shadowColor: 'hover:shadow-red-500/30',
+            },
+            {
+              title: 'Bridges',
+              icon: Construction,
+              color: 'from-blue-500 to-cyan-500',
+              hoverColor: 'hover:border-blue-400/60',
+              shadowColor: 'hover:shadow-blue-500/30',
+            },
+            {
+              title: 'Highways',
+              icon: Truck,
+              color: 'from-green-500 to-emerald-500',
+              hoverColor: 'hover:border-green-400/60',
+              shadowColor: 'hover:shadow-green-500/30',
+            },
+            {
+              title: 'Building & Infrastructure',
+              icon: Building2,
+              color: 'from-purple-500 to-pink-500',
+              hoverColor: 'hover:border-purple-400/60',
+              shadowColor: 'hover:shadow-purple-500/30',
+            },
           ].map((item, idx) => (
             <motion.div
-              key={idx}
+              key={item.title}
               initial={{ opacity: 0, y: 30, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
@@ -693,7 +847,6 @@ export default function Careers() {
               whileHover={{ y: -8, scale: 1.05 }}
               className={`group relative bg-gradient-to-br from-slate-900/90 to-slate-800/80 backdrop-blur-xl border-2 border-white/20 ${item.hoverColor} rounded-3xl p-8 text-center transition-all duration-500 cursor-pointer overflow-hidden shadow-xl ${item.shadowColor}`}
             >
-              {/* Gradient background on hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500 rounded-3xl`} />
               <motion.div
                 className={`absolute -inset-1 bg-gradient-to-r ${item.color} rounded-3xl blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500`}
@@ -701,16 +854,26 @@ export default function Careers() {
                   scale: [1, 1.1, 1],
                   rotate: [0, 3, -3, 0],
                 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               />
-              
+
               <div className="relative">
-                <motion.h4
-                  className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-200 transition-all duration-300"
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  whileInView={{ scale: 1, rotate: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 + idx * 0.1, type: 'spring' }}
+                  viewport={{ once: true }}
+                  className="mx-auto mb-4 w-16 h-16 flex items-center justify-center"
                 >
+                  <item.icon
+                    className="w-12 h-12 text-white group-hover:text-transparent group-hover:bg-clip-text transition-all duration-300"
+                    style={{ filter: 'drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))' }}
+                  />
+                </motion.div>
+
+                <motion.h4 className="text-xl font-bold text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-slate-200 transition-all duration-300">
                   {item.title}
                 </motion.h4>
-                {/* Decorative line */}
                 <motion.div
                   initial={{ scaleX: 0 }}
                   whileInView={{ scaleX: 1 }}
@@ -725,4 +888,6 @@ export default function Careers() {
       </div>
     </div>
   );
-}
+};
+
+export default Careers;

@@ -1,7 +1,32 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function BackgroundVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
+
+    const markReady = () => setIsVideoReady(true);
+    const markErrored = () => setIsVideoReady(true);
+
+    if (video.readyState >= 3) {
+      markReady();
+    }
+
+    video.addEventListener('loadeddata', markReady);
+    video.addEventListener('canplaythrough', markReady);
+    video.addEventListener('error', markErrored);
+
+    return () => {
+      video.removeEventListener('loadeddata', markReady);
+      video.removeEventListener('canplaythrough', markReady);
+      video.removeEventListener('error', markErrored);
+    };
+  }, []);
 
   return (
     <div className="absolute inset-0 pointer-events-none select-none" aria-hidden>
@@ -12,8 +37,10 @@ export default function BackgroundVideo() {
         muted
         loop
         playsInline
-        preload="metadata"
-        poster="/video/bg-poster.jpg"
+        preload="auto"
+        onLoadedData={() => setIsVideoReady(true)}
+        onCanPlayThrough={() => setIsVideoReady(true)}
+        onError={() => setIsVideoReady(true)}
       >
         {/* Use only the local public asset as requested */}
         <source src="/3129957-hd_1920_1080_25fps.mp4" type="video/mp4" />
@@ -25,6 +52,15 @@ export default function BackgroundVideo() {
         background:
           'radial-gradient(1200px 800px at 85% 65%, rgba(56,189,248,0.08), transparent 60%), radial-gradient(1000px 700px at 35% 75%, rgba(236,72,153,0.08), transparent 60%)'
       }} />
+      {!isVideoReady && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-slate-950/70 backdrop-blur-sm text-white">
+          <span className="h-12 w-12 rounded-full border-2 border-white/20 border-t-sky-400 animate-spin" aria-hidden />
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70">Loading</p>
+            <p className="text-xs text-white/50">Preparing the hero experience…</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

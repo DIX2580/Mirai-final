@@ -1,40 +1,39 @@
-﻿import { motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Train, CheckCircle, Users, Zap, Award, MapPin, Calendar, ArrowRight, Target } from 'lucide-react';
+import { Map, CheckCircle, Users, Radar, ArrowRight, MapPin, Calendar, Award, Target } from 'lucide-react';
 import Button from '../../components/ui/Button';
 
 type Section = 'about' | 'services' | 'projects';
 
 const capabilities = [
-  'Preliminary engineering and traffic study',
-  'Final location survey and preparation of detailed project report for new, double and multi-track line projects',
-  'Preparation of general arrangement drawings and structural design of railway bridges',
-  'Conducting DGP survey using drones',
-  'Preparation and detailed project report, general arrangement drawings, structural design for road over bridges (ROB/RUB)',
-  'Geotechnical investigation',
-  'Land acquisition support',
+  'Geospatial Survey & Mapping',
+  'GIS Platform Development',
+  'Remote Sensing & Imagery Analysis',
+  'Spatial Data Analytics',
+  'Drone Survey Operations',
+  '3D Modeling & Visualization',
 ];
 
 const projects = [
   {
-    title: 'Howrah-Chennai Railway Line ROBs',
-    location: 'Andhra Pradesh',
-    scope: '11 Road Over Bridges',
-    year: '2023-2024',
-    description: 'Complete engineering solutions including structural design, general arrangement drawings, and construction supervision for 11 ROBs on the prestigious Howrah-Chennai mainline.',
-    image: 'https://t4.ftcdn.net/jpg/02/69/86/19/360_F_269861905_g8j8FL4715MgfYb77eP5DicVURaKxJBT.jpg',
+    title: 'National Highway GIS Platform',
+    location: 'Pan-India',
+    scope: '45,000 km corridor mapping',
+    year: '2024',
+    description: 'Comprehensive GIS platform for highway asset management and planning.',
+    image: 'https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg',
   },
   {
-    title: 'Multi-Track Railway Line Project',
-    location: 'Eastern India',
-    scope: 'Double Line Railway Track',
-    year: '2022-2023',
-    description: 'Final location survey, detailed project report preparation, and structural design for double-track railway line expansion project.',
-    image: 'https://img.freepik.com/free-photo/high-speed-train-station-sunset-with-modern-railroad-track-motion-blur-effect-industrial-scene-with-moving-blurred-train-railway-platform-railroad-concept-railway-tourism_1321-2906.jpg',
+    title: 'Urban Development Analytics',
+    location: 'Delhi NCR',
+    scope: '2,500 sqkm spatial analysis',
+    year: '2023',
+    description: 'Advanced geospatial analytics for smart city planning and infrastructure development.',
+    image: 'https://images.pexels.com/photos/161963/satellite-space-spacecraft-orbit-161963.jpeg',
   },
 ];
 
-export default function Railways() {
+export default function Geospatial() {
   const [activeSection, setActiveSection] = useState<Section>('about');
 
   return (
@@ -47,17 +46,17 @@ export default function Railways() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-16 h-16 rounded-2xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-              <Train className="w-8 h-8 text-sky-400" />
+              <Map className="w-8 h-8 text-sky-400" />
             </div>
             <div>
               <h1 className="text-4xl lg:text-6xl font-bold text-white">
-                Railways <span className="text-sky-400">Engineering</span>
+                Geospatial <span className="text-sky-400">Intelligence</span>
               </h1>
-              <p className="text-lg text-slate-400 mt-2">Comprehensive Infrastructure Solutions</p>
+              <p className="text-lg text-slate-400 mt-2">Survey Intelligence & Analytics</p>
             </div>
           </div>
           <p className="text-xl text-slate-300 max-w-3xl leading-relaxed">
-            Delivering end-to-end railway infrastructure solutions from preliminary engineering to construction supervision.
+            Transforming spatial data into actionable intelligence for infrastructure planning.
           </p>
         </div>
       </motion.div>
@@ -83,7 +82,7 @@ export default function Railways() {
                   <span>About</span>
                 </div>
               </button>
-              
+
               <button
                 onClick={() => setActiveSection('services')}
                 className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
@@ -93,11 +92,11 @@ export default function Railways() {
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Zap className="w-5 h-5" />
+                  <Radar className="w-5 h-5" />
                   <span>Services</span>
                 </div>
               </button>
-              
+
               <button
                 onClick={() => setActiveSection('projects')}
                 className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
@@ -126,25 +125,25 @@ export default function Railways() {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-                      <Train className="w-6 h-6 text-sky-400" />
+                      <Map className="w-6 h-6 text-sky-400" />
                     </div>
-                    <h2 className="text-2xl lg:text-3xl font-bold text-white">About Railways Engineering</h2>
+                    <h2 className="text-2xl lg:text-3xl font-bold text-white">About Geospatial Intelligence</h2>
                   </div>
-                  
+
                   <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
                     <p>
-                      Railway infrastructure forms the backbone of India's transportation network. Our expertise spans preliminary design, detailed engineering, and construction supervision for new railway lines, double/multi-track expansions, and ROB/RUB constructions.
+                      MIRAI provides comprehensive geospatial solutions combining traditional surveying with cutting-edge technology for accurate spatial intelligence.
                     </p>
                     <p>
-                      With over 30 years of combined experience, our team leverages modern surveying technologies including drone-based DGP surveys to deliver projects that meet international standards and local requirements.
+                      Our expertise spans aerial surveying, GIS development, and spatial analytics to support infrastructure planning and asset management.
                     </p>
                   </div>
 
                   <div className="mt-12 grid gap-6 sm:grid-cols-3">
                     {[
-                      { value: '11+', label: 'ROBs Delivered', icon: Train },
-                      { value: '30+ yrs', label: 'Team Experience', icon: Users },
-                      { value: '100%', label: 'Compliance Score', icon: CheckCircle },
+                      { value: '10M+ acres', label: 'Surveyed Land', icon: Map },
+                      { value: '15+ yrs', label: 'Geospatial Expertise', icon: Users },
+                      { value: 'Sub-cm', label: 'Accuracy Standards', icon: CheckCircle },
                     ].map((stat) => (
                       <div
                         key={stat.label}
@@ -166,25 +165,25 @@ export default function Railways() {
 
                 <div className="grid lg:grid-cols-2 gap-6">
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
-                      src="https://t4.ftcdn.net/jpg/02/69/86/19/360_F_269861905_g8j8FL4715MgfYb77eP5DicVURaKxJBT.jpg"
-                      alt="Railway Engineering"
+                    <img
+                      src="https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg"
+                      alt="GIS Mapping"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Modern Railway Infrastructure</h3>
+                    <h3 className="text-xl font-semibold text-white mb-2">Advanced GIS Platforms</h3>
                     <p className="text-slate-400 leading-relaxed">
-                      State-of-the-art design and construction methodologies for railway systems.
+                      Custom GIS solutions for infrastructure asset management and spatial analysis.
                     </p>
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
-                      src="https://img.freepik.com/free-photo/high-speed-train-station-sunset-with-modern-railroad-track-motion-blur-effect-industrial-scene-with-moving-blurred-train-railway-platform-railroad-concept-railway-tourism_1321-2906.jpg"
-                      alt="Railway Track"
+                    <img
+                      src="https://images.pexels.com/photos/161963/satellite-space-spacecraft-orbit-161963.jpeg"
+                      alt="Drone Surveying"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Advanced Track Systems</h3>
+                    <h3 className="text-xl font-semibold text-white mb-2">Drone & Aerial Surveying</h3>
                     <p className="text-slate-400 leading-relaxed">
-                      Precision engineering for multi-track railway expansions.
+                      High-precision aerial data collection and photogrammetric processing.
                     </p>
                   </div>
                 </div>
@@ -196,13 +195,13 @@ export default function Railways() {
                 <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
                   <div className="flex items-center gap-4 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-                      <Zap className="w-6 h-6 text-sky-400" />
+                      <Radar className="w-6 h-6 text-sky-400" />
                     </div>
                     <h2 className="text-2xl lg:text-3xl font-bold text-white">Our Services</h2>
                   </div>
-                  
+
                   <p className="text-slate-300 text-lg leading-relaxed mb-8">
-                    Comprehensive railway engineering consultancy covering the entire project lifecycle.
+                    Complete geospatial solutions from data collection to actionable insights.
                   </p>
 
                   <div className="grid gap-4">
@@ -232,10 +231,10 @@ export default function Railways() {
                   </div>
                   <div className="grid gap-3 md:grid-cols-2">
                     {[
-                      '30+ years of railway engineering experience',
-                      'Modern surveying technology including drones',
-                      '100% on-time project delivery',
-                      'Adherence to Indian Railway Standards',
+                      'Survey-grade accuracy standards',
+                      'Integrated drone operations',
+                      'Real-time spatial analytics',
+                      'Custom GIS platform development',
                     ].map((reason) => (
                       <div
                         key={reason}
@@ -259,9 +258,9 @@ export default function Railways() {
                     </div>
                     <h2 className="text-2xl lg:text-3xl font-bold text-white">Key Projects</h2>
                   </div>
-                  
+
                   <p className="text-slate-300 text-lg leading-relaxed mb-8">
-                    Showcasing our excellence in railway infrastructure development across Eastern India.
+                    Showcasing our geospatial expertise across large-scale infrastructure programs.
                   </p>
                 </div>
 
@@ -308,9 +307,9 @@ export default function Railways() {
                 ))}
 
                 <div className="rounded-2xl border border-sky-400/20 bg-sky-500/5 p-8 text-center">
-                  <h3 className="text-xl font-semibold text-white mb-3">Have a Railway Project in Mind?</h3>
+                  <h3 className="text-xl font-semibold text-white mb-3">Need Geospatial Solutions?</h3>
                   <p className="text-slate-300 text-base mb-6 max-w-2xl mx-auto">
-                    Partner with us for world-class railway engineering consultancy services.
+                    Partner with us for accurate spatial data and intelligent analytics.
                   </p>
                   <Button
                     variant="primary"
