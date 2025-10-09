@@ -56,8 +56,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold text-lg mb-1">Email</h3>
-                    <a href="mailto:info@mirai.com" className="text-slate-300 hover:text-sky-400 transition-colors">
-                      info@mirai.com
+                    <a href="mailto:info@miraiconsultancy.co.in" className="text-slate-300 hover:text-sky-400 transition-colors">
+                      info@miraiconsultancy.co.in
                     </a>
                   </div>
                 </div>

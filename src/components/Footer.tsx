@@ -31,7 +31,7 @@ export default function Footer({ minimal }: FooterProps) {
               <span className="text-slate-400">Address:</span> 2nd Floor, Mirai House, Connaught Place, New Delhi, India
             </li>
             <li>
-              <span className="text-slate-400">Email:</span> <a className="hover:text-white" href="mailto:contact@miraiconsultant.in">contact@miraiconsultant.in</a>
+              <span className="text-slate-400">Email:</span> <a className="hover:text-white" href="mailto:info@miraiconsultancy.co.in">info@miraiconsultancy.co.in</a>
             </li>
             <li>
               <span className="text-slate-400">Phone:</span> <a className="hover:text-white" href="tel:+917606989489">+91 76069 89489</a>
