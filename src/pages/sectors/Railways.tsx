@@ -189,8 +189,8 @@ export default function Railways() {
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
-                      src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aW5kaWFuJTIwcmFpbHdheXxlbnwwfHwwfHx8MA"
-                      alt="Indian Railway Station"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxAOJejdEjSUqubAiVq5In_u6Qxn9Aj2s-Og&s"
+                      alt="Indian Railway Network"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
                     <h3 className="text-xl font-semibold text-white mb-2">Indian Railway Network</h3>
@@ -200,7 +200,7 @@ export default function Railways() {
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
-                      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGluZGlhbiUyMHJhaWx3YXl8ZW58MHx8MHx8fDA"
+                      src="/railway.png"
                       alt="Railway Bridge Construction"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
