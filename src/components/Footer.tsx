@@ -34,7 +34,7 @@ export default function Footer({ minimal }: FooterProps) {
               <span className="text-slate-400">Email:</span> <a className="hover:text-white" href="mailto:contact@miraiconsultant.in">contact@miraiconsultant.in</a>
             </li>
             <li>
-              <span className="text-slate-400">Phone:</span> <a className="hover:text-white" href="tel:+911234567890">+91 12345 67890</a>
+              <span className="text-slate-400">Phone:</span> <a className="hover:text-white" href="tel:+917606989489">+91 76069 89489</a>
             </li>
             <li className="flex gap-4 pt-1">
               <a href="#" aria-label="LinkedIn" className="hover:text-white">LinkedIn</a>
