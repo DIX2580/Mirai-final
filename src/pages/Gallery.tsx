@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Image, Filter, X, Eye, Download } from 'lucide-react';
+import { Image, X, Eye, Download } from 'lucide-react';
 
 type Category = 'all' | 'railways' | 'highways' | 'bridges' | 'survey' | 'construction';
 
