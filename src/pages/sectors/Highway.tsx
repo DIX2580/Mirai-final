@@ -166,25 +166,17 @@ export default function Highway() {
                 <div className="grid lg:grid-cols-2 gap-6">
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
-                      src="https://images.pexels.com/photos/240222/pexels-photo-240222.jpeg"
+                      src="https://images.news18.com/ibnlive/uploads/2024/11/nhai-national-highways-2024-11-a4ddd508fdc260c089296c7d20aabd3d.png"
                       alt="Highway Engineering"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Smart Corridor Design</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      Optimized alignments for safety and efficiency.
-                    </p>
                   </div>
                   <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
                     <img 
-                      src="https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg"
+                      src="https://www.shutterstock.com/shutterstock/videos/3855235617/thumb/1.jpg?ip=x480"
                       alt="Highway Track"
                       className="w-full h-48 object-cover rounded-xl mb-4"
                     />
-                    <h3 className="text-xl font-semibold text-white mb-2">Sustainable Engineering</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      Climate-aware design for long-term resilience.
-                    </p>
                   </div>
                 </div>
               </div>
