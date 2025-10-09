@@ -1,6 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
 
 type HeroStage = 'gallery' | 'video';
@@ -237,25 +236,9 @@ type HeroTileProps = {
 };
 
 function HeroTile({ service, isSelected, onSelect, onImageClick }: HeroTileProps) {
-  const navigate = useNavigate();
-  
   const handleClick = () => {
     onSelect();
-    
-    // Navigate to sector page after a short delay
-    setTimeout(() => {
-      const sectorRoutes: Record<string, string> = {
-        'Railways': '/sectors/railways',
-        'Bridges': '/sectors/bridges',
-        'Highway': '/sectors/highway',
-        'Survey': '/sectors/survey',
-      };
-      
-      const route = sectorRoutes[service.label];
-      if (route) {
-        navigate(route);
-      }
-    }, 500);
+    // Removed navigation - only image enlargement functionality
   };
 
   return (
