@@ -130,3 +130,4 @@ body {
 @media (min-width: 1024px) {
   .cylinder-bg { height: clamp(56px, 6.5vw, 160px); }
 }
+

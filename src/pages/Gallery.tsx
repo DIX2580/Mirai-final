@@ -1,269 +1,173 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Image, X, Eye, Download } from 'lucide-react';
+﻿import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, FileText, Film, ImageIcon } from 'lucide-react';
 
-type Category = 'all' | 'railways' | 'highways' | 'bridges' | 'survey' | 'construction';
+type FileType = 'image' | 'video' | 'pdf';
+type CategoryType = 'all' | 'images' | 'videos' | 'pdfs';
 
-interface GalleryItem {
-  id: number;
-  title: string;
-  category: Category;
-  image: string;
-  description: string;
-  location: string;
-  year: string;
+interface GalleryFile {
+  name: string;
+  type: FileType;
+  thumbnail?: string;
 }
 
-const galleryItems: GalleryItem[] = [
-  {
-    id: 1,
-    title: 'Railway Bridge Construction',
-    category: 'railways',
-    image: 'https://images.pexels.com/photos/4254893/pexels-photo-4254893.jpeg',
-    description: 'Advanced railway bridge construction using modern engineering techniques',
-    location: 'Andhra Pradesh',
-    year: '2024'
-  },
-  {
-    id: 2,
-    title: 'Highway Interchange',
-    category: 'highways',
-    image: 'https://images.pexels.com/photos/3952038/pexels-photo-3952038.jpeg',
-    description: 'Complex highway interchange design and construction',
-    location: 'Delhi NCR',
-    year: '2023'
-  },
-  {
-    id: 3,
-    title: 'Bridge Foundation Work',
-    category: 'bridges',
-    image: 'https://images.pexels.com/photos/163036/mountain-field-alpine-163036.jpeg',
-    description: 'Deep foundation work for major bridge construction',
-    location: 'Western Ghats',
-    year: '2024'
-  },
-  {
-    id: 4,
-    title: 'Geospatial Survey',
-    category: 'survey',
-    image: 'https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg',
-    description: 'Advanced geospatial surveying for infrastructure planning',
-    location: 'Pan-India',
-    year: '2023'
-  },
-  {
-    id: 5,
-    title: 'Construction Site',
-    category: 'construction',
-    image: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg',
-    description: 'Modern construction techniques and project management',
-    location: 'Mumbai',
-    year: '2024'
-  },
-  {
-    id: 6,
-    title: 'Railway Track Laying',
-    category: 'railways',
-    image: 'https://images.pexels.com/photos/161963/satellite-space-spacecraft-orbit-161963.jpeg',
-    description: 'Precision railway track installation and alignment',
-    location: 'Eastern India',
-    year: '2023'
-  }
-];
+const getAssetUrl = (fileName: string) => encodeURI(`/gallery/${fileName}`);
 
-const categories = [
-  { id: 'all', label: 'All Projects', icon: Image },
-  { id: 'railways', label: 'Railways', icon: Image },
-  { id: 'highways', label: 'Highways', icon: Image },
-  { id: 'bridges', label: 'Bridges', icon: Image },
-  { id: 'survey', label: 'Survey', icon: Image },
-  { id: 'construction', label: 'Construction', icon: Image }
+const galleryFiles: GalleryFile[] = [
+  { name: 'pexels-cottonbro-9950477.jpg', type: 'image' },
+  { name: 'pexels-felix-antoine-coutu-174902-32211979.jpg', type: 'image' },
+  { name: 'pexels-magda-ehlers-pexels-34182312.jpg', type: 'image' },
+  { name: 'pexels-qaarif-16137139.jpg', type: 'image' },
+    { name: '11.png', type: 'image' },
+
+  { name: '2.jpg', type: 'image' },
+  { name: '3.jpg', type: 'image' },
+  { name: '4.jpg', type: 'image' },
+  { name: 'LC-274,GCP-1.jpeg', type: 'image' },
+  { name: 'LC-274,TBM-4.jpeg', type: 'image' },
+  { name: 'LC-335,TBM-19.jpeg', type: 'image' },
+  { name: 'LC-336,GCP-3.jpeg', type: 'image' },
+  { name: 'LC-339,GCP-3.jpeg', type: 'image' },
+    { name: 'WhatsApp Image 2025-10-10 at 17.37.37_a14462ef.jpg', type: 'image' },
+
 ];
 
 export default function Gallery() {
-  const [activeCategory, setActiveCategory] = useState<Category>('all');
-  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>('all');
+  const [selectedFile, setSelectedFile] = useState<GalleryFile | null>(null);
 
-  const filteredItems = activeCategory === 'all'
-    ? galleryItems
-    : galleryItems.filter(item => item.category === activeCategory);
+  const categories = [
+    { id: 'all' as CategoryType, label: 'All Projects', icon: null, count: galleryFiles.length },
+    { id: 'images' as CategoryType, label: 'Images', icon: ImageIcon, count: galleryFiles.filter(f => f.type === 'image').length },
+    { id: 'videos' as CategoryType, label: 'Videos', icon: Film, count: galleryFiles.filter(f => f.type === 'video').length },
+    { id: 'pdfs' as CategoryType, label: 'Documents', icon: FileText, count: galleryFiles.filter(f => f.type === 'pdf').length },
+  ];
+
+  const filteredFiles = selectedCategory === 'all' 
+    ? galleryFiles 
+    : galleryFiles.filter(file => {
+        if (selectedCategory === 'images') return file.type === 'image';
+        if (selectedCategory === 'videos') return file.type === 'video';
+        if (selectedCategory === 'pdfs') return file.type === 'pdf';
+        return true;
+      });
 
   return (
-    <div className="min-h-screen pt-20 bg-slate-950 text-white">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="relative overflow-hidden border-b border-white/10 bg-slate-950"
-      >
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 rounded-2xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-              <Image className="w-8 h-8 text-sky-400" />
-            </div>
-            <div>
-              <h1 className="text-4xl lg:text-6xl font-bold text-white">
-                Project <span className="text-sky-400">Gallery</span>
-              </h1>
-              <p className="text-lg text-slate-400 mt-2">Showcasing our engineering excellence</p>
-            </div>
-          </div>
-          <p className="text-xl text-slate-300 max-w-3xl leading-relaxed">
-            Explore our portfolio of infrastructure projects across railways, highways, and bridges.
+  <div className="min-h-screen bg-gradient-to-br from-[#020617] via-[#050a1f] to-[#0b1126] pt-24 pb-16">
+      <div className="max-w-7xl mx-auto px-6 mb-12">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 text-transparent bg-clip-text">
+            Project Gallery
+          </h1>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            Explore our collection of engineering excellence across infrastructure projects
           </p>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        {/* Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
+      <div className="max-w-7xl mx-auto px-6 mb-12">
+        <div className="flex flex-wrap justify-center gap-4">
           {categories.map((category) => {
             const Icon = category.icon;
             return (
-              <button
+              <motion.button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id as Category)}
-                className={`flex items-center gap-3 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-                  activeCategory === category.id
-                    ? 'bg-sky-500/10 border border-sky-400/30 text-white'
-                    : 'border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
+                onClick={() => setSelectedCategory(category.id)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all ${
+                  selectedCategory === category.id
+                    ? 'bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500 text-white shadow-lg shadow-sky-500/40'
+                    : 'bg-white/5 text-slate-200 hover:bg-white/10 backdrop-blur-md border border-white/10'
                 }`}
               >
-                <Icon className="w-5 h-5" />
+                {Icon && <Icon size={20} />}
                 <span>{category.label}</span>
-              </button>
+                <span className="bg-white/20 px-2 py-0.5 rounded-full text-sm">{category.count}</span>
+              </motion.button>
             );
           })}
-        </motion.div>
+        </div>
+      </div>
 
-        {/* Gallery Grid */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {filteredItems.map((item, index) => (
-            <motion.div
-              key={item.id}
-              layout
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 cursor-pointer"
-              onClick={() => setSelectedImage(item)}
-            >
-              <div className="aspect-video overflow-hidden">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-medium uppercase">
-                    {item.category}
-                  </span>
-                  <span className="text-xs text-slate-300">{item.year}</span>
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm text-slate-300 mb-3">{item.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-slate-400">{item.location}</span>
-                  <Eye className="w-4 h-4 text-sky-400" />
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {filteredItems.length === 0 && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-center py-16"
-          >
-            <Image className="w-16 h-16 text-slate-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-slate-400 mb-2">No projects found</h3>
-            <p className="text-slate-500">Try selecting a different category</p>
-          </motion.div>
-        )}
-
-        {/* Image Modal */}
-        {selectedImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-            onClick={() => setSelectedImage(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="relative max-w-4xl max-h-[90vh] w-full bg-slate-900 rounded-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 border border-white/20 flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+      <div className="max-w-7xl mx-auto px-6">
+        <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filteredFiles.map((file, index) => (
+              <motion.div
+                key={file.name}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ delay: index * 0.05 }}
+                className="group relative bg-white/5 backdrop-blur-lg rounded-2xl overflow-hidden border border-white/10 hover:border-sky-400/60 transition-all cursor-pointer shadow-[0_15px_45px_rgba(8,47,73,0.35)]"
+                onClick={() => setSelectedFile(file)}
               >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="relative">
-                <img
-                  src={selectedImage.image}
-                  alt={selectedImage.title}
-                  className="w-full h-auto max-h-[70vh] object-contain"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-medium uppercase">
-                      {selectedImage.category}
-                    </span>
-                    <span className="text-xs text-slate-300">{selectedImage.year}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{selectedImage.title}</h3>
-                  <p className="text-slate-300 mb-3">{selectedImage.description}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-slate-400">{selectedImage.location}</span>
-                    <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-sky-500/10 border border-sky-400/20 text-sky-300 hover:bg-sky-500/20 transition-colors">
-                      <Download className="w-4 h-4" />
-                      <span className="text-sm">Download</span>
-                    </button>
-                  </div>
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  {file.type === 'image' && (
+                    <img
+                      src={getAssetUrl(file.name)}
+                      alt=""
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  )}
+                  {file.type === 'video' && (
+                    <div className="w-full h-full bg-gradient-to-br from-blue-900/60 to-indigo-900/40 flex items-center justify-center">
+                      <Film size={64} className="text-sky-400" />
+                    </div>
+                  )}
+                  {file.type === 'pdf' && (
+                    <div className="w-full h-full bg-gradient-to-br from-slate-800/70 to-blue-900/40 flex items-center justify-center">
+                      <FileText size={64} className="text-indigo-300" />
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-
-        {/* Stats Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 rounded-2xl border border-sky-400/20 bg-sky-500/5 p-8 text-center"
-        >
-          <h3 className="text-xl font-semibold text-white mb-6">Our Project Portfolio</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { value: '50+', label: 'Projects Completed' },
-              { value: '6', label: 'States Covered' },
-              { value: '100%', label: 'Quality Standards' },
-              { value: '24/7', label: 'Support Available' }
-            ].map((stat, idx) => (
-              <div key={idx} className="text-center">
-                <div className="text-2xl font-bold text-sky-400 mb-1">{stat.value}</div>
-                <div className="text-sm text-slate-300">{stat.label}</div>
-              </div>
+                <div className="p-3 flex items-center justify-end">
+                  <span className="inline-flex rounded-full border border-white/15 bg-black/30 px-3 py-1 text-xs uppercase tracking-[0.2em] text-white/70">
+                    {file.type}
+                  </span>
+                </div>
+              </motion.div>
             ))}
+          </AnimatePresence>
+        </motion.div>
+
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="mt-16 text-center">
+          <div className="inline-block bg-gradient-to-r from-sky-500/10 via-blue-500/10 to-indigo-500/10 backdrop-blur-xl border border-sky-500/30 rounded-2xl px-8 py-6">
+            <h3 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-indigo-400 mb-2">
+              Portfolio Expansion
+            </h3>
+            <p className="text-slate-200">
+              More projects will be updated soon. Stay tuned for additional showcases of our engineering excellence.
+            </p>
           </div>
         </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selectedFile && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setSelectedFile(null)}>
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: 'spring', damping: 25, stiffness: 300 }} className="relative max-w-6xl w-full max-h-[90vh] bg-gray-900 rounded-2xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <button onClick={() => setSelectedFile(null)} className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors">
+                <X size={24} />
+              </button>
+              <div className="w-full h-full overflow-auto">
+                {selectedFile.type === 'image' && (
+                  <img src={getAssetUrl(selectedFile.name)} alt="" className="w-full h-auto" />
+                )}
+                {selectedFile.type === 'video' && (
+                  <video src={getAssetUrl(selectedFile.name)} controls className="w-full h-auto" />
+                )}
+                {selectedFile.type === 'pdf' && (
+                  <iframe src={getAssetUrl(selectedFile.name)} className="w-full h-[90vh]" title={selectedFile.name} />
+                )}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

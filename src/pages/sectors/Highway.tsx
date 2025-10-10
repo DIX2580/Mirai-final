@@ -88,12 +88,6 @@ export default function Highway() {
               }, {
                 src: 'https://www.shutterstock.com/shutterstock/videos/3855235617/thumb/1.jpg?ip=x480',
                 label: 'Highway Track',
-              }, {
-                src: 'https://images.pexels.com/photos/240222/pexels-photo-240222.jpeg',
-                label: 'Freight Mobility Corridor',
-              }, {
-                src: 'https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg',
-                label: 'Urban Ring Road',
               }].map((img, idx) => (
                 <motion.button
                   key={img.src}

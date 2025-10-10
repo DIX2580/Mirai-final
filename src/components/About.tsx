@@ -1,4 +1,7 @@
 ﻿import { Award, CheckCircle, Target, Train, Landmark, Lightbulb, Users, TrendingUp, Clock, Shield, Zap, Quote, Star, Rocket } from 'lucide-react';
+import Projects from './Projects';
+import ValueProps from './ValueProps';
+import TestimonialsNew from './TestimonialsNew';
 
 export default function About() {
   return (
@@ -203,7 +206,7 @@ export default function About() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {[
                 { icon: TrendingUp, number: '11+', label: 'ROBs Delivered', color: 'from-blue-500 to-cyan-500' },
-                { icon: Clock, number: '30+', label: 'Years Experience', color: 'from-violet-500 to-fuchsia-500' },
+                { icon: Users, number: '10+', label: 'Specialist Engineers', color: 'from-violet-500 to-fuchsia-500' },
                 { icon: Award, number: '100%', label: 'On-Time Delivery', color: 'from-emerald-500 to-teal-500' },
               ].map((stat) => {
                 const Icon = stat.icon;
@@ -249,7 +252,7 @@ export default function About() {
                 title: 'End-to-End Expertise',
                 desc: 'Survey to execution under one roof: design, proof checking, and supervision.',
                 icon: CheckCircle,
-                stat: '250+',
+                stat: '+',
                 statLabel: 'Projects Completed'
               },
               {
@@ -353,93 +356,58 @@ export default function About() {
         </div>
       </div>
 
-      {/* Our Clients Section */}
+      {/* Completed GADs Section */}
+      <div className="relative py-12 lg:py-20 border-t border-white/5">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-500/30 via-violet-500/30 to-fuchsia-500/30 border-2 border-white/30 text-sm font-bold text-white backdrop-blur-xl shadow-lg uppercase tracking-wider">
+              Completed GADs for ROBs
+            </span>
+            <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4 mt-4">
+              Delivered Combined GADs (in lieu of LC)
+            </h3>
+            <p className="text-slate-300 text-base max-w-2xl mx-auto">
+              The following General Arrangement Drawings (GADs) for Road Over Bridges (ROBs) have been completed. As we expand, more will be added to this gallery.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[{
+              name: 'LC NO-336',
+              file: '/gallery/combined GAD for ROB in lieu of LC NO-336.pdf'
+            }, {
+              name: 'LC NO-339',
+              file: '/gallery/combined GAD for ROB in lieu of LC NO-339.pdf'
+            }, {
+              name: 'LC NO-337',
+              file: '/gallery/Combined GAD for ROB in lieu of LC No.-337.pdf'
+            }].map((gad) => (
+              <div key={gad.name} className="rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6 text-center">
+                <div className="mb-3 text-lg font-semibold text-white">{gad.name}</div>
+                <div className="w-full mb-2 flex items-center justify-center bg-slate-900/40 rounded-lg overflow-hidden relative" style={{ aspectRatio: '1 / 1', minHeight: '340px', maxHeight: '420px' }}>
+                  <embed src={gad.file} type="application/pdf" width="100%" height="100%" style={{ borderRadius: '0.75rem', background: '#0f172a', width: '100%', height: '100%', aspectRatio: '1 / 1' }} />
+                  <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '40px', background: 'rgba(15,23,42,0.95)', zIndex: 2, pointerEvents: 'none' }} />
+                </div>
+                <div className="mt-1 text-xs text-slate-400">Use the PDF viewer controls to zoom, pan, or navigate pages for a detailed view.</div>
+                <div className="mt-2 text-xs text-slate-400">Status: <span className="text-green-400 font-bold">Completed</span></div>
+                <div className="mt-2 text-xs text-slate-500">Preview only. Download is disabled for these documents.</div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-8 text-slate-400 text-sm">
+            <span className="font-semibold text-white">More GADs will be showcased here as our portfolio grows. Stay tuned for future updates and completed projects.</span>
+          </div>
+        </div>
+      </div>
       <div className="relative py-20 lg:py-32 border-t border-white/5">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <div className="h-2 w-2 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500" />
-              <span className="text-sm font-medium text-slate-400 tracking-wider uppercase">Client Success</span>
-              <div className="h-2 w-2 rounded-full bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500" />
-            </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Our Clients
-            </h2>
-            <p className="text-slate-300 text-base max-w-3xl mx-auto leading-relaxed">
-              Don't just take our word for it. Hear from industry leaders and infrastructure pioneers
-              who have partnered with us to build India's future.
-            </p>
+           
+          
+            
           </div>
 
           {/* Testimonials */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-20">
-            {[
-              {
-                name: 'Rajesh Kumar',
-                role: 'Senior Project Director',
-                company: 'Indian Railways',
-                text: 'Dependable partner — modern design practices with meticulous supervision. Their attention to detail and innovative approaches consistently exceed our expectations.',
-                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
-                rating: 5
-              },
-              {
-                name: 'Dr. Priya Sharma',
-                role: 'Chief Engineer',
-                company: 'NHAI (National Highways Authority of India)',
-                text: 'Delivered our ROB program with speed and precision. The team\'s expertise in complex infrastructure projects is truly remarkable.',
-                image: 'https://images.unsplash.com/photo-1494790108755-2616b612b167?w=100&h=100&fit=crop&crop=face',
-                rating: 5
-              },
-              {
-                name: 'Anil Agarwal',
-                role: 'Infrastructure Developer',
-                company: 'IRCON International',
-                text: 'Value engineering that saved time and cost without compromises. Their innovative solutions helped us achieve impossible deadlines.',
-                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-                rating: 5
-              },
-            ].map((q) => (
-              <blockquote
-                key={q.name}
-                className="group relative rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl p-6 lg:p-8 hover:bg-white/[0.08] transition-all duration-300"
-              >
-                {/* Quote icon */}
-                <div className="absolute top-6 right-6 opacity-20">
-                  <Quote className="w-8 h-8 text-fuchsia-500" />
-                </div>
-
-                {/* Rating */}
-                <div className="flex items-center gap-1 mb-4">
-                  {Array.from({ length: q.rating }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-
-                {/* Quote text */}
-                <p className="text-slate-300 text-sm leading-relaxed mb-6 relative z-10">
-                  "{q.text}"
-                </p>
-
-                {/* Author */}
-                <footer className="flex items-center gap-4">
-                  <img
-                    loading="lazy"
-                    src={q.image}
-                    alt={q.name}
-                    className="w-12 h-12 rounded-full border-2 border-white/20 object-cover"
-                  />
-                  <div>
-                    <div className="text-white font-semibold">{q.name}</div>
-                    <div className="text-slate-400 text-sm">{q.role}</div>
-                    <div className="text-slate-500 text-xs">{q.company}</div>
-                  </div>
-                </footer>
-
-                {/* Hover effect */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-fuchsia-500/5 via-violet-500/5 to-sky-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              </blockquote>
-            ))}
-          </div>
+        
 
           {/* Client Logos */}
           <div className="text-center">
@@ -469,25 +437,15 @@ export default function About() {
             </div>
 
             {/* CTA Section */}
-            <div className="mt-16 p-8 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl">
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Join Our Success Stories
-              </h3>
-              <p className="text-slate-300 text-sm mb-6 max-w-2xl mx-auto">
-                Ready to become our next success story? Let's discuss how we can bring your infrastructure vision to life.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="px-8 py-4 text-sm font-semibold text-white bg-gradient-to-r from-fuchsia-500 via-violet-500 to-sky-500 rounded-xl shadow-[0_0_30px_theme(colors.fuchsia.500/30%)] hover:shadow-[0_0_40px_theme(colors.fuchsia.500/50%)] transition-shadow">
-                  Start Your Project
-                </button>
-                <button className="px-8 py-4 text-sm font-semibold text-slate-300 border border-white/20 rounded-xl hover:bg-white/10 transition-colors">
-                  View Case Studies
-                </button>
-              </div>
-            </div>
+           
+            
           </div>
         </div>
       </div>
+
+      <Projects />
+      <ValueProps />
+      <TestimonialsNew />
     </section>
   );
 }

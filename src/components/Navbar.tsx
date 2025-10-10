@@ -34,6 +34,11 @@ export default function Navbar() {
   const underlineClasses =
     'absolute inset-x-0 -bottom-1 h-[2px] rounded-full bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 transition-all duration-300';
 
+  const handleSectorsClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   return (
     <header className="fixed top-0 inset-x-0 z-[9999] bg-[#04070f]/80 supports-[backdrop-filter]:bg-[#04070f]/60 backdrop-blur-xl border-b border-white/10">
       <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-sky-500/50 to-transparent" />
@@ -42,9 +47,9 @@ export default function Navbar() {
           <Link to="/" className="flex items-center z-10">
             <span className="relative flex items-center">
               <img
-                src="/6440-removebg-preview.png"
-                alt="Mirai Logo"
-                className="h-[350px] w-full max-w-[450px] object-contain drop-shadow-xl"
+                src="/Mirailogo.png"
+                alt="Mirai Consultant"
+                className="h-[200px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(59,130,246,0.5)]"
               />
             </span>
           </Link>
@@ -100,6 +105,7 @@ export default function Navbar() {
                     <NavLink
                       key={item.label}
                       to={item.path}
+                      onClick={handleSectorsClick}
                       className={({ isActive }) =>
                         `flex flex-col gap-1 rounded-xl border border-transparent px-4 py-3 transition ${
                           isActive
@@ -220,10 +226,7 @@ export default function Navbar() {
                           <NavLink
                             key={item.label}
                             to={item.path}
-                            onClick={() => {
-                              setOpen(false);
-                              setSectorsOpen(false);
-                            }}
+                            onClick={handleSectorsClick}
                             className={({ isActive }) =>
                               `block rounded-lg px-3 py-2 text-sm font-medium transition ${
                                 isActive ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/5 hover:text-white'

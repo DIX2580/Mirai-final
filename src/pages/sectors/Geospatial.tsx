@@ -84,17 +84,14 @@ export default function Geospatial() {
               className="grid grid-cols-1 gap-6"
             >
               {[{
-                src: 'https://images.pexels.com/photos/41949/earth-earth-at-night-night-lights-41949.jpeg',
-                label: 'GIS Mapping',
+                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcX6IP_IRnVLrA3irT_LR_fOL0LF2x3Px7Lvy1a5a9TQ&s=10',
+                label: 'Geospatial Monitoring',
               }, {
-                src: 'https://images.pexels.com/photos/161963/satellite-space-spacecraft-orbit-161963.jpeg',
-                label: 'Drone Surveying',
+                src: 'https://cdn.prod.website-files.com/625350933660db97afa01913/63887ce50d226b6937db384c_boosting-agriculture.jpg',
+                label: 'Agricultural Intelligence',
               }, {
-                src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-                label: 'Spatial Data Analytics',
-              }, {
-                src: '/geospatial.png',
-                label: '3D Modeling & Visualization',
+                src: 'https://www.deepblock.net/hubfs/Blog%20Components/What%20is%20Geospatial%20%20MLOps%20and%20how%20does%20it%20work_Thumbnail-min.png',
+                label: 'Geospatial Analytics Platforms',
               }].map((img, idx) => (
                 <motion.button
                   key={img.src}

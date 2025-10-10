@@ -81,17 +81,11 @@ export default function Bridges() {
               className="grid grid-cols-1 gap-6"
             >
               {[{
-                src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-                label: 'Iconic Bridge Structure',
+                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-JBjjR96pPwZADvtNiRdV59plQk2FTeLgJw&s',
+                label: 'Cable-Stayed Bridge Concept',
               }, {
-                src: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80',
-                label: 'Long Span Bridge',
-              }, {
-                src: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',
-                label: 'Urban Flyover',
-              }, {
-                src: '/bridge.png',
-                label: 'Segmental Box Girder',
+                src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1uSyPhKtrOJOkTEhi71UgD9JIhyGDtHKyiZ6C-cD4BCFi_3-a7KTgejDNPKfTu1jr1Y0&usqp=CAU',
+                label: 'Elevated Flyover Perspective',
               }].map((img, idx) => (
                 <motion.button
                   key={img.src}

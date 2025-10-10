@@ -93,17 +93,11 @@ visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.15, delayChildren:
 className="grid grid-cols-1 gap-6"
 >
 {[{
-src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
-label: 'Modern Residential Complex',
+src: 'https://images.unsplash.com/photo-1630060041646-3ba002aa7d37?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5kaWFuJTIwYnVpbGRpbmd8ZW58MHx8MHx8fDA%3D',
+label: 'Indian Green Building Design',
 }, {
-src: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80',
-label: 'Green Urban Planning',
-}, {
-src: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',
-label: 'Innovative Architecture',
-}, {
-src: '/architecture.png',
-label: 'Auditorium & Convention Centre',
+src: 'https://media.istockphoto.com/id/1236842597/photo/under-construction-building.jpg?s=612x612&w=0&k=20&c=x_CHgh2m31FHN68pMmIPfqGwGgWJx6UUwsi34kRea-c=',
+label: 'Building Construction in Progress',
 }].map((img, idx) => (
 <motion.button
 key={img.src}

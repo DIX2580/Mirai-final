@@ -28,7 +28,7 @@ export default function Footer({ minimal }: FooterProps) {
         <div className="sm:justify-self-end">
           <ul className="text-sm text-slate-300 space-y-2">
             <li>
-              <span className="text-slate-400">Address:</span> 2nd Floor, Mirai House, Connaught Place, New Delhi, India
+              <span className="text-slate-400">Address:</span> 1st Floor, Mirai House, Connaught Place, New Delhi, India
             </li>
             <li>
               <span className="text-slate-400">Email:</span> <a className="hover:text-white" href="mailto:info@miraiconsultancy.co.in">info@miraiconsultancy.co.in</a>

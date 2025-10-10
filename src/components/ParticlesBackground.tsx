@@ -9,6 +9,7 @@ export default function ParticlesBackground() {
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
+      
     }).then(() => setReady(true));
   }, []);
 
