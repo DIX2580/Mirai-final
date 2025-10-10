@@ -1,8 +1,8 @@
-﻿import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Landmark, X } from 'lucide-react';
 
-export default function Highway() {
+export default function ArchitectureBuilding() {
   const [selectedImage, setSelectedImage] = useState<{ src: string; label: string; description?: string } | null>(null);
 
   return (
@@ -35,41 +35,21 @@ export default function Highway() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
-                  className="text-2xl lg:text-4xl font-bold text-white mb-2"
+                  className="text-4xl lg:text-6xl font-bold text-white"
                 >
-                  Highway
+                  Architecture & Building
                 </motion.h1>
               </motion.div>
-              <motion.div
+              <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: 'easeOut' }}
-                className="space-y-4 text-base text-slate-300 max-w-2xl leading-normal"
+                className="text-xl text-slate-300 max-w-5xl leading-relaxed mb-6"
               >
-                <p>
-                  Improvement of road infrastructure is a precursor to economic growth, and India has witnessed unprecedented highway development in the last three decades. Programmes under NHDP, PMGSY, Bharatmala Pariyojana, and Urban Renewal Missions have accelerated regional development and strengthened national connectivity.
-                </p>
-                <p>
-                  We take pride in contributing to this transformation, delivering over 5000 km of roads across multiple states while integrating modern technology and innovative design to balance engineering performance with aesthetics.
-                </p>
-                <p>
-                  Our highway professionals specialise in capacity and network analysis, offering optimal solutions for road infrastructure design and providing on-ground implementation support, including challenging Himalayan terrain projects.
-                </p>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.7, ease: 'easeOut' }}
-                className="mt-4"
-              >
-                <h2 className="text-lg font-semibold text-sky-300 mb-2">CAPABILITIES</h2>
-                <ul className="list-disc pl-5 text-slate-300 text-sm space-y-1">
-                  <li>Planning, design, rehabilitation, and strengthening of National and State highways across varied terrain.</li>
-                  <li>Integrated urban road solutions featuring dedicated cycle tracks, footpaths, subways, foot over bridges, parking bays, and landscaping elements.</li>
-                  <li>Traffic surveys, junction design, and traffic engineering studies delivered by experienced transport planners.</li>
-                  <li>Adoption of innovative materials and construction technologies to enhance durability and sustainability.</li>
-                </ul>
-              </motion.div>
+                Our firm specializes in innovative architectural and building solutions, blending aesthetics with functionality. We deliver comprehensive planning, design, and supervision for a wide range of building projects, including commercial complexes, institutional buildings, residential developments, and public infrastructure. Our team leverages advanced design software and sustainable practices to create spaces that inspire and endure.<br /><br />
+                <span className="font-bold text-sky-400">CAPABILITIES</span><br />
+                Expertise in architectural design, structural engineering, interior planning, landscape architecture, and project management. We provide end-to-end solutions from concept to completion, ensuring quality, safety, and client satisfaction.
+              </motion.p>
             </div>
             {/* Right: Image Gallery */}
             <motion.div
@@ -83,17 +63,17 @@ export default function Highway() {
               className="grid grid-cols-1 gap-6"
             >
               {[{
-                src: 'https://images.news18.com/ibnlive/uploads/2024/11/nhai-national-highways-2024-11-a4ddd508fdc260c089296c7d20aabd3d.png',
-                label: 'National Highways',
+                src: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80',
+                label: 'Modern Building Design',
               }, {
-                src: 'https://www.shutterstock.com/shutterstock/videos/3855235617/thumb/1.jpg?ip=x480',
-                label: 'Highway Track',
+                src: 'https://images.unsplash.com/photo-1503389152951-9c3d8e1e8d4e?auto=format&fit=crop&w=800&q=80',
+                label: 'Architectural Excellence',
               }, {
-                src: 'https://images.pexels.com/photos/240222/pexels-photo-240222.jpeg',
-                label: 'Freight Mobility Corridor',
+                src: 'https://images.unsplash.com/photo-1523413363574-c30aa1c2a1ae?auto=format&fit=crop&w=800&q=80',
+                label: 'Sustainable Architecture',
               }, {
-                src: 'https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg',
-                label: 'Urban Ring Road',
+                src: '/architecture.png',
+                label: 'Building Supervision',
               }].map((img, idx) => (
                 <motion.button
                   key={img.src}

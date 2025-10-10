@@ -36,8 +36,8 @@ export default function Hero() {
   const [headingText, setHeadingText] = useState('');
   const [paragraphText, setParagraphText] = useState('');
 
-  const fullHeading = 'We are an emerging engineering consultancy company in Eastern India';
-  const fullParagraph = 'Specialising in railway and highway projects, delivering robust, sustainable and innovative infrastructure project solutions that connect communities and drive economic growth.';
+  const fullHeading = 'Building the arteries of modern transport. Next Generation Railway and Highway solutions';
+  const fullParagraph = 'We are an emerging engineering consultancy company in Eastern India. Specialising in railway and highway projects, delivering robust, sustainable and innovative infrastructure project solutions that connect communities and drive economic growth.';
 
   useEffect(() => {
     let headingTimeout: number;

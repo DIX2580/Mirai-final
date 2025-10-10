@@ -1,330 +1,165 @@
-﻿import { motion } from 'framer-motion';
+﻿import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
-import { Building2, CheckCircle, Users, Zap, Award, MapPin, Calendar, ArrowRight, Target } from 'lucide-react';
-import Button from '../../components/ui/Button';
-
-type Section = 'about' | 'services' | 'projects';
-
-const capabilities = [
-  'Concept to Detailed Design',
-  'Advanced Structural Analysis',
-  'Geotechnical & Foundation Engineering',
-  'Inspection & Rehabilitation',
-  'Construction Engineering',
-  'Quality & Safety Management',
-];
-
-const projects = [
-  {
-    title: 'Howrah–Chennai ROB Programme',
-    location: 'Andhra Pradesh',
-    scope: '11 ROB packages',
-    year: '2024',
-    description: 'End-to-end engineering delivery for critical ROB assets.',
-    image: 'https://images.pexels.com/photos/4254893/pexels-photo-4254893.jpeg',
-  },
-  {
-    title: 'Multi-Span River Bridge Upgrade',
-    location: 'Eastern India',
-    scope: '520 m rehabilitation',
-    year: '2023',
-    description: 'Detailed assessment and retrofitting design for strategic bridge.',
-    image: 'https://images.pexels.com/photos/3952038/pexels-photo-3952038.jpeg',
-  },
-];
+import { Landmark, X } from 'lucide-react';
 
 export default function Bridges() {
-  const [activeSection, setActiveSection] = useState<Section>('about');
+  const [selectedImage, setSelectedImage] = useState<{ src: string; label: string; description?: string } | null>(null);
 
   return (
     <div className="min-h-screen pt-20 bg-slate-950 text-white">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="relative overflow-hidden border-b border-white/10 bg-slate-950"
-      >
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-          <div className="flex items-center gap-4 mb-6">
-            <div className="w-16 h-16 rounded-2xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-              <Building2 className="w-8 h-8 text-sky-400" />
-            </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          className="rounded-3xl border border-white/10 bg-slate-900/70 shadow-2xl p-8 md:p-12"
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            {/* Left: Heading, Paragraph, Capabilities */}
             <div>
-              <h1 className="text-4xl lg:text-6xl font-bold text-white">
-                Bridge <span className="text-sky-400">Engineering</span>
-              </h1>
-              <p className="text-lg text-slate-400 mt-2">Structural Integrity Solutions</p>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: 'easeOut' }}
+                className="flex items-center gap-4 mb-6"
+              >
+                <motion.div
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
+                  className="w-16 h-16 rounded-2xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center"
+                >
+                  <Landmark className="w-8 h-8 text-sky-400" />
+                </motion.div>
+                <motion.h1
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.7, delay: 0.3, ease: 'easeOut' }}
+                  className="text-2xl lg:text-4xl font-bold text-white mb-2"
+                >
+                  <motion.span
+                    initial={{ width: 0 }}
+                    animate={{ width: '100%' }}
+                    transition={{ duration: 1.2, ease: 'easeOut' }}
+                    style={{ display: 'inline-block', overflow: 'hidden', whiteSpace: 'nowrap', borderRight: '2px solid #38bdf8' }}
+                  >
+                    Bridges & Flyovers
+                  </motion.span>
+                </motion.h1>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
+                className="text-base text-slate-300 max-w-2xl leading-normal mb-4"
+              >
+                Bridges, Fly overs, Road over bridges, Interchanges, ROB/RUB etc are integral part of road and railway development sectors and also in urban area. The technology advancement in bridge sector has witnessed construction of iconic structures with long span, and aesthetics. This sector also requires assessment of existing bridges and providing solution for rehabilitation or strengthening. Our Team of experts have the competency of planning and design of all types of Bridges, Fly overs, Road over bridges, Interchanges, ROB/RUB besides taking up proof consultancy of design, supervision Consultancy for bridge projects. We have designed and supervised construction of many bridges across the country; few of them being very important bridge projects having length over 2500m having well/pile foundation and superstructure with segmental post-tensioned box girder, pretension girder and RCC deck, prestressed girder with RCC deck, Steel Girders with RCC deck, Steel through Girder etc. We have designed and supervised over 30000m length of Road and Railway bridge across India.
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.8, ease: 'easeOut' }}
+                className="mb-4"
+              >
+                <h2 className="text-lg font-semibold text-sky-300 mb-2">CAPABILITIES</h2>
+                <ul className="list-disc pl-5 text-slate-300 text-sm space-y-1">
+                  <li>The Firm has the core competency of planning and design of all types of Bridges, Fly overs, Road over bridges, Interchanges, ROB/RUB besides taking up proof consultancy of design, supervision Consultancy for bridge projects. The firm has experienced Design Engineers and design software for carrying out analysis.</li>
+                  <li>Inhouse competency for Topographical Survey, Hydrological survey and Geo-technical investigation, providing 'one stop solution' for planning, design and construction of bridging structures for Highways and Railways.</li>
+                  <li>Having our inhouse competency of carrying out Topographical Survey, Hydrological survey and Geo-technical investigation, our firm provides 'one stop solution' for planning, design and construction of bridging structures for Highways and Railways.</li>
+                </ul>
+              </motion.div>
             </div>
+            {/* Right: Image Gallery */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+              }}
+              className="grid grid-cols-1 gap-6"
+            >
+              {[{
+                src: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80',
+                label: 'Iconic Bridge Structure',
+              }, {
+                src: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80',
+                label: 'Long Span Bridge',
+              }, {
+                src: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',
+                label: 'Urban Flyover',
+              }, {
+                src: '/bridge.png',
+                label: 'Segmental Box Girder',
+              }].map((img, idx) => (
+                <motion.button
+                  key={img.src}
+                  type="button"
+                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.7, delay: 0.2 + idx * 0.15, ease: 'easeOut' }}
+                  onClick={() => setSelectedImage({ src: img.src, label: img.label })}
+                  className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60"
+                  whileHover={{ scale: 1.03, boxShadow: '0 8px 32px rgba(56,189,248,0.12)' }}
+                >
+                  <motion.img
+                    src={img.src}
+                    alt={img.label}
+                    className="w-full h-48 object-cover rounded-xl mb-4 transition-transform duration-300 group-hover:scale-[1.04]"
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.7, delay: 0.3 + idx * 0.15, ease: 'easeOut' }}
+                  />
+                </motion.button>
+              ))}
+            </motion.div>
           </div>
-          <p className="text-xl text-slate-300 max-w-3xl leading-relaxed">
-            Delivering resilient bridge structures that connect communities with structural excellence.
-          </p>
-        </div>
-      </motion.div>
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="flex flex-col lg:flex-row gap-8 text-white">
-          <motion.aside
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="lg:w-64 flex-shrink-0"
-          >
-            <div className="sticky top-24 space-y-3">
-              <button
-                onClick={() => setActiveSection('about')}
-                className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
-                  activeSection === 'about'
-                    ? 'bg-sky-500/10 border border-sky-400/30 text-white'
-                    : 'border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Users className="w-5 h-5" />
-                  <span>About</span>
-                </div>
-              </button>
-              
-              <button
-                onClick={() => setActiveSection('services')}
-                className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
-                  activeSection === 'services'
-                    ? 'bg-sky-500/10 border border-sky-400/30 text-white'
-                    : 'border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Zap className="w-5 h-5" />
-                  <span>Services</span>
-                </div>
-              </button>
-              
-              <button
-                onClick={() => setActiveSection('projects')}
-                className={`w-full text-left px-6 py-4 rounded-xl font-medium transition-all duration-300 ${
-                  activeSection === 'projects'
-                    ? 'bg-sky-500/10 border border-sky-400/30 text-white'
-                    : 'border border-white/10 bg-white/5 text-slate-400 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <Award className="w-5 h-5" />
-                  <span>Key Projects</span>
-                </div>
-              </button>
-            </div>
-          </motion.aside>
-
-          <motion.div
-            key={activeSection}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex-1"
-          >
-            {activeSection === 'about' && (
-              <div className="space-y-8">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-                      <Building2 className="w-6 h-6 text-sky-400" />
-                    </div>
-                    <h2 className="text-2xl lg:text-3xl font-bold text-white">About Bridge Engineering</h2>
-                  </div>
-                  
-                  <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
-                    <p>
-                      Bridge infrastructure connects communities and economies. Our expertise covers design, analysis, and construction supervision for ROBs, RUBs, and special bridges.
-                    </p>
-                    <p>
-                      We specialize in structural integrity, seismic resilience, and lifecycle management, ensuring compliance with IRC standards.
-                    </p>
-                  </div>
-
-                  <div className="mt-12 grid gap-6 sm:grid-cols-3">
-                    {[
-                      { value: '11 ROBs', label: 'Delivered', icon: Building2 },
-                      { value: '30+ yrs', label: 'Team Experience', icon: Users },
-                      { value: 'Tier-1 QA', label: 'Peer Reviews', icon: CheckCircle },
-                    ].map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="group relative overflow-hidden rounded-2xl border border-white/20 bg-slate-900/50 p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300"
-                      >
-                        <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sky-500/10 mb-4">
-                          <stat.icon className="h-6 w-6 text-sky-400" />
-                        </div>
-                        <div className="text-3xl font-bold text-white mb-2">
-                          {stat.value}
-                        </div>
-                        <p className="text-sm font-medium text-slate-300 uppercase tracking-wide">
-                          {stat.label}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid lg:grid-cols-2 gap-6">
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
-                      src="https://images.pexels.com/photos/4254893/pexels-photo-4254893.jpeg"
-                      alt="Bridge Engineering"
-                      className="w-full h-48 object-cover rounded-xl mb-4"
-                    />
-                    <h3 className="text-xl font-semibold text-white mb-2">Signature Span Design</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      Engineered for visual impact and structural efficiency.
-                    </p>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 p-6">
-                    <img 
-                      src="https://images.pexels.com/photos/3952038/pexels-photo-3952038.jpeg"
-                      alt="Bridge Track"
-                      className="w-full h-48 object-cover rounded-xl mb-4"
-                    />
-                    <h3 className="text-xl font-semibold text-white mb-2">Hydraulic Mastery</h3>
-                    <p className="text-slate-400 leading-relaxed">
-                      Safeguarding piers through extreme events.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'services' && (
-              <div className="space-y-6">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-                      <Zap className="w-6 h-6 text-sky-400" />
-                    </div>
-                    <h2 className="text-2xl lg:text-3xl font-bold text-white">Our Services</h2>
-                  </div>
-                  
-                  <p className="text-slate-300 text-lg leading-relaxed mb-8">
-                    Comprehensive bridge engineering services from design to construction.
-                  </p>
-
-                  <div className="grid gap-4">
-                    {capabilities.map((service, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.1 }}
-                        className="flex items-start gap-4 rounded-xl border border-white/10 bg-slate-900/30 p-4 hover:bg-slate-800/30 transition-colors"
-                      >
-                        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/10 text-sky-400">
-                          <CheckCircle className="h-4 w-4" />
-                        </div>
-                        <div>
-                          <p className="text-slate-200 text-base leading-relaxed">{service}</p>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="rounded-2xl border border-sky-400/20 bg-sky-500/5 p-8">
-                  <div className="mb-6 flex items-center gap-3">
-                    <Target className="w-6 h-6 text-sky-400" />
-                    <h3 className="text-xl font-semibold text-white">Why Choose MIRAI</h3>
-                  </div>
-                  <div className="grid gap-3 md:grid-cols-2">
-                    {[
-                      'Specialist bridge engineering team',
-                      'Digital twin and BIM collaboration',
-                      'Resilience against climate risks',
-                      'Lifecycle stewardship and training',
-                    ].map((reason) => (
-                      <div
-                        key={reason}
-                        className="flex items-start gap-3 rounded-lg border border-white/10 bg-slate-900/50 p-3"
-                      >
-                        <CheckCircle className="mt-0.5 h-4 w-4 text-sky-400 flex-shrink-0" />
-                        <span className="text-sm text-slate-300 leading-relaxed">{reason}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {activeSection === 'projects' && (
-              <div className="space-y-6">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-8 lg:p-10">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center">
-                      <Award className="w-6 h-6 text-sky-400" />
-                    </div>
-                    <h2 className="text-2xl lg:text-3xl font-bold text-white">Key Projects</h2>
-                  </div>
-                  
-                  <p className="text-slate-300 text-lg leading-relaxed mb-8">
-                    Showcasing our expertise in bridge infrastructure development.
-                  </p>
-                </div>
-
-                {projects.map((project, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.2 }}
-                    className="group overflow-hidden rounded-2xl border border-white/10 bg-slate-900/50 lg:flex"
-                  >
-                    <div className="relative lg:w-2/5">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="space-y-4 p-6 lg:w-3/5 lg:p-8">
-                      <div className="flex flex-wrap gap-2 text-xs font-medium uppercase tracking-wide text-sky-400">
-                        <span className="inline-flex items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-500/10 px-3 py-1">
-                          <MapPin className="h-3 w-3" />
-                          {project.location}
-                        </span>
-                        <span className="inline-flex items-center gap-2 rounded-lg border border-sky-400/30 bg-sky-500/10 px-3 py-1">
-                          <Calendar className="h-3 w-3" />
-                          {project.year}
-                        </span>
-                      </div>
-                      <h3 className="text-xl lg:text-2xl font-bold text-white">{project.title}</h3>
-                      <div className="inline-flex rounded-lg border border-white/20 bg-white/10 px-3 py-1 text-sm font-medium text-slate-200">
-                        {project.scope}
-                      </div>
-                      <p className="text-base leading-relaxed text-slate-300">{project.description}</p>
-                      <Button
-                        variant="secondary"
-                        href="#contact"
-                        rightIcon={<ArrowRight className="w-4 h-4" />}
-                      >
-                        Learn More
-                      </Button>
-                    </div>
-                  </motion.div>
-                ))}
-
-                <div className="rounded-2xl border border-sky-400/20 bg-sky-500/5 p-8 text-center">
-                  <h3 className="text-xl font-semibold text-white mb-3">Have a Bridge Project in Mind?</h3>
-                  <p className="text-slate-300 text-base mb-6 max-w-2xl mx-auto">
-                    Partner with us for expert bridge engineering solutions.
-                  </p>
-                  <Button
-                    variant="primary"
-                    href="#contact"
-                    className="inline-flex items-center gap-2 px-6 py-3"
-                    rightIcon={<ArrowRight className="w-4 h-4" />}
-                  >
-                    Discuss Your Project
-                  </Button>
-                </div>
-              </div>
-            )}
-          </motion.div>
-        </div>
+        </motion.div>
       </div>
+
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <div
+              className="relative max-w-4xl w-full"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <motion.img
+                key={selectedImage.src}
+                src={selectedImage.src}
+                alt={selectedImage.label}
+                className="w-full h-auto max-h-[75vh] object-contain rounded-2xl shadow-[0_20px_60px_rgba(15,23,42,0.6)]"
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.92 }}
+              />
+
+              <div className="mt-4 flex items-start justify-between gap-4 rounded-xl bg-slate-900/70 p-4 border border-white/10">
+                <div>
+                  <h3 className="text-lg font-semibold text-white">{selectedImage.label}</h3>
+                  {selectedImage.description && (
+                    <p className="text-sm text-slate-300 mt-1">{selectedImage.description}</p>
+                  )}
+                </div>
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                  aria-label="Close image preview"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
