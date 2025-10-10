@@ -259,7 +259,7 @@ export default function About() {
                 title: 'Iconic Engineering',
                 desc: 'Complex spans, composite systems, and modernization of critical corridors.',
                 icon: Award,
-                stat: '15+',
+                stat: '+',
                 statLabel: 'Years Experience'
               },
               {

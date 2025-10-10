@@ -86,7 +86,7 @@ export default function Contact() {
                       Bhubaneswar, Odisha, India
                     </p>
                     <p className="text-slate-400 text-sm mt-1">
-                      20°19'33.7"N 85°49'02.2"E
+                      143, District Center, Chandrasekharpur, Bhubaneswar, 751024
                     </p>
                   </div>
                 </div>

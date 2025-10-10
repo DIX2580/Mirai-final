@@ -48,7 +48,7 @@ export default function Navbar() {
             <span className="relative flex items-center">
               <img
                 src="/Mirailogo.png"
-                alt="Mirai Consultant"
+                alt="MIRAI CONSULTANCY"
                 className="h-[200px] w-auto object-contain drop-shadow-[0_12px_24px_rgba(59,130,246,0.5)]"
               />
             </span>

@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { initParticlesEngine, Particles } from '@tsparticles/react';
 import type { ISourceOptions } from '@tsparticles/engine';
-import { loadSlim } from '@tsparticles/slim';
-import { loadEmittersPlugin } from '@tsparticles/plugin-emitters';
-import { loadSoundsPlugin } from '@tsparticles/plugin-sounds';
+import { loadFull } from 'tsparticles';
 
 type ComingSoonProps = {
 	onComplete: () => void;
@@ -23,32 +21,74 @@ export default function ComingSoon({
 		const [fireworksOptions, setFireworksOptions] = useState<ISourceOptions | null>(null);
 		const [celebrationStage, setCelebrationStage] = useState<'idle' | 'lottie' | 'fireworks'>('idle');
 		const [showIntro, setShowIntro] = useState(durationSeconds > 0);
+		const [backgroundMusic] = useState(() => new Audio('/classical-strings-violin-music-391775.mp3'));
+		const [musicStarted, setMusicStarted] = useState(false);
 
 	useEffect(() => {
 		setTimeLeft(durationSeconds);
 		setIsFinished(durationSeconds === 0);
-			setCelebrationStage('idle');
-			setShowCelebration(false);
-			setShowIntro(durationSeconds > 0);
-	}, [durationSeconds]);
+		setCelebrationStage('idle');
+		setShowCelebration(false);
+		setShowIntro(durationSeconds > 0);
+		backgroundMusic.pause();
+		backgroundMusic.currentTime = 0;
+		setMusicStarted(false);
+	}, [durationSeconds, backgroundMusic]);
+
+	useEffect(() => {
+		if (durationSeconds <= 0 || musicStarted) {
+			return;
+		}
+
+		// Start music automatically - browsers allow muted autoplay
+		backgroundMusic.loop = true;
+		backgroundMusic.volume = 0.7;
+		backgroundMusic.muted = true; // Start muted to bypass autoplay restrictions
+		backgroundMusic.currentTime = 0;
+
+		const startMusic = async () => {
+			try {
+				await backgroundMusic.play();
+				setMusicStarted(true);
+				console.log('Music started (muted)');
+
+				// Immediately try to unmute after a very short delay
+				setTimeout(() => {
+					backgroundMusic.muted = false;
+					console.log('Music unmuted - should now play automatically');
+				}, 100); // Very short delay to ensure play() has started
+
+			} catch (error) {
+				console.log('Autoplay failed, will try on user interaction:', error);
+
+				// If autoplay fails completely, wait for user interaction
+				const handleUserInteraction = async () => {
+					try {
+						backgroundMusic.muted = false;
+						await backgroundMusic.play();
+						setMusicStarted(true);
+						console.log('Music started after user interaction');
+						document.removeEventListener('click', handleUserInteraction);
+						document.removeEventListener('keydown', handleUserInteraction);
+					} catch (finalError) {
+						console.log('Final music start failed:', finalError);
+					}
+				};
+
+				document.addEventListener('click', handleUserInteraction);
+				document.addEventListener('keydown', handleUserInteraction);
+			}
+		};
+
+		startMusic();
+	}, [durationSeconds, musicStarted, backgroundMusic]);
 
 	useEffect(() => {
 		if (isFinished) {
-			setShowIntro(false);
-			setShowCelebration(true);
-			setCelebrationStage('lottie');
-			const toFireworks = window.setTimeout(() => {
-				setCelebrationStage('fireworks');
-			}, 5000);
-			const doneTimer = window.setTimeout(() => {
-		setShowCelebration(false);
-		onComplete();
-	}, 8500);
-	return () => {
-			window.clearTimeout(toFireworks);
-			window.clearTimeout(doneTimer);
-		};
-	}			const tick = window.setInterval(() => {
+			return;
+		}
+
+		const tick = window.setInterval(() => {
 			setTimeLeft((prev) => {
 				if (prev <= 1) {
 					setIsFinished(true);
@@ -59,48 +99,71 @@ export default function ComingSoon({
 		}, 1000);
 
 		return () => window.clearInterval(tick);
-		}, [isFinished, onComplete]);
+	}, [isFinished]);
+
+	useEffect(() => {
+		if (!isFinished) {
+			return;
+		}
+
+		setShowIntro(false);
+		setShowCelebration(true);
+		setCelebrationStage('lottie');
+
+		const toFireworks = window.setTimeout(() => {
+			setCelebrationStage('fireworks');
+		}, 5000);
+		const doneTimer = window.setTimeout(() => {
+			setShowCelebration(false);
+
+			// Fade out music gradually
+			const fadeOutMusic = () => {
+				const fadeStep = 0.05; // Reduce volume by 5% every 100ms
+				const fadeInterval = window.setInterval(() => {
+					if (backgroundMusic.volume > fadeStep) {
+						backgroundMusic.volume -= fadeStep;
+					} else {
+						backgroundMusic.pause();
+						backgroundMusic.currentTime = 0;
+						backgroundMusic.volume = 0.4; // Reset volume for next time
+						setMusicStarted(false);
+						window.clearInterval(fadeInterval);
+					}
+				}, 100);
+			};
+
+			fadeOutMusic();
+			onComplete();
+		}, 12000);
+
+		return () => {
+			window.clearTimeout(toFireworks);
+			window.clearTimeout(doneTimer);
+		};
+	}, [isFinished, onComplete, backgroundMusic]);
 
 		useEffect(() => {
 			void initParticlesEngine(async (engine) => {
-				await loadSlim(engine);
-				await loadEmittersPlugin(engine);
-				await loadSoundsPlugin(engine);
+				await loadFull(engine);
 			}).then(() => setParticlesReady(true));
 		}, []);
 
 			useEffect(() => {
 				let isMounted = true;
 				const fireworksConfig: ISourceOptions = {
-					fullScreen: { enable: false, zIndex: 0 },
-					background: { color: 'transparent' },
+					fullScreen: { enable: true },
+					background: { color: '#000000' },
 					detectRetina: true,
-					fpsLimit: 120,
-					emitters: [
-						{
-							direction: 'top',
-							life: { count: 20, duration: 3, delay: 0.1 },
-							rate: { delay: 0.15, quantity: 1 },
-							size: { width: 100, height: 0 },
-							position: { y: 100, x: 15 },
-						},
-						{
-							direction: 'top',
-							life: { count: 20, duration: 3, delay: 0.2 },
-							rate: { delay: 0.15, quantity: 1 },
-							size: { width: 100, height: 0 },
-							position: { y: 100, x: 85 },
-						},
-						{
-							direction: 'top',
-							life: { count: 20, duration: 3, delay: 0.15 },
-							rate: { delay: 0.2, quantity: 1 },
-							size: { width: 100, height: 0 },
-							position: { y: 100, x: 50 },
-						},
-					],
+					fpsLimit: 60,
+					emitters: {
+						direction: 'top',
+						life: { count: 0, duration: 0.1, delay: 0.1 },
+						rate: { delay: 0.15, quantity: 1 },
+						size: { width: 100, height: 0 },
+						position: { y: 100, x: 50 },
+					},
 					particles: {
-						color: { value: '#fff' },
+						color: { value: '#ffffff' },
 						number: { value: 0 },
 						destroy: {
 							bounds: { top: 30 },
@@ -149,7 +212,6 @@ export default function ComingSoon({
 							},
 						},
 						life: { count: 1 },
-						rotate: { path: true },
 						shape: { type: 'circle' },
 						size: { value: 1 },
 						move: {
@@ -210,12 +272,12 @@ export default function ComingSoon({
 								<span className="cylinder-bg" aria-hidden />
 								<img
 									src="/Mirailogo.png"
-									alt="Mirai Consultant logo"
+									alt="MIRAI CONSULTANCY logo"
 									className="h-[300px] w-auto drop-shadow-[0_18px_60px_rgba(59,130,246,0.45)]"
 								/>
 								<p className="font-semibold tracking-[0.35em] uppercase text-white/70 text-xs sm:text-sm">Launching on</p>
 								<h1 className="metallic-text text-3xl sm:text-4xl md:text-5xl font-black tracking-[0.2em]">
-									MIRAI CONSULTANT
+									MIRAI CONSULTANCY
 								</h1>
 								<p className="text-white/70 text-sm sm:text-base">{launchDateLabel}</p>
 							</div>
@@ -239,7 +301,7 @@ export default function ComingSoon({
 						<div className="pointer-events-none absolute inset-0 flex items-center justify-center">
 									{celebrationStage === 'lottie' && (
 										<div className="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-black/70 backdrop-blur-sm px-6 text-center">
-											<div className="text-xs sm:text-sm uppercase tracking-[0.45em] text-white/60">Entering Mirai Consultant...</div>
+											<div className="text-xs sm:text-sm uppercase tracking-[0.45em] text-white/60">Entering MIRAI CONSULTANCY...</div>
 														<div className="h-[70vh] w-full max-w-5xl overflow-hidden">
 												<iframe
 													src="https://lottie.host/embed/0caf0201-01a4-448a-91e9-c8f144cb7ff4/QklyMDRVO0.lottie"
@@ -265,17 +327,17 @@ export default function ComingSoon({
 												/>
 											</div>
 										)}
-										<div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-8 px-6">
+										<div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 px-6">
 											<img
 												src="/Mirailogo.png"
-												alt="Mirai Consultant logo"
-												className="h-40 w-auto drop-shadow-[0_18px_60px_rgba(59,130,246,0.6)] animate-floaty"
+												alt="MIRAI CONSULTANCY logo"
+												className="h-48 sm:h-64 md:h-80 lg:h-96 w-auto drop-shadow-[0_20px_80px_rgba(59,130,246,0.9)] animate-floaty"
 											/>
 											<div className="flex flex-col items-center gap-3">
-												<div className="text-3xl sm:text-4xl md:text-5xl font-black tracking-[0.3em] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.5)]">
+												<div className="text-2xl sm:text-3xl md:text-4xl font-black tracking-[0.25em] text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.8)] animate-pulse">
 													WE ARE LIVE NOW
 												</div>
-												<div className="text-sm sm:text-base uppercase tracking-[0.4em] text-white/80">Mirai Consultant • Grand Opening</div>
+												<div className="text-sm sm:text-base md:text-lg uppercase tracking-[0.4em] text-white/90 font-semibold">MIRAI CONSULTANCY • Grand Opening</div>
 											</div>
 										</div>
 									</div>
