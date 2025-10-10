@@ -1,4 +1,4 @@
-﻿import { Award, CheckCircle, Target, Train, Landmark, Lightbulb, Users, TrendingUp, Clock, Shield, Zap, Quote, Star, Rocket } from 'lucide-react';
+﻿import { Award, CheckCircle, Target, Train, Landmark, Lightbulb, Users, TrendingUp, Clock, Shield, Zap, Rocket } from 'lucide-react';
 import Projects from './Projects';
 import ValueProps from './ValueProps';
 import TestimonialsNew from './TestimonialsNew';
