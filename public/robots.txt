@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://miraiconsultancy.co.in/sitemap.xml
