@@ -1,5 +1,4 @@
 import './index.css';
-import { useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Layout from './pages/Layout';
 import Home from './pages/Home';
@@ -14,20 +13,8 @@ import Railways from './pages/sectors/Railways';
 import ArchitectureBuildings from './pages/sectors/ArchitectureBuildings';
 import Geospatial from './pages/sectors/Geospatial';
 import GeotechnicalInvestigation from './pages/sectors/GeotechnicalInvestigation';
-import ComingSoon from './components/ComingSoon';
-
 export default function App() {
-  const [gateOpen, setGateOpen] = useState(false);
-
-  if (!gateOpen) {
-    return (
-      <ComingSoon
-        durationSeconds={10}
-        launchDateLabel="October 10, 2025"
-        onComplete={() => setGateOpen(true)}
-      />
-    );
-  }
+  // Gate removed: app should go directly to the site now
 
   return (
     <Routes>
