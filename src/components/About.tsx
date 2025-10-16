@@ -2,10 +2,32 @@
 import Projects from './Projects';
 import ValueProps from './ValueProps';
 import TestimonialsNew from './TestimonialsNew';
+import Seo from './Seo';
+
+const BASE_URL = 'http://miraiconsultancy.co.in';
 
 export default function About() {
   return (
     <section id="about" className="relative py-24 lg:py-32 border-t border-white/5 overflow-hidden">
+      <Seo
+        title="About Mirai Consultancy | Transport Infrastructure Experts"
+        description="Mirai Consultancy is an Eastern India engineering firm delivering railways, highways, bridges and geotechnical solutions with veteran leadership."
+        canonical={`${BASE_URL}/about`}
+        keywords={[
+          'Mirai Consultancy about',
+          'transport infrastructure consultants',
+          'railway engineering firm India',
+        ]}
+        ogImage={`${BASE_URL}/Mirailogo.png`}
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'AboutPage',
+          name: 'About Mirai Consultancy',
+          url: `${BASE_URL}/about`,
+          description:
+            'Learn about Mirai Consultancy, a multidisciplinary engineering firm delivering railway, bridge, highway and geospatial projects across India.',
+        }}
+      />
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl" />

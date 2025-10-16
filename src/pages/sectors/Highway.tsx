@@ -1,12 +1,26 @@
 ﻿import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Landmark, X } from 'lucide-react';
+import Seo from '../../components/Seo';
+
+const BASE_URL = 'http://miraiconsultancy.co.in';
 
 export default function Highway() {
   const [selectedImage, setSelectedImage] = useState<{ src: string; label: string; description?: string } | null>(null);
 
   return (
     <div className="min-h-screen pt-20 bg-slate-950 text-white">
+      <Seo
+        title="Highway Engineering Consultancy | Mirai Consultancy"
+        description="Mirai Consultancy plans, designs and upgrades national and state highways with traffic studies, geometrics, drainage and innovative materials."
+        canonical={`${BASE_URL}/sectors/highway`}
+        keywords={[
+          'highway engineering consultancy',
+          'road design consultants',
+          'traffic engineering studies india',
+        ]}
+        ogImage={`${BASE_URL}/Mirailogo.png`}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}

@@ -1,6 +1,9 @@
 ﻿import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, FileText, Film, ImageIcon } from 'lucide-react';
+import Seo from '../components/Seo';
+
+const BASE_URL = 'http://miraiconsultancy.co.in';
 
 type FileType = 'image' | 'video' | 'pdf';
 type CategoryType = 'all' | 'images' | 'videos' | 'pdfs';
@@ -54,6 +57,26 @@ export default function Gallery() {
 
   return (
   <div className="min-h-screen bg-gradient-to-br from-[#020617] via-[#050a1f] to-[#0b1126] pt-24 pb-16">
+      <Seo
+        title="Mirai Consultancy Project Gallery | Railway & Highway Portfolio"
+        description="View Mirai Consultancy's gallery of railway, bridge and highway engineering projects including ROB GADs and geospatial visuals."
+        canonical={`${BASE_URL}/gallery`}
+        keywords={[
+          'Mirai Consultancy gallery',
+          'railway project images',
+          'road over bridge GADs',
+          'infrastructure engineering portfolio',
+        ]}
+        ogImage={`${BASE_URL}/Mirailogo.png`}
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: 'Mirai Consultancy Project Gallery',
+          url: `${BASE_URL}/gallery`,
+          description:
+            'Browse Mirai Consultancy projects across railways, bridges, highways and geospatial mapping.',
+        }}
+      />
       <div className="max-w-7xl mx-auto px-6 mb-12">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
           <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-500 text-transparent bg-clip-text">

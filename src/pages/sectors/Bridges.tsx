@@ -1,12 +1,43 @@
 ﻿import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Landmark, X } from 'lucide-react';
+import Seo from '../../components/Seo';
+
+const BASE_URL = 'http://miraiconsultancy.co.in';
 
 export default function Bridges() {
   const [selectedImage, setSelectedImage] = useState<{ src: string; label: string; description?: string } | null>(null);
 
   return (
     <div className="min-h-screen pt-20 bg-slate-950 text-white">
+      <Seo
+        title="Bridge Engineering Consultants in Bhubaneswar | Mirai Consultancy"
+        description="Mirai Consultancy in Bhubaneswar delivers bridge, flyover, ROB and railway interchange design with survey, geotechnical, proof checking and project management expertise across India."
+        canonical={`${BASE_URL}/sectors/bridges`}
+        keywords={[
+          'mirai consultancy',
+          'miraicunsultancy bhubaneswar',
+          'mirai consultancya',
+          'bridge consultants bhubaneswar',
+          'bridge engineering consultants',
+          'flyover structural consultancy',
+          'road over bridge design india',
+          'rob design consultants odisha',
+          'railway department consultants bhubaneswar',
+          'railway infrastructure consultancy',
+          'transport department consultants odisha',
+          'civil engineering consultants bhubaneswar',
+          'structural engineers bhubaneswar',
+          'bhubaneswar infrastructure consultants',
+          'bridge inspection services india',
+          'bridge proof checking services',
+          'interchange design consultants',
+          'transit infrastructure consultants',
+          'project management consultants bhubaneswar',
+          'bridge design consultants odisha',
+        ]}
+        ogImage={`${BASE_URL}/Mirailogo.png`}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}

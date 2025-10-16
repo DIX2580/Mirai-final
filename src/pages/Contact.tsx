@@ -1,10 +1,86 @@
 ﻿import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, CheckCircle } from 'lucide-react';
+import Seo from '../components/Seo';
+
+const BASE_URL = 'http://miraiconsultancy.co.in';
 
 export default function Contact() {
 
   return (
     <div className="min-h-screen pt-20 bg-slate-950 text-white">
+      <Seo
+        title="Contact Mirai Consultancy | Engineering Consultants in Bhubaneswar"
+        description="Talk to Mirai Consultancy's railway and highway engineering experts. Visit our Bhubaneswar office or reach us via phone and email."
+        canonical={`${BASE_URL}/contact`}
+        keywords={[
+          'Mirai Consultancy contact',
+          'engineering consultants Bhubaneswar',
+          'railway consultants contact number',
+          'highway engineering company odisha',
+        ]}
+        ogImage={`${BASE_URL}/Mirailogo.png`}
+        structuredData={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            name: 'Mirai Consultancy',
+            image: `${BASE_URL}/Mirailogo.png`,
+            url: `${BASE_URL}/`,
+            telephone: '+91-7606989489',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: '143, District Center, Chandrasekharpur',
+              addressLocality: 'Bhubaneswar',
+              addressRegion: 'Odisha',
+              postalCode: '751024',
+              addressCountry: 'IN',
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: '20.326025',
+              longitude: '85.81395',
+            },
+            openingHoursSpecification: [
+              {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: [
+                  'Monday',
+                  'Tuesday',
+                  'Wednesday',
+                  'Thursday',
+                  'Friday',
+                  'Saturday',
+                ],
+                opens: '09:00',
+                closes: '18:00',
+              },
+            ],
+            contactPoint: {
+              '@type': 'ContactPoint',
+              contactType: 'Customer Service',
+              email: 'info@miraiconsultancy.co.in',
+            },
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: `${BASE_URL}/`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Contact',
+                item: `${BASE_URL}/contact`,
+              },
+            ],
+          },
+        ]}
+      />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

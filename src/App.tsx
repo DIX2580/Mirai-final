@@ -22,7 +22,24 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="/projects" element={<SimplePage title="Projects">Selected iconic projects.</SimplePage>} />
+        <Route
+          path="/projects"
+          element={(
+            <SimplePage
+              title="Projects"
+              seo={{
+                description: 'Discover Mirai Consultancy projects across railways, highways, bridges and geospatial engineering.',
+                keywords: [
+                  'Mirai Consultancy projects',
+                  'railway engineering portfolio',
+                  'road over bridge designs',
+                ],
+              }}
+            >
+              Selected iconic projects.
+            </SimplePage>
+          )}
+        />
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/sectors/highway" element={<Highway />} />

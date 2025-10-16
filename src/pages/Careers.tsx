@@ -22,6 +22,9 @@ import {
   ChevronDown,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
+import Seo from '../components/Seo';
+
+const BASE_URL = 'http://miraiconsultancy.co.in';
 
 type RoleCategory = 'railways' | 'bridges' | 'highways' | 'buildings';
 type CategoryId = 'all' | RoleCategory;
@@ -267,6 +270,47 @@ const Careers = () => {
 
   return (
     <div className="relative overflow-hidden bg-gradient-to-b from-slate-950 via-slate-950 to-slate-900 text-white">
+      <Seo
+        title="Careers at Mirai Consultancy | Build India's Engineering Future"
+        description="Explore railway, bridge, highway and infrastructure job opportunities at Mirai Consultancy. Join multidisciplinary teams delivering iconic transport projects."
+        canonical={`${BASE_URL}/careers`}
+        keywords={[
+          'Mirai Consultancy careers',
+          'railway engineering jobs india',
+          'highway consultant hiring',
+          'bridge design vacancies',
+          'transport infrastructure jobs',
+        ]}
+        ogImage={`${BASE_URL}/Mirailogo.png`}
+        structuredData={[
+          {
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            name: 'Careers at Mirai Consultancy',
+            url: `${BASE_URL}/careers`,
+            description:
+              'Explore open positions in railway, highway, bridge and infrastructure engineering at Mirai Consultancy.',
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: `${BASE_URL}/`,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Careers',
+                item: `${BASE_URL}/careers`,
+              },
+            ],
+          },
+        ]}
+      />
       {/* Hero Banner - Minimal Professional Design */}
       <motion.div
         initial={{ opacity: 0 }}
